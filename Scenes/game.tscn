@@ -1,6 +1,39 @@
-[gd_scene load_steps=5 format=3 uid="uid://bc2pdgvvigyy1"]
+[gd_scene load_steps=10 format=3 uid="uid://bc2pdgvvigyy1"]
 
 [ext_resource type="Texture2D" uid="uid://cpwaa4s2klaho" path="res://Temp_assets/n0o0bPumkin.png" id="1_ebmjs"]
+[ext_resource type="PackedScene" uid="uid://bpgaix3cftid6" path="res://Scenes/player.tscn" id="2_qxrlw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qxrlw"]
+sky_top_color = Color(0.5686275, 0.12941177, 0.16470589, 1)
+sky_horizon_color = Color(0.32991916, 0.22011521, 0.22893876, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.32991916, 0.22011521, 0.22893876, 1)
+
+[sub_resource type="Sky" id="Sky_wrm1d"]
+sky_material = SubResource("ProceduralSkyMaterial_qxrlw")
+
+[sub_resource type="Environment" id="Environment_3dryh"]
+background_mode = 2
+sky = SubResource("Sky_wrm1d")
+tonemap_mode = 3
+tonemap_exposure = 3.45
+tonemap_white = 0.1
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 0.65
+glow_strength = 2.0
+glow_blend_mode = 1
+adjustment_enabled = true
+adjustment_contrast = 4.0
+adjustment_saturation = 4.0
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_qxrlw"]
+auto_exposure_enabled = true
+auto_exposure_scale = 0.03
+auto_exposure_speed = 10.0
+dof_blur_far_enabled = true
+dof_blur_far_transition = 10.0
+dof_blur_amount = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qxrlw"]
 albedo_texture = ExtResource("1_ebmjs")
@@ -14,6 +47,16 @@ size = Vector2(20, 20)
 
 [node name="Game" type="Node3D"]
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.50000006, -0.6123724, 0.6123724, 0, 0.70710677, 0.70710677, -0.8660254, 0.3535534, -0.3535534, 0, 0, 0)
+light_color = Color(0.32156864, 0.8352941, 0.8666667, 1)
+light_specular = 0.0
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3dryh")
+camera_attributes = SubResource("CameraAttributesPractical_qxrlw")
+
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
@@ -22,3 +65,6 @@ mesh = SubResource("PlaneMesh_wrm1d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_3dryh")
+
+[node name="Player" parent="." instance=ExtResource("2_qxrlw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
