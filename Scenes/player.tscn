@@ -1,12 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://bpgaix3cftid6"]
+[gd_scene load_steps=8 format=3 uid="uid://bpgaix3cftid6"]
 
 [ext_resource type="Script" uid="uid://c73bn6ajbmaj" path="res://Scripts/player.gd" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://1f0q4ofhgup" path="res://Scripts/gun_pointer.gd" id="2_cvnsp"]
+[ext_resource type="Script" uid="uid://dcpwb4aalddig" path="res://Scripts/gun_visual.gd" id="3_6t5aa"]
+[ext_resource type="Script" uid="uid://c2qad2apg860v" path="res://Scripts/label_sizer.gd" id="4_vgqql"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_cvnsp"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6t5aa"]
 radius = 0.4
 height = 1.6
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6t5aa"]
+[sub_resource type="BoxMesh" id="BoxMesh_v0iea"]
+size = Vector3(0.1, 0.2, 0.4)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_cvnsp"]
 radius = 0.4
 height = 1.6
 
@@ -17,14 +23,53 @@ script = ExtResource("1_v0iea")
 charecter = NodePath("..")
 rotator = NodePath("../Neck")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_cvnsp")
+[node name="PointerToSpace" type="Node" parent="." node_paths=PackedStringArray("camera", "pointer")]
+script = ExtResource("2_cvnsp")
+camera = NodePath("../Neck/Camera3D")
+pointer = NodePath("../Gun_Look_at")
+offset = Vector3(0, 1, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="PLayerCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_6t5aa")
+
+[node name="Gun_Look_at" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -2)
+
+[node name="Gun" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+
+[node name="GunVisual" type="Node" parent="Gun" node_paths=PackedStringArray("LOOK_AT", "GUN", "POINTER")]
+script = ExtResource("3_6t5aa")
+LOOK_AT = NodePath("../../Gun_Look_at")
+GUN = NodePath("..")
+POINTER = NodePath("../POINTER")
+
+[node name="Gun" type="MeshInstance3D" parent="Gun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8)
+mesh = SubResource("BoxMesh_v0iea")
+skeleton = NodePath("../../PLayerCollision")
+
+[node name="POINTER" type="Label3D" parent="Gun"]
+transform = Transform3D(1.9106855e-15, -1, -4.371139e-08, -4.371139e-08, -4.371139e-08, 1, -1, 0, -4.371139e-08, 0, 0, -3)
+alpha_cut = 1
+alpha_scissor_threshold = 0.7
+texture_filter = 0
+modulate = Color(1, 0, 0, 1)
+outline_modulate = Color(0, 1, 1, 1)
+text = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+"
+font_size = 100
+outline_size = 20
+uppercase = true
+script = ExtResource("4_vgqql")
 
 [node name="Neck" type="Node3D" parent="."]
 transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Neck"]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 5, 5)
+
+[node name="PlayerBean" type="MeshInstance3D" parent="Neck"]
+transform = Transform3D(0.7071068, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.7071068, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_cvnsp")
+skeleton = NodePath("../..")

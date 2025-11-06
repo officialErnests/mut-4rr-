@@ -32,7 +32,7 @@ auto_exposure_enabled = true
 auto_exposure_scale = 0.03
 auto_exposure_speed = 10.0
 dof_blur_far_enabled = true
-dof_blur_far_transition = 10.0
+dof_blur_far_transition = 20.0
 dof_blur_amount = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qxrlw"]
@@ -58,12 +58,24 @@ environment = SubResource("Environment_3dryh")
 camera_attributes = SubResource("CameraAttributesPractical_qxrlw")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 material_override = SubResource("StandardMaterial3D_qxrlw")
 mesh = SubResource("PlaneMesh_wrm1d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_3dryh")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 0, 0, 1, -19.5, 2.5, 0)
+collision_layer = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+material_override = SubResource("StandardMaterial3D_qxrlw")
+mesh = SubResource("PlaneMesh_wrm1d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
 shape = SubResource("WorldBoundaryShape3D_3dryh")
 
 [node name="Player" parent="." instance=ExtResource("2_qxrlw")]
