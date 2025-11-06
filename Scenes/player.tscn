@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpgaix3cftid6"]
+[gd_scene load_steps=12 format=3 uid="uid://bpgaix3cftid6"]
 
 [ext_resource type="Script" uid="uid://c73bn6ajbmaj" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://1f0q4ofhgup" path="res://Scripts/gun_pointer.gd" id="2_cvnsp"]
 [ext_resource type="Script" uid="uid://dcpwb4aalddig" path="res://Scripts/gun_visual.gd" id="3_6t5aa"]
 [ext_resource type="Script" uid="uid://c2qad2apg860v" path="res://Scripts/label_sizer.gd" id="4_vgqql"]
+[ext_resource type="Texture2D" uid="uid://ctx06ekxiqf8u" path="res://Temp_assets/s7.jpg" id="5_fkybt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6t5aa"]
 radius = 0.4
@@ -11,6 +12,17 @@ height = 1.6
 
 [sub_resource type="BoxMesh" id="BoxMesh_v0iea"]
 size = Vector3(0.1, 0.2, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x3wgy"]
+shading_mode = 0
+albedo_texture = ExtResource("5_fkybt")
+billboard_mode = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3smsa"]
+albedo_texture = ExtResource("5_fkybt")
+
+[sub_resource type="QuadMesh" id="QuadMesh_8erm5"]
+material = SubResource("StandardMaterial3D_3smsa")
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_cvnsp"]
 radius = 0.4
@@ -38,11 +50,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -2)
 [node name="Gun" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 
-[node name="GunVisual" type="Node" parent="Gun" node_paths=PackedStringArray("LOOK_AT", "GUN", "POINTER")]
+[node name="GunVisual" type="Node" parent="Gun" node_paths=PackedStringArray("LOOK_AT", "GUN", "POINTER", "POINTER_LEFT", "POINTER_GOAL")]
 script = ExtResource("3_6t5aa")
 LOOK_AT = NodePath("../../Gun_Look_at")
 GUN = NodePath("..")
 POINTER = NodePath("../POINTER")
+POINTER_LEFT = NodePath("../POINTER_LEFT")
+POINTER_GOAL = NodePath("../POINTER_END")
+smoothing = 10.0
 
 [node name="Gun" type="MeshInstance3D" parent="Gun"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8)
@@ -50,7 +65,8 @@ mesh = SubResource("BoxMesh_v0iea")
 skeleton = NodePath("../../PLayerCollision")
 
 [node name="POINTER" type="Label3D" parent="Gun"]
-transform = Transform3D(1.9106855e-15, -1, -4.371139e-08, -4.371139e-08, -4.371139e-08, 1, -1, 0, -4.371139e-08, 0, 0, -3)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, -3)
+double_sided = false
 alpha_cut = 1
 alpha_scissor_threshold = 0.7
 texture_filter = 0
@@ -62,6 +78,45 @@ font_size = 100
 outline_size = 20
 uppercase = true
 script = ExtResource("4_vgqql")
+
+[node name="POINTER_LEFT" type="Label3D" parent="Gun"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, -3)
+double_sided = false
+alpha_cut = 1
+alpha_scissor_threshold = 0.7
+texture_filter = 0
+modulate = Color(1, 0, 0, 1)
+outline_modulate = Color(0, 1, 1, 1)
+text = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+"
+font_size = 100
+outline_size = 20
+uppercase = true
+script = ExtResource("4_vgqql")
+
+[node name="FLASH" type="SpotLight3D" parent="Gun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39999998, -1.6)
+visible = false
+light_color = Color(1, 1, 0, 1)
+light_energy = 16.0
+light_specular = 2.0
+spot_range = 20.0
+spot_attenuation = -1.0
+spot_angle = 68.58
+spot_angle_attenuation = 0.056328375
+
+[node name="XD" type="OmniLight3D" parent="Gun/FLASH"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.39999998, 1.6)
+light_color = Color(1, 1, 0, 1)
+light_energy = 16.0
+light_negative = true
+light_specular = 0.65
+omni_range = 40.0
+omni_attenuation = -0.878
+
+[node name="POINTER_END" type="MeshInstance3D" parent="Gun"]
+material_override = SubResource("StandardMaterial3D_x3wgy")
+mesh = SubResource("QuadMesh_8erm5")
 
 [node name="Neck" type="Node3D" parent="."]
 transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, 0, 0)
