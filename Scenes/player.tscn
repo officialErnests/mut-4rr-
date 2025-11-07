@@ -113,7 +113,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 [node name="HandleShoot" type="Node" parent="Gun" node_paths=PackedStringArray("light", "light_pt2", "hiddens")]
 script = ExtResource("3_x3wgy")
 light = NodePath("../XD")
-light_pt2 = NodePath("../FLASH")
+light_pt2 = NodePath("../FLASH2")
 hiddens = NodePath("../hiddens")
 
 [node name="GunVisual" type="Node" parent="Gun" node_paths=PackedStringArray("LOOK_AT", "GUN", "POINTER", "POINTER_LEFT", "POINTER_GOAL", "POINTER_GROUND", "POINTER_GROUND_NORM")]
@@ -191,6 +191,10 @@ material_override = SubResource("StandardMaterial3D_f1ek2")
 mesh = SubResource("TorusMesh_3smsa")
 skeleton = NodePath("../../..")
 
+[node name="SpotLight3D" type="SpotLight3D" parent="Gun/hiddens"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, -0.9)
+spot_range = 20.0
+
 [node name="Gun" type="MeshInstance3D" parent="Gun"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8)
 mesh = SubResource("BoxMesh_v0iea")
@@ -199,25 +203,23 @@ skeleton = NodePath("../../PLayerCollision")
 [node name="XD" type="OmniLight3D" parent="Gun"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.4901161e-08, -1)
 visible = false
-light_color = Color(1, 1, 0, 1)
 light_energy = 16.0
-light_negative = true
 light_specular = 0.65
 shadow_enabled = true
 omni_range = 40.0
-omni_attenuation = -0.878
 
-[node name="FLASH" type="SpotLight3D" parent="Gun"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39999998, -1.6)
+[node name="FLASH2" type="SpotLight3D" parent="Gun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.4703484e-08, -1)
 visible = false
-light_color = Color(1, 1, 0, 1)
+light_color = Color(0, 0, 1, 1)
 light_energy = 16.0
-light_specular = 2.0
+light_negative = true
+light_specular = 16.0
 shadow_enabled = true
-spot_range = 20.0
+spot_range = 100.0
 spot_attenuation = -1.0
-spot_angle = 68.58
-spot_angle_attenuation = 0.056328375
+spot_angle = 28.86
+spot_angle_attenuation = 0.17677742
 
 [node name="Neck" type="Node3D" parent="."]
 transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, 0, 0)
