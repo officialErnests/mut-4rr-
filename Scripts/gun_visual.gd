@@ -24,9 +24,9 @@ func instaSet():
 func _process(delta: float) -> void:
 	#Smooths cursor
 	prev_location += (LOOK_AT.global_position - prev_location) * delta * smoothing
-
+	prev_location.y = LOOK_AT.global_position.y
 	#Detects if there aren't no obstacles infront
-	var temp_raycast = castRay(GUN.global_position, prev_location, GUN.get_world_3d().direct_space_state)
+	var temp_raycast = castRay(GUN.global_position, prev_location, GUN.get_world_3d().direct_space_state, 2)
 	var look_position = prev_location
 	if temp_raycast:
 		look_position = temp_raycast["position"]
@@ -44,7 +44,7 @@ func _process(delta: float) -> void:
 	POINTER_LEFT.renderText()
 	POINTER_LEFT.position.z = -0.4 + dist / -2
 
-	var cursor_raycast = castRay(look_position, look_position - Vector3(0, below_cursor_distance, 0), GUN.get_world_3d().direct_space_state)
+	var cursor_raycast = castRay(look_position, look_position - Vector3(0, below_cursor_distance, 0), GUN.get_world_3d().direct_space_state, 4)
 	if cursor_raycast:
 		POINTER_GROUND_NORM.global_position = cursor_raycast["position"] + Vector3.UP * 0.2
 		POINTER_GROUND_NORM.look_at(POINTER_GROUND_NORM.global_position + cursor_raycast["normal"])
@@ -56,7 +56,7 @@ func _process(delta: float) -> void:
 		POINTER_GROUND.global_rotation = Vector3.ZERO
 
 
-func castRay(from, to, obj):
-	var params = PhysicsRayQueryParameters3D.create(from, to, 2)
+func castRay(from, to, obj, coll_layer):
+	var params = PhysicsRayQueryParameters3D.create(from, to, coll_layer)
 
 	return obj.intersect_ray(params)

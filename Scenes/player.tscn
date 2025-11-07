@@ -1,11 +1,13 @@
-[gd_scene load_steps=21 format=3 uid="uid://bpgaix3cftid6"]
+[gd_scene load_steps=22 format=3 uid="uid://bpgaix3cftid6"]
 
 [ext_resource type="Script" uid="uid://c73bn6ajbmaj" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://1f0q4ofhgup" path="res://Scripts/gun_pointer.gd" id="2_cvnsp"]
 [ext_resource type="Script" uid="uid://dcpwb4aalddig" path="res://Scripts/gun_visual.gd" id="3_6t5aa"]
 [ext_resource type="Script" uid="uid://b5kv5ttlwlpi5" path="res://Scripts/handle_shoot.gd" id="3_x3wgy"]
 [ext_resource type="Script" uid="uid://c2qad2apg860v" path="res://Scripts/label_sizer.gd" id="4_vgqql"]
-[ext_resource type="Texture2D" uid="uid://ctx06ekxiqf8u" path="res://Temp_assets/s7.jpg" id="5_fkybt"]
+[ext_resource type="Texture2D" uid="uid://b6apxjep8wnwf" path="res://Assets/cursor.png" id="6_f1ek2"]
+[ext_resource type="Script" uid="uid://c65dhkofbptrf" path="res://Scripts/look_at.gd" id="7_3smsa"]
+[ext_resource type="Script" uid="uid://bjuxy6pujas3c" path="res://Scripts/CursorToPoint.gd" id="7_8erm5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6t5aa"]
 radius = 0.4
@@ -13,19 +15,19 @@ height = 1.6
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x3wgy"]
 shading_mode = 0
-albedo_texture = ExtResource("5_fkybt")
+albedo_color = Color(0.13, 0.13, 0.13, 1)
+albedo_texture = ExtResource("6_f1ek2")
 billboard_mode = 1
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3smsa"]
-albedo_texture = ExtResource("5_fkybt")
+billboard_keep_scale = true
+fixed_size = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_8erm5"]
-material = SubResource("StandardMaterial3D_3smsa")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tx1dd"]
-blend_mode = 2
+blend_mode = 1
 no_depth_test = true
-albedo_color = Color(1, 0, 0, 1)
+shading_mode = 0
+albedo_color = Color(0.003921569, 0, 0, 1)
 grow = true
 grow_amount = -0.158
 
@@ -35,12 +37,13 @@ radial_segments = 4
 rings = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fkybt"]
+blend_mode = 1
 cull_mode = 2
+no_depth_test = true
 shading_mode = 0
-albedo_color = Color(0, 0, 1, 1)
+albedo_color = Color(0, 0, 0.003921569, 1)
 heightmap_scale = 8.468
 grow_amount = -0.315
-fixed_size = true
 point_size = 36.9
 fov_override = 50.0
 
@@ -51,12 +54,12 @@ rings = 4
 ring_segments = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8erm5"]
+blend_mode = 1
 cull_mode = 2
 shading_mode = 0
-albedo_color = Color(0, 1, 0, 1)
+albedo_color = Color(0, 0.003921569, 0, 1)
 heightmap_scale = 8.468
 grow_amount = -0.315
-fixed_size = true
 point_size = 36.9
 fov_override = 50.0
 
@@ -67,12 +70,12 @@ rings = 4
 ring_segments = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f1ek2"]
+blend_mode = 1
 cull_mode = 2
 shading_mode = 0
-albedo_color = Color(1, 0, 0, 1)
+albedo_color = Color(0.003921569, 0, 0, 1)
 heightmap_scale = 8.468
 grow_amount = -0.315
-fixed_size = true
 point_size = 36.9
 fov_override = 50.0
 
@@ -97,7 +100,7 @@ rotator = NodePath("../Neck")
 
 [node name="PointerToSpace" type="Node" parent="." node_paths=PackedStringArray("camera", "pointer")]
 script = ExtResource("2_cvnsp")
-camera = NodePath("../Neck/Camera3D")
+camera = NodePath("../Neck/Cursor_offset/Camera3D")
 pointer = NodePath("../Gun_Look_at")
 offset = Vector3(0, 1, 0)
 
@@ -110,11 +113,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -2)
 [node name="Gun" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 
-[node name="HandleShoot" type="Node" parent="Gun" node_paths=PackedStringArray("light", "light_pt2", "hiddens")]
+[node name="HandleShoot" type="Node" parent="Gun" node_paths=PackedStringArray("light", "light_pt2", "hiddens", "cursor_handler", "cam_shaker")]
 script = ExtResource("3_x3wgy")
 light = NodePath("../XD")
 light_pt2 = NodePath("../FLASH2")
 hiddens = NodePath("../hiddens")
+cursor_handler = NodePath("../GunVisual")
+cam_shaker = NodePath("../../Neck/Cursor_offset/CursorToPos")
 
 [node name="GunVisual" type="Node" parent="Gun" node_paths=PackedStringArray("LOOK_AT", "GUN", "POINTER", "POINTER_LEFT", "POINTER_GOAL", "POINTER_GROUND", "POINTER_GROUND_NORM")]
 script = ExtResource("3_6t5aa")
@@ -125,12 +130,13 @@ POINTER_LEFT = NodePath("../hiddens/POINTER_LEFT")
 POINTER_GOAL = NodePath("../hiddens/POINTER_END")
 POINTER_GROUND = NodePath("../hiddens/GROUND_POINTER")
 POINTER_GROUND_NORM = NodePath("../hiddens/POINTER_BOTTOM")
-smoothing = 10.0
+smoothing = 4.0
 below_cursor_distance = 10
 
 [node name="hiddens" type="Node3D" parent="Gun"]
 
 [node name="POINTER_END" type="MeshInstance3D" parent="Gun/hiddens"]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 1, 0)
 material_override = SubResource("StandardMaterial3D_x3wgy")
 mesh = SubResource("QuadMesh_8erm5")
 skeleton = NodePath("../..")
@@ -141,11 +147,11 @@ double_sided = false
 alpha_cut = 1
 alpha_scissor_threshold = 0.7
 texture_filter = 0
-modulate = Color(1, 0, 0, 1)
-outline_modulate = Color(0, 1, 1, 1)
+modulate = Color(0.039215688, 0, 0, 1)
+outline_modulate = Color(0, 0.019607844, 0.019607844, 1)
 text = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 "
-font_size = 100
+font_size = 200
 outline_size = 20
 uppercase = true
 script = ExtResource("4_vgqql")
@@ -156,11 +162,11 @@ double_sided = false
 alpha_cut = 1
 alpha_scissor_threshold = 0.7
 texture_filter = 0
-modulate = Color(1, 0, 0, 1)
-outline_modulate = Color(0, 1, 1, 1)
+modulate = Color(0.039215688, 0, 0, 1)
+outline_modulate = Color(0, 0.019607844, 0.019607844, 1)
 text = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 "
-font_size = 100
+font_size = 200
 outline_size = 20
 uppercase = true
 script = ExtResource("4_vgqql")
@@ -174,26 +180,29 @@ skeleton = NodePath("../..")
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="POINTER_BOTTOM" type="MeshInstance3D" parent="Gun/hiddens/POINTER_BOTTOM"]
-transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_fkybt")
 mesh = SubResource("TorusMesh_x3wgy")
 skeleton = NodePath("../../..")
 
 [node name="POINTER_BOTTOM2" type="MeshInstance3D" parent="Gun/hiddens/POINTER_BOTTOM"]
-transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_8erm5")
 mesh = SubResource("TorusMesh_fkybt")
 skeleton = NodePath("../../..")
 
 [node name="POINTER_BOTTOM3" type="MeshInstance3D" parent="Gun/hiddens/POINTER_BOTTOM"]
-transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_f1ek2")
 mesh = SubResource("TorusMesh_3smsa")
 skeleton = NodePath("../../..")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Gun/hiddens"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, -0.9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, -0.3, -1.1)
+shadow_enabled = true
 spot_range = 20.0
+spot_angle = 50.0
+spot_angle_attenuation = 34.29675
 
 [node name="Gun" type="MeshInstance3D" parent="Gun"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8)
@@ -202,30 +211,46 @@ skeleton = NodePath("../../PLayerCollision")
 
 [node name="XD" type="OmniLight3D" parent="Gun"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.4901161e-08, -1)
-visible = false
-light_energy = 16.0
 light_specular = 0.65
 shadow_enabled = true
 omni_range = 40.0
+omni_attenuation = 0.1
 
 [node name="FLASH2" type="SpotLight3D" parent="Gun"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.4703484e-08, -1)
-visible = false
-light_color = Color(0, 0, 1, 1)
+light_color = Color(1, 1, 0, 1)
 light_energy = 16.0
-light_negative = true
 light_specular = 16.0
 shadow_enabled = true
 spot_range = 100.0
-spot_attenuation = -1.0
-spot_angle = 28.86
-spot_angle_attenuation = 0.17677742
+spot_angle = 80.0
+spot_angle_attenuation = 28.840166
 
 [node name="Neck" type="Node3D" parent="."]
 transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, 0, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Neck"]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 5, 5)
+[node name="Cursor_offset" type="Node3D" parent="Neck"]
+
+[node name="CursorToPos" type="Node" parent="Neck/Cursor_offset" node_paths=PackedStringArray("obj")]
+script = ExtResource("7_8erm5")
+obj = NodePath("..")
+space_mul = 0.01
+speed_mul = 2.0
+
+[node name="Camera3D" type="Camera3D" parent="Neck/Cursor_offset"]
+transform = Transform3D(1.0000001, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 20, 10.000001)
+
+[node name="Player_spotlight" type="SpotLight3D" parent="Neck/Cursor_offset/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.93969256, 0.34202012, 0, -0.3420201, 0.9396926, 0, 0, 0)
+spot_range = 100.0
+spot_attenuation = 2.0
+spot_angle = 5.0
+spot_angle_attenuation = 12.553313
+
+[node name="LookAt" type="Node" parent="Neck/Cursor_offset/Camera3D/Player_spotlight" node_paths=PackedStringArray("base", "look_node")]
+script = ExtResource("7_3smsa")
+base = NodePath("..")
+look_node = NodePath("../../../../PlayerBean")
 
 [node name="PlayerBean" type="MeshInstance3D" parent="Neck"]
 transform = Transform3D(0.7071068, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.7071068, 0, 0, 0)

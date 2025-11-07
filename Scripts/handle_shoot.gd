@@ -3,21 +3,28 @@ extends Node
 @export var light: Node3D
 @export var light_pt2: Node3D
 @export var hiddens: Node3D
+@export var cursor_handler: Node
+@export var cam_shaker: Node
 var timer = 0
 var flash_timer = 0
+var delay = 0
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_pressed("shoot") and delay <= 0:
 		light.visible = true
 		light_pt2.visible = true
 		hiddens.visible = false
-		flash_timer = 0.05
-		timer = 0.05
+		flash_timer = 0.01
+		timer = 0.01
+		delay = 0.02
+		cursor_handler.instaSet()
+		cam_shaker.shot(1)
 	elif flash_timer > 0:
 		flash_timer -= delta
 	elif timer > 0:
 		light_pt2.visible = false
 		timer -= delta
 	else:
+		delay -= delta
 		light_pt2.visible = false
 		light.visible = false
 		hiddens.visible = true
