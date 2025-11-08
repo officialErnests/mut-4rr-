@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bc2pdgvvigyy1"]
+[gd_scene load_steps=11 format=3 uid="uid://bc2pdgvvigyy1"]
 
 [ext_resource type="Texture2D" uid="uid://cpwaa4s2klaho" path="res://Temp_assets/n0o0bPumkin.png" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://bpgaix3cftid6" path="res://Scenes/player.tscn" id="2_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://b3o55eubyfvcu" path="res://Scenes/items/pistol.tscn" id="3_wrm1d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qxrlw"]
 sky_top_color = Color(0.5686275, 0.12941177, 0.16470589, 1)
@@ -89,3 +90,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39999986, 2.0000002, 6.75)
 use_collision = true
 collision_layer = 3
 size = Vector3(14, 4.2000003, 3.5)
+
+[node name="Pistol" parent="." instance=ExtResource("3_wrm1d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07293272, 0.29999995, -3.2161436)

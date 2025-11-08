@@ -4,5 +4,5 @@ extends Node
 @export var look_node: Node3D
 @export var offset: Vector3
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	base.look_at(look_node.global_position + offset)

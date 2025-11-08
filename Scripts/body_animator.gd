@@ -6,7 +6,7 @@ extends Node
 func _process(delta: float) -> void:
 	if main_body.velocity.y != 0:
 		animator.updateAnimation(animator.AnimationStates.IDLE)
-	elif main_body.velocity.length() > 10:
+	elif main_body.velocity.length() > 3:
 		animator.updateAnimation(animator.AnimationStates.RUN)
 	elif main_body.velocity.length() > 0:
 		animator.updateAnimation(animator.AnimationStates.WALK)

@@ -109,10 +109,13 @@ script = ExtResource("3_gymyn")
 main_body = NodePath("..")
 animator = NodePath("../SkelBody")
 
-[node name="Items" type="Node" parent="." node_paths=PackedStringArray("itemHolder", "animator")]
+[node name="Items" type="Node" parent="." node_paths=PackedStringArray("itemHolder", "animator", "pickup_hitbox", "cursor_handler", "cam_shaker")]
 script = ExtResource("4_8erm5")
 itemHolder = NodePath("../ItemHolder/ItemSlot")
 animator = NodePath("../SkelBody")
+pickup_hitbox = NodePath("../SkelBody/PickupArea")
+cursor_handler = NodePath("../ItemHolder/Pointer/Pointer")
+cam_shaker = NodePath("../Neck/Cursor_offset/CursorToPos")
 
 [node name="PLayerCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
@@ -131,10 +134,10 @@ to = NodePath("..")
 y = true
 offset = Vector3(0, 180, 0)
 
-[node name="Area3D" type="Area3D" parent="SkelBody"]
+[node name="PickupArea" type="Area3D" parent="SkelBody"]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, -0.020662546, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SkelBody/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SkelBody/PickupArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
 shape = SubResource("BoxShape3D_8erm5")
 
@@ -179,6 +182,7 @@ offset = Vector3(0, 1, 0)
 script = ExtResource("10_pu2lt")
 skeleton_info = NodePath("../../SkelBody")
 node_to_stick = NodePath("../ItemSlot")
+offset = Vector3(0, 0.5, 0)
 
 [node name="ItemSlot" type="Node3D" parent="ItemHolder"]
 
