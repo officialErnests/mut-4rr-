@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1dg24cxas7ge"]
+
+[ext_resource type="Script" uid="uid://dwj6fl455tj5t" path="res://Scripts/switch_scene.gd" id="1_1ehe0"]
+[ext_resource type="Script" uid="uid://dghijtnxv14l1" path="res://Scripts/menu_set.gd" id="1_28flt"]
+[ext_resource type="PackedScene" uid="uid://bc2pdgvvigyy1" path="res://Scenes/game.tscn" id="2_ce3w2"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "MUT4RR#"
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "PLAY"
+script = ExtResource("1_1ehe0")
+scene = ExtResource("2_ce3w2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "QE CAMERA MOVEMENT"
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+button_pressed = true
+script = ExtResource("1_28flt")
+globa_value = "cam_controll_qe"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "MOUSE CAMERA MOVEMENT"
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+button_pressed = true
+script = ExtResource("1_28flt")
+globa_value = "cam_controll_mouse"

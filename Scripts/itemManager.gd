@@ -3,9 +3,9 @@ extends Node
 @export var itemHolder: Node3D
 @export var animator: Node
 @export var pickup_hitbox: Area3D
-@export_group("items")
 @export var cursor_handler: Node
 @export var cam_shaker: Node
+@export var movement_manager: Node
 
 var equiped_item = null
 var equiped_item_script = null
@@ -24,10 +24,14 @@ func pickupDetect():
 			return
 
 func pickup(p_node: Node):
+	animator.use()
+	animator.hold(true)
 	p_node.reparent(itemHolder)
 	equiped_item = p_node
 	equiped_item_script = p_node.get_node("MAIN")
+	p_node.remove_from_group("item")
 
+	movement_manager.item_mul = equiped_item_script.speed_factor
 	equiped_item_script.initalise(self)
 
 func getCursorHandler():

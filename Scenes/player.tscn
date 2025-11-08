@@ -21,8 +21,10 @@ height = 1.5999999
 size = Vector3(2, 2, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pu2lt"]
+blend_mode = 1
+no_depth_test = true
 shading_mode = 0
-albedo_color = Color(0.13, 0.13, 0.13, 1)
+albedo_color = Color(0.02, 0.02, 0.02, 1)
 albedo_texture = ExtResource("6_f1ek2")
 billboard_mode = 1
 billboard_keep_scale = true
@@ -54,8 +56,7 @@ point_size = 36.9
 fov_override = 50.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_qqcod"]
-inner_radius = 2.8
-outer_radius = 3.0
+inner_radius = 0.9
 rings = 4
 ring_segments = 4
 
@@ -70,8 +71,8 @@ point_size = 36.9
 fov_override = 50.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_fs7ks"]
-inner_radius = 1.6
-outer_radius = 2.0
+inner_radius = 0.7
+outer_radius = 0.8
 rings = 4
 ring_segments = 4
 
@@ -86,7 +87,7 @@ point_size = 36.9
 fov_override = 50.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_olqyp"]
-inner_radius = 0.4
+outer_radius = 0.6
 rings = 4
 ring_segments = 4
 
@@ -109,13 +110,14 @@ script = ExtResource("3_gymyn")
 main_body = NodePath("..")
 animator = NodePath("../SkelBody")
 
-[node name="Items" type="Node" parent="." node_paths=PackedStringArray("itemHolder", "animator", "pickup_hitbox", "cursor_handler", "cam_shaker")]
+[node name="Items" type="Node" parent="." node_paths=PackedStringArray("itemHolder", "animator", "pickup_hitbox", "cursor_handler", "cam_shaker", "movement_manager")]
 script = ExtResource("4_8erm5")
 itemHolder = NodePath("../ItemHolder/ItemSlot")
 animator = NodePath("../SkelBody")
 pickup_hitbox = NodePath("../SkelBody/PickupArea")
 cursor_handler = NodePath("../ItemHolder/Pointer/Pointer")
 cam_shaker = NodePath("../Neck/Cursor_offset/CursorToPos")
+movement_manager = NodePath("../Movement")
 
 [node name="PLayerCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
@@ -213,8 +215,8 @@ double_sided = false
 alpha_cut = 1
 alpha_scissor_threshold = 0.7
 texture_filter = 0
-modulate = Color(0.039215688, 0, 0, 1)
-outline_modulate = Color(0, 0.019607844, 0.019607844, 1)
+modulate = Color(0.01, 0, 0, 1)
+outline_modulate = Color(0, 0.01, 0.01, 1)
 text = "A"
 font_size = 200
 outline_size = 20
@@ -228,8 +230,8 @@ double_sided = false
 alpha_cut = 1
 alpha_scissor_threshold = 0.7
 texture_filter = 0
-modulate = Color(0.039215688, 0, 0, 1)
-outline_modulate = Color(0, 0.019607844, 0.019607844, 1)
+modulate = Color(0.01, 0, 0, 1)
+outline_modulate = Color(0, 0.01, 0.01, 1)
 text = "A
 "
 font_size = 200

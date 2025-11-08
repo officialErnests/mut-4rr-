@@ -18,6 +18,7 @@ material_override = ExtResource("2_wnart")
 
 [node name="MAIN" parent="." node_paths=PackedStringArray("itemRigid", "handle") instance=ExtResource("2_bgrny")]
 itemRigid = NodePath("..")
+speed_factor = 0.5
 handle = NodePath("../HandleShoot")
 
 [node name="HandleShoot" type="Node" parent="." node_paths=PackedStringArray("light", "light_pt2", "hiddens", "cursor_handler")]
