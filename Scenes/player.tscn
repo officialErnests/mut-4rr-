@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bpgaix3cftid6"]
+[gd_scene load_steps=12 format=3 uid="uid://bpgaix3cftid6"]
 
 [ext_resource type="Script" uid="uid://c73bn6ajbmaj" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://1f0q4ofhgup" path="res://Scripts/gun_pointer.gd" id="2_cvnsp"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bjuxy6pujas3c" path="res://Scripts/CursorToPoint.gd" id="7_8erm5"]
 [ext_resource type="PackedScene" uid="uid://dtohjmomqtvq3" path="res://Scenes/body.tscn" id="7_f1ek2"]
 [ext_resource type="Script" uid="uid://clkaneisu7we7" path="res://Scripts/copyRot.gd" id="8_tx1dd"]
+[ext_resource type="Script" uid="uid://dbi36cvmg01de" path="res://Scripts/stick_to_head.gd" id="10_pu2lt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6t5aa"]
 radius = 0.2
@@ -100,5 +101,10 @@ script = ExtResource("7_3smsa")
 base = NodePath("..")
 look_node = NodePath("../../Gun_Look_at")
 offset = Vector3(0, 1, 0)
+
+[node name="StickToHead" type="Node" parent="ItemHolder" node_paths=PackedStringArray("skeleton_info", "node_to_stick")]
+script = ExtResource("10_pu2lt")
+skeleton_info = NodePath("../../SkelBody")
+node_to_stick = NodePath("../ItemSlot")
 
 [node name="ItemSlot" type="Node3D" parent="ItemHolder"]

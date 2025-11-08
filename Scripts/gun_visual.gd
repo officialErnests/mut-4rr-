@@ -1,5 +1,6 @@
 extends Node
 
+@export var enabled = false
 @export_group("assignments")
 @export var LOOK_AT: Node3D
 @export var GUN: Node3D
@@ -22,6 +23,7 @@ func instaSet():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if not enabled: return
 	#Smooths cursor
 	prev_location += (LOOK_AT.global_position - prev_location) * delta * smoothing
 	prev_location.y = LOOK_AT.global_position.y

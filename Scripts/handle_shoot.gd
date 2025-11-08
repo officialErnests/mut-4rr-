@@ -1,5 +1,6 @@
 extends Node
 
+@export var enabled = false
 @export var light: Node3D
 @export var light_pt2: Node3D
 @export var hiddens: Node3D
@@ -9,6 +10,7 @@ var timer = 0
 var flash_timer = 0
 var delay = 0
 func _process(delta: float) -> void:
+	if not enabled: return
 	if Input.is_action_pressed("shoot") and delay <= 0:
 		light.visible = true
 		light_pt2.visible = true
