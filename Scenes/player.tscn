@@ -1,9 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://bpgaix3cftid6"]
+[gd_scene load_steps=25 format=3 uid="uid://bpgaix3cftid6"]
 
 [ext_resource type="Script" uid="uid://c73bn6ajbmaj" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://1f0q4ofhgup" path="res://Scripts/gun_pointer.gd" id="2_cvnsp"]
+[ext_resource type="Script" uid="uid://dcpwb4aalddig" path="res://Scripts/gun_visual.gd" id="3_6t5aa"]
 [ext_resource type="Script" uid="uid://crc1oiqwmss8" path="res://Scripts/body_animator.gd" id="3_gymyn"]
 [ext_resource type="Script" uid="uid://cx0dgxu33maxl" path="res://Scripts/itemManager.gd" id="4_8erm5"]
+[ext_resource type="Script" uid="uid://c2qad2apg860v" path="res://Scripts/label_sizer.gd" id="4_vgqql"]
+[ext_resource type="Texture2D" uid="uid://b6apxjep8wnwf" path="res://Assets/cursor.png" id="6_f1ek2"]
 [ext_resource type="Script" uid="uid://c65dhkofbptrf" path="res://Scripts/look_at.gd" id="7_3smsa"]
 [ext_resource type="Script" uid="uid://bjuxy6pujas3c" path="res://Scripts/CursorToPoint.gd" id="7_8erm5"]
 [ext_resource type="PackedScene" uid="uid://dtohjmomqtvq3" path="res://Scenes/body.tscn" id="7_f1ek2"]
@@ -16,6 +19,76 @@ height = 1.5999999
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8erm5"]
 size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pu2lt"]
+shading_mode = 0
+albedo_color = Color(0.13, 0.13, 0.13, 1)
+albedo_texture = ExtResource("6_f1ek2")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_ukyrk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dp3o"]
+blend_mode = 1
+no_depth_test = true
+shading_mode = 0
+albedo_color = Color(0.003921569, 0, 0, 1)
+grow = true
+grow_amount = -0.158
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_h4iuc"]
+top_radius = 0.0
+radial_segments = 4
+rings = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fd4e3"]
+blend_mode = 1
+cull_mode = 2
+no_depth_test = true
+shading_mode = 0
+albedo_color = Color(0, 0, 0.003921569, 1)
+heightmap_scale = 8.468
+grow_amount = -0.315
+point_size = 36.9
+fov_override = 50.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_qqcod"]
+inner_radius = 2.8
+outer_radius = 3.0
+rings = 4
+ring_segments = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_igrcy"]
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0, 0.003921569, 0, 1)
+heightmap_scale = 8.468
+grow_amount = -0.315
+point_size = 36.9
+fov_override = 50.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_fs7ks"]
+inner_radius = 1.6
+outer_radius = 2.0
+rings = 4
+ring_segments = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l6n3p"]
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.003921569, 0, 0, 1)
+heightmap_scale = 8.468
+grow_amount = -0.315
+point_size = 36.9
+fov_override = 50.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_olqyp"]
+inner_radius = 0.4
+rings = 4
+ring_segments = 4
 
 [node name="Player" type="CharacterBody3D"]
 collision_mask = 8
@@ -108,3 +181,80 @@ skeleton_info = NodePath("../../SkelBody")
 node_to_stick = NodePath("../ItemSlot")
 
 [node name="ItemSlot" type="Node3D" parent="ItemHolder"]
+
+[node name="Pointer" type="Node3D" parent="ItemHolder"]
+
+[node name="Pointer" type="Node" parent="ItemHolder/Pointer" node_paths=PackedStringArray("LOOK_AT", "GUN", "POINTER", "POINTER_LEFT", "POINTER_GOAL", "POINTER_GROUND", "POINTER_GROUND_NORM")]
+script = ExtResource("3_6t5aa")
+enabled = true
+LOOK_AT = NodePath("../../../Gun_Look_at")
+GUN = NodePath("..")
+POINTER = NodePath("../POINTER")
+POINTER_LEFT = NodePath("../POINTER_LEFT")
+POINTER_GOAL = NodePath("../POINTER_END")
+POINTER_GROUND = NodePath("../GROUND_POINTER")
+POINTER_GROUND_NORM = NodePath("../POINTER_BOTTOM")
+smoothing = 4.0
+below_cursor_distance = 10
+
+[node name="POINTER_END" type="MeshInstance3D" parent="ItemHolder/Pointer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0000001, 0)
+material_override = SubResource("StandardMaterial3D_pu2lt")
+mesh = SubResource("QuadMesh_ukyrk")
+skeleton = NodePath("")
+
+[node name="POINTER" type="Label3D" parent="ItemHolder/Pointer"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, -3)
+double_sided = false
+alpha_cut = 1
+alpha_scissor_threshold = 0.7
+texture_filter = 0
+modulate = Color(0.039215688, 0, 0, 1)
+outline_modulate = Color(0, 0.019607844, 0.019607844, 1)
+text = "A"
+font_size = 200
+outline_size = 20
+uppercase = true
+script = ExtResource("4_vgqql")
+scroll_dir = 10
+
+[node name="POINTER_LEFT" type="Label3D" parent="ItemHolder/Pointer"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, -3)
+double_sided = false
+alpha_cut = 1
+alpha_scissor_threshold = 0.7
+texture_filter = 0
+modulate = Color(0.039215688, 0, 0, 1)
+outline_modulate = Color(0, 0.019607844, 0.019607844, 1)
+text = "A
+"
+font_size = 200
+outline_size = 20
+uppercase = true
+script = ExtResource("4_vgqql")
+
+[node name="GROUND_POINTER" type="MeshInstance3D" parent="ItemHolder/Pointer"]
+material_override = SubResource("StandardMaterial3D_7dp3o")
+mesh = SubResource("CylinderMesh_h4iuc")
+skeleton = NodePath("")
+
+[node name="POINTER_BOTTOM" type="Node3D" parent="ItemHolder/Pointer"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="POINTER_BOTTOM" type="MeshInstance3D" parent="ItemHolder/Pointer/POINTER_BOTTOM"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_fd4e3")
+mesh = SubResource("TorusMesh_qqcod")
+skeleton = NodePath("")
+
+[node name="POINTER_BOTTOM2" type="MeshInstance3D" parent="ItemHolder/Pointer/POINTER_BOTTOM"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_igrcy")
+mesh = SubResource("TorusMesh_fs7ks")
+skeleton = NodePath("")
+
+[node name="POINTER_BOTTOM3" type="MeshInstance3D" parent="ItemHolder/Pointer/POINTER_BOTTOM"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_l6n3p")
+mesh = SubResource("TorusMesh_olqyp")
+skeleton = NodePath("")

@@ -1,21 +1,15 @@
-@tool
 extends Node
 
 enum ItemType {
-	GUN
+	GUN,
 }
-var classes
-var typess: ItemType
-var testing: bool
-func _get_property_list() -> Array:
-	var properties: Array = []
-	if ItemType.GUN:
-		properties.append({
-			"name": "typess",
-			"type": TYPE_NIL,
-			"usage": PROPERTY_USAGE_CATEGORY,
-		})
-	return properties
+
+@export var type: ItemType
+
+@export_category("GUN")
+@export
 
 func initalise(p_main):
-	pass
+	match type:
+		ItemType.GUN:
+			pass

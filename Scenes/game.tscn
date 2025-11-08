@@ -55,7 +55,7 @@ environment = SubResource("Environment_3dryh")
 camera_attributes = SubResource("CameraAttributesPractical_qxrlw")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-collision_layer = 7
+collision_layer = 15
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 material_override = SubResource("StandardMaterial3D_qxrlw")
@@ -66,7 +66,7 @@ shape = SubResource("WorldBoundaryShape3D_3dryh")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="."]
 transform = Transform3D(0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 0, 0, 1, -19.5, 2.5, 0)
-collision_layer = 7
+collision_layer = 15
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
 material_override = SubResource("StandardMaterial3D_qxrlw")

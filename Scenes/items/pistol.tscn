@@ -1,86 +1,12 @@
-[gd_scene load_steps=19 format=3 uid="uid://b3o55eubyfvcu"]
+[gd_scene load_steps=6 format=3 uid="uid://b3o55eubyfvcu"]
 
 [ext_resource type="PackedScene" uid="uid://d27ox066bvw2q" path="res://Assets/pistol.fbx" id="1_v2aij"]
 [ext_resource type="PackedScene" uid="uid://sniksy4nvnio" path="res://Scenes/item.tscn" id="2_bgrny"]
 [ext_resource type="Material" uid="uid://b3aqa3jh0vjre" path="res://Assets/Materials/metal.tres" id="2_wnart"]
 [ext_resource type="Script" uid="uid://b5kv5ttlwlpi5" path="res://Scripts/handle_shoot.gd" id="4_1kwx8"]
-[ext_resource type="Script" uid="uid://dcpwb4aalddig" path="res://Scripts/gun_visual.gd" id="5_fx7r4"]
-[ext_resource type="Texture2D" uid="uid://b6apxjep8wnwf" path="res://Assets/cursor.png" id="7_t8rfc"]
-[ext_resource type="Script" uid="uid://c2qad2apg860v" path="res://Scripts/label_sizer.gd" id="8_nya4u"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bgrny"]
 size = Vector3(0.2, 0.5, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_21gyy"]
-shading_mode = 0
-albedo_color = Color(0.13, 0.13, 0.13, 1)
-albedo_texture = ExtResource("7_t8rfc")
-billboard_mode = 1
-billboard_keep_scale = true
-fixed_size = true
-
-[sub_resource type="QuadMesh" id="QuadMesh_fo338"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iye42"]
-blend_mode = 1
-no_depth_test = true
-shading_mode = 0
-albedo_color = Color(0.003921569, 0, 0, 1)
-grow = true
-grow_amount = -0.158
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_wdpvw"]
-top_radius = 0.0
-radial_segments = 4
-rings = 0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uypta"]
-blend_mode = 1
-cull_mode = 2
-no_depth_test = true
-shading_mode = 0
-albedo_color = Color(0, 0, 0.003921569, 1)
-heightmap_scale = 8.468
-grow_amount = -0.315
-point_size = 36.9
-fov_override = 50.0
-
-[sub_resource type="TorusMesh" id="TorusMesh_ybdjb"]
-inner_radius = 2.8
-outer_radius = 3.0
-rings = 4
-ring_segments = 4
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qvc5s"]
-blend_mode = 1
-cull_mode = 2
-shading_mode = 0
-albedo_color = Color(0, 0.003921569, 0, 1)
-heightmap_scale = 8.468
-grow_amount = -0.315
-point_size = 36.9
-fov_override = 50.0
-
-[sub_resource type="TorusMesh" id="TorusMesh_7kt45"]
-inner_radius = 1.6
-outer_radius = 2.0
-rings = 4
-ring_segments = 4
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o8ibb"]
-blend_mode = 1
-cull_mode = 2
-shading_mode = 0
-albedo_color = Color(0.003921569, 0, 0, 1)
-heightmap_scale = 8.468
-grow_amount = -0.315
-point_size = 36.9
-fov_override = 50.0
-
-[sub_resource type="TorusMesh" id="TorusMesh_wlkew"]
-inner_radius = 0.4
-rings = 4
-ring_segments = 4
 
 [node name="Pistol" type="RigidBody3D" groups=["item"]]
 
@@ -97,18 +23,7 @@ script = ExtResource("4_1kwx8")
 light = NodePath("../XD")
 light_pt2 = NodePath("../FLASH2")
 hiddens = NodePath("../hiddens")
-cursor_handler = NodePath("../GunVisual")
-
-[node name="GunVisual" type="Node" parent="." node_paths=PackedStringArray("GUN", "POINTER", "POINTER_LEFT", "POINTER_GOAL", "POINTER_GROUND", "POINTER_GROUND_NORM")]
-script = ExtResource("5_fx7r4")
-GUN = NodePath("..")
-POINTER = NodePath("../hiddens/POINTER")
-POINTER_LEFT = NodePath("../hiddens/POINTER_LEFT")
-POINTER_GOAL = NodePath("../hiddens/POINTER_END")
-POINTER_GROUND = NodePath("../hiddens/GROUND_POINTER")
-POINTER_GROUND_NORM = NodePath("../hiddens/POINTER_BOTTOM")
-smoothing = 4.0
-below_cursor_distance = 10
+cursor_handler = NodePath("")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.050000012, 0)
@@ -116,68 +31,6 @@ shape = SubResource("BoxShape3D_bgrny")
 
 [node name="hiddens" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.7)
-
-[node name="POINTER_END" type="MeshInstance3D" parent="hiddens"]
-transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 1, 0)
-material_override = SubResource("StandardMaterial3D_21gyy")
-mesh = SubResource("QuadMesh_fo338")
-skeleton = NodePath("")
-
-[node name="POINTER" type="Label3D" parent="hiddens"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, -3)
-double_sided = false
-alpha_cut = 1
-alpha_scissor_threshold = 0.7
-texture_filter = 0
-modulate = Color(0.039215688, 0, 0, 1)
-outline_modulate = Color(0, 0.019607844, 0.019607844, 1)
-text = "A"
-font_size = 200
-outline_size = 20
-uppercase = true
-script = ExtResource("8_nya4u")
-scroll_dir = 10
-
-[node name="POINTER_LEFT" type="Label3D" parent="hiddens"]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, -3)
-double_sided = false
-alpha_cut = 1
-alpha_scissor_threshold = 0.7
-texture_filter = 0
-modulate = Color(0.039215688, 0, 0, 1)
-outline_modulate = Color(0, 0.019607844, 0.019607844, 1)
-text = "A
-"
-font_size = 200
-outline_size = 20
-uppercase = true
-script = ExtResource("8_nya4u")
-
-[node name="GROUND_POINTER" type="MeshInstance3D" parent="hiddens"]
-material_override = SubResource("StandardMaterial3D_iye42")
-mesh = SubResource("CylinderMesh_wdpvw")
-skeleton = NodePath("")
-
-[node name="POINTER_BOTTOM" type="Node3D" parent="hiddens"]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
-
-[node name="POINTER_BOTTOM" type="MeshInstance3D" parent="hiddens/POINTER_BOTTOM"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_uypta")
-mesh = SubResource("TorusMesh_ybdjb")
-skeleton = NodePath("")
-
-[node name="POINTER_BOTTOM2" type="MeshInstance3D" parent="hiddens/POINTER_BOTTOM"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_qvc5s")
-mesh = SubResource("TorusMesh_7kt45")
-skeleton = NodePath("")
-
-[node name="POINTER_BOTTOM3" type="MeshInstance3D" parent="hiddens/POINTER_BOTTOM"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_o8ibb")
-mesh = SubResource("TorusMesh_wlkew")
-skeleton = NodePath("")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="hiddens"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, -1.1920929e-07, -1)

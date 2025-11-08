@@ -32,7 +32,7 @@ func setState(p_state):
 
 func renderText():
 	text = ""
-	var temp_range = floori(distance / (TEXT_SIZE[text_state] * 8))
+	var temp_range = max(floori(distance / (TEXT_SIZE[text_state] * 8)) + 1, 2)
 	for i in range(temp_range):
 		if i == 0:
 			text += SHOT_TEXTS[text_state].substr(floori(scroll) % (SHOT_TEXTS[text_state].length()))
