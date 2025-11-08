@@ -16,7 +16,7 @@ var TEXT_SIZE = [
 	0.325
 ]
 var distance = 4
-var scroll_dir = -10
+@export var scroll_dir = -10
 @export var text_state := Text_States.IDLE
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
