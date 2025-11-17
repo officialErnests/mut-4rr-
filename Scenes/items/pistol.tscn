@@ -16,17 +16,16 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0
 [node name="Cube" parent="pistol" index="0"]
 material_override = ExtResource("2_wnart")
 
-[node name="MAIN" parent="." node_paths=PackedStringArray("itemRigid", "handle") instance=ExtResource("2_bgrny")]
+[node name="MAIN" parent="." node_paths=PackedStringArray("itemRigid") instance=ExtResource("2_bgrny")]
 itemRigid = NodePath("..")
 speed_factor = 0.5
-handle = NodePath("../HandleShoot")
 
-[node name="HandleShoot" type="Node" parent="." node_paths=PackedStringArray("light", "light_pt2", "hiddens", "cursor_handler")]
+[node name="HandleShoot" type="Node" parent="." node_paths=PackedStringArray("light", "light_pt2", "hiddens")]
 script = ExtResource("4_1kwx8")
 light = NodePath("../XD")
 light_pt2 = NodePath("../FLASH2")
 hiddens = NodePath("../hiddens")
-cursor_handler = NodePath("")
+metadata/_custom_type_script = "uid://b5kv5ttlwlpi5"
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.050000012, 0)

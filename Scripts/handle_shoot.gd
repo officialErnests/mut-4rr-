@@ -1,11 +1,10 @@
-extends Node
+class_name Handle extends NB_script
 
-@export var enabled = false
 @export var light: Node3D
 @export var light_pt2: Node3D
 @export var hiddens: Node3D
-@export var cursor_handler: Node
-@export var cam_shaker: Node
+var cursor_handler: Node
+var cam_shaker: Node
 var timer = 0
 var flash_timer = 0
 var delay = 0
