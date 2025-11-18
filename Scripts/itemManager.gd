@@ -14,7 +14,23 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("throw"):
-		pickupDetect()
+		if equiped_item:
+			throw()
+		else:
+			pickupDetect()
+
+func throw():
+	animator.use()
+	animator.hold(false)
+
+	equiped_item_script.drop()
+	equiped_item.reparent(global.global_nodes["Items"])
+	equiped_item.add_to_group("item")
+
+	movement_manager.item_mul = 1
+
+	equiped_item = null
+	equiped_item_script = null
 
 func pickupDetect():
 	var hit_nodes = pickup_hitbox.get_overlapping_bodies()

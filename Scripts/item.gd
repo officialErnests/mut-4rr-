@@ -21,6 +21,10 @@ func initalise(p_main):
 	return speed_factor
 
 func drop() -> void:
+	itemRigid.freeze = false
 	match type:
 		ItemType.GUN:
+			gun_handle.cursor_handler = null
+			gun_handle.cam_shaker = null
 			gun_handle.enabled = false
+			itemRigid.linear_velocity = -itemRigid.global_basis.z * 10

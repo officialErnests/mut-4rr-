@@ -16,9 +16,10 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0
 [node name="Cube" parent="pistol" index="0"]
 material_override = ExtResource("2_wnart")
 
-[node name="MAIN" parent="." node_paths=PackedStringArray("itemRigid") instance=ExtResource("2_bgrny")]
+[node name="MAIN" parent="." node_paths=PackedStringArray("itemRigid", "gun_handle") instance=ExtResource("2_bgrny")]
 itemRigid = NodePath("..")
 speed_factor = 0.5
+gun_handle = NodePath("../HandleShoot")
 
 [node name="HandleShoot" type="Node" parent="." node_paths=PackedStringArray("light", "light_pt2", "hiddens")]
 script = ExtResource("4_1kwx8")
@@ -35,7 +36,7 @@ shape = SubResource("BoxShape3D_bgrny")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.7)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="hiddens"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, -1.1920929e-07, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1920929e-07, -1)
 shadow_enabled = true
 spot_range = 20.0
 spot_angle = 50.0
