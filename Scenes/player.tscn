@@ -92,7 +92,7 @@ rings = 4
 ring_segments = 4
 
 [node name="Player" type="CharacterBody3D"]
-collision_mask = 8
+collision_mask = 10
 
 [node name="Movement" type="Node" parent="." node_paths=PackedStringArray("charecter", "rotator")]
 script = ExtResource("1_v0iea")
@@ -162,14 +162,13 @@ transform = Transform3D(1, 0, 0, 0, 0.93969256, 0.34202012, 0, -0.3420201, 0.939
 light_specular = 0.0
 spot_range = 100.0
 spot_attenuation = 2.0
-spot_angle = 20.0
+spot_angle = 30.0
 spot_angle_attenuation = 123.63955
 
 [node name="LookAt" type="Node" parent="Neck/Cursor_offset/Camera3D/Player_spotlight" node_paths=PackedStringArray("base", "look_node")]
 script = ExtResource("7_3smsa")
 base = NodePath("..")
 look_node = NodePath("../../../../../ItemHolder")
-offset = Vector3(0, -1, 0)
 
 [node name="ItemHolder" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8000001, 0)

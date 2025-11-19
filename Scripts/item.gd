@@ -7,10 +7,14 @@ enum ItemType {
 @export var itemRigid: RigidBody3D
 @export var type: ItemType
 @export var speed_factor: float
+@export var visual_outside: MeshInstance3D
 @export_category("GUN")
 @export var gun_handle: Handle
 
+var item_equiped = false
+
 func initalise(p_main):
+	item_equiped = true
 	itemRigid.freeze = true
 	itemRigid.transform = Transform3D.IDENTITY
 	match type:
@@ -20,7 +24,11 @@ func initalise(p_main):
 			gun_handle.enabled = true
 	return speed_factor
 
+func _process(delta):
+	visual_outside.material_overlay.grow_amount += ((0.02 if item_equiped else 0.001) - visual_outside.material_overlay.grow_amount) * delta * 4
+	
 func drop() -> void:
+	item_equiped = false
 	itemRigid.freeze = false
 	match type:
 		ItemType.GUN:

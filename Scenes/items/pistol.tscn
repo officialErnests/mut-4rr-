@@ -1,9 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://b3o55eubyfvcu"]
+[gd_scene load_steps=7 format=3 uid="uid://b3o55eubyfvcu"]
 
 [ext_resource type="PackedScene" uid="uid://d27ox066bvw2q" path="res://Assets/pistol.fbx" id="1_v2aij"]
 [ext_resource type="PackedScene" uid="uid://sniksy4nvnio" path="res://Scenes/item.tscn" id="2_bgrny"]
 [ext_resource type="Material" uid="uid://b3aqa3jh0vjre" path="res://Assets/Materials/metal.tres" id="2_wnart"]
 [ext_resource type="Script" uid="uid://b5kv5ttlwlpi5" path="res://Scripts/handle_shoot.gd" id="4_1kwx8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wnart"]
+blend_mode = 1
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0.09985284, 0.09985284, 0.09985284, 1)
+grow = true
+grow_amount = 0.001
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bgrny"]
 size = Vector3(0.2, 0.5, 1)
@@ -15,10 +23,12 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0
 
 [node name="Cube" parent="pistol" index="0"]
 material_override = ExtResource("2_wnart")
+material_overlay = SubResource("StandardMaterial3D_wnart")
 
-[node name="MAIN" parent="." node_paths=PackedStringArray("itemRigid", "gun_handle") instance=ExtResource("2_bgrny")]
+[node name="MAIN" parent="." node_paths=PackedStringArray("itemRigid", "visual_outside", "gun_handle") instance=ExtResource("2_bgrny")]
 itemRigid = NodePath("..")
 speed_factor = 0.5
+visual_outside = NodePath("../pistol/Cube")
 gun_handle = NodePath("../HandleShoot")
 
 [node name="HandleShoot" type="Node" parent="." node_paths=PackedStringArray("light", "light_pt2", "hiddens")]
