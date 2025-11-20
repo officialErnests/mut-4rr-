@@ -13,17 +13,16 @@ extends Node
 @export var smoothing: float = 1
 @export var below_cursor_distance = 2
 var prev_location = Vector3.FORWARD
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	POINTER.scroll_dir = -10
-	POINTER_LEFT.scroll_dir = -10
 
+signal UpdateText 
+# Called when the node enters the scene tree for the first time.
 func instaSet():
 	prev_location = LOOK_AT.global_position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if not enabled: return
+	
 	#Smooths cursor
 	prev_location += (LOOK_AT.global_position - prev_location) * delta * smoothing
 	prev_location.y = LOOK_AT.global_position.y

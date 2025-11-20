@@ -6,6 +6,9 @@ extends Node
 @export var cursor_handler: Node
 @export var cam_shaker: Node
 @export var movement_manager: Node
+# Specificly this project ;))
+@export var cursor_label_1 : Label3D
+@export var cursor_label_2 : Label3D
 
 var equiped_item = null
 var equiped_item_script = null
@@ -49,6 +52,12 @@ func pickup(p_node: Node):
 
 	movement_manager.item_mul = equiped_item_script.speed_factor
 	equiped_item_script.initalise(self)
+
+func getLabel1():
+	return cursor_label_1
+
+func getLabel2():
+	return cursor_label_2
 
 func getCursorHandler():
 	return cursor_handler

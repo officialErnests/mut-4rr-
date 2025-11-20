@@ -8,6 +8,10 @@ var cam_shaker: Node
 var timer = 0
 var flash_timer = 0
 var delay = 0
+
+var TEMP_AMMO = 10
+var MAIN: Node
+
 func _process(delta: float) -> void:
 	if not enabled: return
 	if Input.is_action_pressed("shoot") and delay <= 0:
@@ -19,6 +23,8 @@ func _process(delta: float) -> void:
 		delay = 0.02
 		cursor_handler.instaSet()
 		cam_shaker.shot(1)
+		MAIN.setCursorText("AMMO: " + str(TEMP_AMMO) + " - ")
+		TEMP_AMMO -= 1
 	elif flash_timer > 0:
 		flash_timer -= delta
 	elif timer > 0:
