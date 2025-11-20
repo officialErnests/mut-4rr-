@@ -161,6 +161,7 @@ transform = Transform3D(1.0000001, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068,
 
 [node name="Player_spotlight" type="SpotLight3D" parent="Neck/Cursor_offset/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 0.93969256, 0.34202012, 0, -0.3420201, 0.9396926, 0, 0, 0)
+visible = false
 light_specular = 0.0
 spot_range = 100.0
 spot_attenuation = 3.0
@@ -223,6 +224,7 @@ font_size = 100
 outline_size = 20
 uppercase = true
 script = ExtResource("4_vgqql")
+scroll_dir = 10
 
 [node name="POINTER_LEFT" type="Label3D" parent="ItemHolder/Pointer"]
 transform = Transform3D(-3.090862e-08, 0.7071068, -0.7071067, 3.090862e-08, 0.7071067, 0.7071068, 1, 0, -4.371139e-08, -0.2, 0, -3)

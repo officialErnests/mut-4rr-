@@ -129,7 +129,6 @@ font_size = 200
 outline_size = 20
 uppercase = true
 script = ExtResource("5_m62s6")
-scroll_dir = 10
 
 [node name="POINTER_LEFT" type="Label3D" parent="Gun/hiddens"]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, -3)

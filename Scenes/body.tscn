@@ -1,6 +1,23 @@
-[gd_scene load_steps=29 format=4 uid="uid://dtohjmomqtvq3"]
+[gd_scene load_steps=31 format=4 uid="uid://dtohjmomqtvq3"]
 
 [ext_resource type="Script" uid="uid://bnfrta8sdl02n" path="res://Scripts/NPC_animator.gd" id="1_35550"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_35550"]
+render_priority = 1
+transparency = 1
+no_depth_test = true
+shading_mode = 0
+albedo_color = Color(0.05, 0.05, 0.05, 1)
+stencil_mode = 3
+stencil_flags = 1
+stencil_compare = 5
+metadata/_stencil_owned = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7h43o"]
+next_pass = SubResource("StandardMaterial3D_35550")
+stencil_mode = 2
+stencil_flags = 2
+stencil_color = Color(0.05, 0.05, 0.05, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_prour"]
 
@@ -3940,6 +3957,7 @@ bones/27/scale = Vector3(1, 1, 1)
 
 [node name="Cube" type="MeshInstance3D" parent="Skeleton3D"]
 transform = Transform3D(1, 3.5527137e-15, 1.9106857e-15, -3.5527137e-15, 1, 3.5527137e-15, 4.952302e-15, -1.0658141e-14, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_7h43o")
 mesh = SubResource("ArrayMesh_q0t65")
 skin = SubResource("Skin_35550")
 

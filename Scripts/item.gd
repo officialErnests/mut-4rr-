@@ -2,6 +2,7 @@ extends Node
 
 enum ItemType {
 	GUN,
+	NAN,
 }
 
 @export var itemRigid: RigidBody3D
@@ -37,7 +38,7 @@ func setCursorText(p_text):
 	cursor_label_2.curent_text = p_text
 
 func _process(delta):
-	visual_outside.material_overlay.grow_amount += ((0.02 if item_equiped else 0.001) - visual_outside.material_overlay.grow_amount) * delta * 8
+	visual_outside.material_overlay.grow_amount += ((2.0 if item_equiped else 0.1) - visual_outside.material_overlay.grow_amount) * delta * 8
 	
 func drop() -> void:
 	item_equiped = false

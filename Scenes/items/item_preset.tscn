@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://bg1vog6ifsvpi"]
+
+[ext_resource type="PackedScene" uid="uid://sniksy4nvnio" path="res://Scenes/items/item.tscn" id="1_y3qgv"]
+[ext_resource type="Material" uid="uid://b3aqa3jh0vjre" path="res://Assets/Materials/metal.tres" id="2_tqgrt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y3qgv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uc2hg"]
+blend_mode = 1
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0.038397167, 0.038397167, 0.03839716, 1)
+grow = true
+grow_amount = 0.001
+distance_fade_mode = 2
+distance_fade_min_distance = 10.0
+distance_fade_max_distance = 0.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_myoyh"]
+
+[node name="Item_preset" type="RigidBody3D" groups=["item"]]
+
+[node name="MAIN" parent="." node_paths=PackedStringArray("itemRigid", "visual_outside") instance=ExtResource("1_y3qgv")]
+itemRigid = NodePath("..")
+type = 1
+speed_factor = 0.9
+visual_outside = NodePath("../MeshInstance3D")
+show_text = "TEST ITEM --"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("BoxShape3D_y3qgv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+material_override = ExtResource("2_tqgrt")
+material_overlay = SubResource("StandardMaterial3D_uc2hg")
+mesh = SubResource("PrismMesh_myoyh")
