@@ -3,15 +3,17 @@ extends Node
 enum ItemType {
 	GUN,
 	NAN,
+	USE,
+	CONSUMABLE
 }
 
 @export var itemRigid: RigidBody3D
 @export var type: ItemType
 @export var speed_factor: float
-@export var visual_outside: MeshInstance3D
+@export var visual_outside: GeometryInstance3D
 @export var show_text:String
-@export_category("GUN")
-@export var gun_handle: Handle
+@export var throw_force: float = 1
+@export var extend_script: Node
 
 var cursor_label_1 : Label3D = null
 var cursor_label_2 : Label3D = null
@@ -27,10 +29,12 @@ func initalise(p_main):
 	
 	match type:
 		ItemType.GUN:
-			gun_handle.MAIN = self
-			gun_handle.cursor_handler = p_main.getCursorHandler()
-			gun_handle.cam_shaker = p_main.getCamShaker()
-			gun_handle.enabled = true
+			extend_script.MAIN = self
+			extend_script.cursor_handler = p_main.getCursorHandler()
+			extend_script.cam_shaker = p_main.getCamShaker()
+			extend_script.enabled = true
+		# ItemType.USE:
+
 	return speed_factor
 
 func setCursorText(p_text):
@@ -43,9 +47,9 @@ func _process(delta):
 func drop() -> void:
 	item_equiped = false
 	itemRigid.freeze = false
+	itemRigid.linear_velocity = -itemRigid.global_basis.z * throw_force
 	match type:
 		ItemType.GUN:
-			gun_handle.cursor_handler = null
-			gun_handle.cam_shaker = null
-			gun_handle.enabled = false
-			itemRigid.linear_velocity = -itemRigid.global_basis.z * 10
+			extend_script.cursor_handler = null
+			extend_script.cam_shaker = null
+			extend_script.enabled = false
