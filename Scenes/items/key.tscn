@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ep6k8yqtrsmj"]
+[gd_scene load_steps=7 format=3 uid="uid://ep6k8yqtrsmj"]
 
 [ext_resource type="PackedScene" uid="uid://sniksy4nvnio" path="res://Scenes/items/item.tscn" id="1_kn0ow"]
 [ext_resource type="Material" uid="uid://b3aqa3jh0vjre" path="res://Assets/Materials/metal.tres" id="2_4po2v"]
+[ext_resource type="Script" uid="uid://dls8qhndupmtp" path="res://Scripts/items/handle_usables.gd" id="2_mtd5w"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kn0ow"]
 blend_mode = 1
@@ -29,6 +30,7 @@ visual_outside = NodePath("../CSGTorus3D")
 show_text = "TEST ITEM --"
 
 [node name="USABLES" type="Node" parent="."]
+script = ExtResource("2_mtd5w")
 
 [node name="CSGTorus3D" type="CSGTorus3D" parent="."]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)

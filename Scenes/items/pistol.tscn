@@ -3,7 +3,7 @@
 [ext_resource type="ArrayMesh" uid="uid://dgmu1dtilc8pi" path="res://Assets/pistol.obj" id="2_6kuqx"]
 [ext_resource type="PackedScene" uid="uid://sniksy4nvnio" path="res://Scenes/items/item.tscn" id="2_bgrny"]
 [ext_resource type="Material" uid="uid://b3aqa3jh0vjre" path="res://Assets/Materials/metal.tres" id="2_wnart"]
-[ext_resource type="Script" uid="uid://b5kv5ttlwlpi5" path="res://Scripts/handle_shoot.gd" id="4_1kwx8"]
+[ext_resource type="Script" uid="uid://b5kv5ttlwlpi5" path="res://Scripts/items/handle_shoot.gd" id="4_1kwx8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wnart"]
 blend_mode = 1

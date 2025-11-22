@@ -17,7 +17,6 @@ var start_position
 
 func _ready():
 	refresh()
-	triggered()
 
 func refresh():
 	start_position = main_node.position
