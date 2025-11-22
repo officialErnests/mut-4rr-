@@ -31,7 +31,6 @@ mesh = ExtResource("2_6kuqx")
 itemRigid = NodePath("..")
 speed_factor = 0.5
 visual_outside = NodePath("../Pistol")
-throw_force = 1.0
 extend_script = NodePath("../HandleShoot")
 
 [node name="HandleShoot" type="Node" parent="." node_paths=PackedStringArray("light", "light_pt2", "hiddens")]

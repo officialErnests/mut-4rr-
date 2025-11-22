@@ -22,6 +22,11 @@ func _process(delta: float) -> void:
 		else:
 			pickupDetect()
 
+func use():
+	#TODO
+	# add so it checks item use case then it switches to just checking witouth item
+	pass
+
 func throw():
 	animator.use()
 	animator.hold(false)

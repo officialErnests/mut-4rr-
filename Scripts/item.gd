@@ -12,7 +12,7 @@ enum ItemType {
 @export var speed_factor: float
 @export var visual_outside: GeometryInstance3D
 @export var show_text:String
-@export var throw_force: float = 1
+@export var throw_force: float = 5
 @export var extend_script: Node
 
 var cursor_label_1 : Label3D = null
