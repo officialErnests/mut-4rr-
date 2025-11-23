@@ -21,11 +21,25 @@ func _process(delta: float) -> void:
 			throw()
 		else:
 			pickupDetect()
+	if Input.is_action_just_pressed("use"):
+		if equiped_item:
+			equipUse()
+		else:
+			use()
+
+func equipUse():
+	equiped_item_script.use(self)
 
 func use():
-	#TODO
-	# add so it checks item use case then it switches to just checking witouth item
+	for iter_node in detectFront():
+		if iter_node.is_in_group("Interactable"):
+			iter_node.get_node("MAIN").triggered()
 	pass
+
+func detectFront():
+	var temp_bodies = pickup_hitbox.get_overlapping_bodies()
+	temp_bodies.append_array(pickup_hitbox.get_overlapping_areas())
+	return temp_bodies
 
 func throw():
 	animator.use()
@@ -41,8 +55,7 @@ func throw():
 	equiped_item_script = null
 
 func pickupDetect():
-	var hit_nodes = pickup_hitbox.get_overlapping_bodies()
-	for node in hit_nodes:
+	for node in detectFront():
 		if node.is_in_group("item"):
 			pickup(node)
 			return

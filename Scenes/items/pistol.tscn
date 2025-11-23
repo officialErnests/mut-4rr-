@@ -38,6 +38,8 @@ script = ExtResource("4_1kwx8")
 light = NodePath("../XD")
 light_pt2 = NodePath("../FLASH2")
 hiddens = NodePath("../hiddens")
+light_time = 0.02
+delay = 0.04
 metadata/_custom_type_script = "uid://b5kv5ttlwlpi5"
 
 [node name="Collider" type="CollisionShape3D" parent="."]

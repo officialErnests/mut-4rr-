@@ -43,7 +43,15 @@ func setCursorText(p_text):
 
 func _process(delta):
 	visual_outside.material_overlay.grow_amount += ((2.0 if item_equiped else 0.1) - visual_outside.material_overlay.grow_amount) * delta * 8
-	
+
+func use(p_main) -> void:
+	match type:
+		ItemType.GUN:
+			extend_script.shoot()	
+		_:
+			p_main.use()
+
+
 func drop() -> void:
 	item_equiped = false
 	itemRigid.freeze = false

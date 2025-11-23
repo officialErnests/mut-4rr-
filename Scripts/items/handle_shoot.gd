@@ -3,9 +3,9 @@ class_name Handle extends NB_script
 @export var light: Node3D
 @export var light_pt2: Node3D
 @export var hiddens: Node3D
-@export var light_time: float
-@export var flash_time: float
-@export var delay : float
+@export var light_time: float = 0.05
+@export var flash_time: float = 0.01
+@export var delay : float = 0.1
 @export var max_ammo: int
 
 var curent_ammo = max_ammo
@@ -17,13 +17,12 @@ var MAIN: Node
 func _process(delta: float) -> void:
 	if light_countdown_timer <= 0: return
 	light_countdown_timer -= delta
-
-	if light_countdown_timer <= delay - light_time - flash_time :
+	if light_countdown_timer <= delay - light_time:
 		light.visible = false
 		light_pt2.visible = false 
 		hiddens.visible = true
 	elif light_countdown_timer <= delay + light_time - flash_time:
-		light_pt2.visible = false 
+		light_pt2.visible = false
 
 func setAmmoString():
 	MAIN.setCursorText("AMMO: " + str(curent_ammo) + " // ")
