@@ -1,13 +1,13 @@
 [gd_scene load_steps=22 format=3 uid="uid://bvyc5gq1qi2qw"]
 
-[ext_resource type="Script" uid="uid://c73bn6ajbmaj" path="res://Scripts/player.gd" id="1_8gudg"]
-[ext_resource type="Script" uid="uid://1f0q4ofhgup" path="res://Scripts/pointer_cursor.gd" id="2_qi7up"]
+[ext_resource type="Script" uid="uid://c73bn6ajbmaj" path="res://Scripts/player/player.gd" id="1_8gudg"]
+[ext_resource type="Script" uid="uid://1f0q4ofhgup" path="res://Scripts/player/pointer_cursor.gd" id="2_qi7up"]
 [ext_resource type="Script" uid="uid://b5kv5ttlwlpi5" path="res://Scripts/items/handle_shoot.gd" id="3_a6nw3"]
-[ext_resource type="Script" uid="uid://dcpwb4aalddig" path="res://Scripts/cursor_visual_draw.gd" id="4_b4syp"]
+[ext_resource type="Script" uid="uid://dcpwb4aalddig" path="res://Scripts/player/cursor_visual_draw.gd" id="4_b4syp"]
 [ext_resource type="Texture2D" uid="uid://b6apxjep8wnwf" path="res://Assets/cursor.png" id="5_f10bm"]
-[ext_resource type="Script" uid="uid://c2qad2apg860v" path="res://Scripts/label_sizer.gd" id="6_jcef7"]
-[ext_resource type="Script" uid="uid://bjuxy6pujas3c" path="res://Scripts/CursorToPoint.gd" id="7_njxey"]
-[ext_resource type="Script" uid="uid://c65dhkofbptrf" path="res://Scripts/look_at.gd" id="8_y54i2"]
+[ext_resource type="Script" uid="uid://c2qad2apg860v" path="res://Scripts/player/label_sizer.gd" id="6_jcef7"]
+[ext_resource type="Script" uid="uid://bjuxy6pujas3c" path="res://Scripts/player/CursorToPoint.gd" id="7_njxey"]
+[ext_resource type="Script" uid="uid://c65dhkofbptrf" path="res://Scripts/player/look_at.gd" id="8_y54i2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mc8fj"]
 radius = 0.4

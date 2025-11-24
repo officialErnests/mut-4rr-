@@ -1,46 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://bc2pdgvvigyy1"]
+[gd_scene load_steps=12 format=3 uid="uid://bc2pdgvvigyy1"]
 
 [ext_resource type="Texture2D" uid="uid://cpwaa4s2klaho" path="res://Temp_assets/n0o0bPumkin.png" id="1_ebmjs"]
+[ext_resource type="Script" uid="uid://cwietp32u5ei5" path="res://Scripts/setup/setup_world.gd" id="1_v158k"]
 [ext_resource type="PackedScene" uid="uid://bpgaix3cftid6" path="res://Scenes/player.tscn" id="2_qxrlw"]
 [ext_resource type="PackedScene" uid="uid://b3o55eubyfvcu" path="res://Scenes/items/pistol.tscn" id="3_wrm1d"]
-[ext_resource type="Script" uid="uid://cktt5pl0bvboc" path="res://Scripts/global_node.gd" id="4_3dryh"]
+[ext_resource type="Script" uid="uid://cktt5pl0bvboc" path="res://Scripts/utils/global_node.gd" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://bg1vog6ifsvpi" path="res://Scenes/items/item_preset.tscn" id="5_wowpa"]
 [ext_resource type="PackedScene" uid="uid://ep6k8yqtrsmj" path="res://Scenes/items/key.tscn" id="6_i6g32"]
-[ext_resource type="Script" uid="uid://c3jig88yhlhd1" path="res://Scripts/interactable.gd" id="7_1l0tm"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qxrlw"]
-sky_top_color = Color(0.5686275, 0.12941177, 0.16470589, 1)
-sky_horizon_color = Color(0.32991916, 0.22011521, 0.22893876, 1)
-ground_bottom_color = Color(0, 0, 0, 1)
-ground_horizon_color = Color(0.32991916, 0.22011521, 0.22893876, 1)
-
-[sub_resource type="Sky" id="Sky_wrm1d"]
-sky_material = SubResource("ProceduralSkyMaterial_qxrlw")
-
-[sub_resource type="Environment" id="Environment_3dryh"]
-background_mode = 4
-sky = SubResource("Sky_wrm1d")
-ambient_light_source = 1
-reflected_light_source = 1
-tonemap_mode = 3
-tonemap_exposure = 0.85
-tonemap_white = 16.0
-glow_enabled = true
-glow_normalized = true
-glow_intensity = 0.42
-glow_bloom = 1.0
-glow_blend_mode = 1
-adjustment_enabled = true
-adjustment_contrast = 4.0
-adjustment_saturation = 4.0
-
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_qxrlw"]
-auto_exposure_enabled = true
-auto_exposure_scale = 0.03
-auto_exposure_speed = 1.0
-dof_blur_far_enabled = true
-dof_blur_far_transition = 10.0
-dof_blur_amount = 1.0
+[ext_resource type="PackedScene" uid="uid://d3fr5ec77cm5i" path="res://Scenes/map.tscn" id="8_v158k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qxrlw"]
 albedo_texture = ExtResource("1_ebmjs")
@@ -52,17 +19,10 @@ size = Vector2(100, 100)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_3dryh"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_1l0tm"]
-size = Vector3(0.2, 5, 5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_i6g32"]
-size = Vector3(0.2, 5, 5)
-
 [node name="Game" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_3dryh")
-camera_attributes = SubResource("CameraAttributesPractical_qxrlw")
+script = ExtResource("1_v158k")
 
 [node name="Floor" type="Node3D" parent="."]
 
@@ -76,19 +36,8 @@ mesh = SubResource("PlaneMesh_wrm1d")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_3dryh")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="Floor"]
-transform = Transform3D(0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 0, 0, 1, -19.5, 2.5, 0)
-collision_layer = 15
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor/StaticBody3D2"]
-material_override = SubResource("StandardMaterial3D_qxrlw")
-mesh = SubResource("PlaneMesh_wrm1d")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D2"]
-shape = SubResource("WorldBoundaryShape3D_3dryh")
-
 [node name="Player" parent="." instance=ExtResource("2_qxrlw")]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 3.9999998, 1, 0)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 3.9999998, 1, -6.9999995)
 
 [node name="Items" type="Node3D" parent="."]
 
@@ -99,103 +48,12 @@ node_to_globalize = NodePath("..")
 enabled = true
 
 [node name="Pistol" parent="Items" instance=ExtResource("3_wrm1d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07293272, 0.29999995, -3.2161436)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9270673, 0.29999995, -5.2161436)
 
 [node name="Item_preset" parent="Items" instance=ExtResource("5_wowpa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4267366, 0.5, -1.3963675)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4267366, 0.5, -8.396368)
 
 [node name="Item_preset2" parent="Items" instance=ExtResource("6_i6g32")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.894635, 0.099999994, 1.4364657)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.894635, 0.099999994, -5.5635343)
 
-[node name="Map" type="Node3D" parent="."]
-
-[node name="Static" type="Node3D" parent="Map"]
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Map/Static"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.55, 2.0000002, -1.25)
-use_collision = true
-collision_layer = 3
-size = Vector3(4.1, 4.2000003, 3.5)
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="Map/Static"]
-transform = Transform3D(-0.40703964, 0.91341054, 0, -0.91341054, -0.40703964, 0, 0, 0, 1, 2.4308407, 8.015628, -2.0500002)
-use_collision = true
-collision_layer = 3
-size = Vector3(1, 4.2000003, 3.5)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Map/Static/CSGBox3D3"]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
-light_energy = 0.1
-shadow_enabled = true
-spot_range = 30.0
-spot_angle = 80.0
-spot_angle_attenuation = 4.924578
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="Map/Static"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3999999, 1.9000001, 5.9999995)
-use_collision = true
-collision_layer = 3
-size = Vector3(20, 4, 1)
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="Map/Static"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4, 1.9000001, -1.0000005)
-use_collision = true
-collision_layer = 3
-size = Vector3(8, 4, 1)
-
-[node name="CSGBox3D6" type="CSGBox3D" parent="Map/Static"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4, 1.9000001, -10)
-use_collision = true
-collision_layer = 3
-size = Vector3(8, 4, 1)
-
-[node name="CSGBox3D7" type="CSGBox3D" parent="Map/Static"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6000004, 1.9000001, -10)
-use_collision = true
-collision_layer = 3
-size = Vector3(8, 4, 1)
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="Map/Static"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.9, 1.9000001, -2.0000005)
-use_collision = true
-collision_layer = 3
-size = Vector3(1, 4, 17)
-
-[node name="Area3D" type="Area3D" parent="Map" groups=["Interactable"]]
-collision_layer = 3
-
-[node name="MAIN" type="Node" parent="Map/Area3D" node_paths=PackedStringArray("main_node", "move_node")]
-script = ExtResource("7_1l0tm")
-usecase = 0
-main_node = NodePath("../AnimatableBody3D")
-move_vector = Vector3(0, 3, 0)
-max_action_timer = 1
-move_node = NodePath("../AnimatableBody3D")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Map/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2.5, 3)
-shape = SubResource("BoxShape3D_1l0tm")
-
-[node name="AnimatableBody3D" type="AnimatableBody3D" parent="Map/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0.5)
-collision_layer = 3
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/Area3D/AnimatableBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 2.5)
-mesh = SubResource("BoxMesh_i6g32")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Area3D/AnimatableBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 2.5)
-shape = SubResource("BoxShape3D_1l0tm")
-
-[node name="AnimatableBody3D2" type="AnimatableBody3D" parent="Map/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -8)
-collision_layer = 3
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/Area3D/AnimatableBody3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 2.5)
-mesh = SubResource("BoxMesh_i6g32")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Area3D/AnimatableBody3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 2.5)
-shape = SubResource("BoxShape3D_1l0tm")
+[node name="Map" parent="." instance=ExtResource("8_v158k")]

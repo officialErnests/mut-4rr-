@@ -1,6 +1,6 @@
 [gd_scene load_steps=31 format=4 uid="uid://dtohjmomqtvq3"]
 
-[ext_resource type="Script" uid="uid://bnfrta8sdl02n" path="res://Scripts/NPC_animator.gd" id="1_35550"]
+[ext_resource type="Script" uid="uid://bnfrta8sdl02n" path="res://Scripts/player/NPC_animator.gd" id="1_35550"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_35550"]
 render_priority = 1

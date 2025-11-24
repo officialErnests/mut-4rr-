@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://d1dg24cxas7ge"]
 
-[ext_resource type="Script" uid="uid://dwj6fl455tj5t" path="res://Scripts/switch_scene.gd" id="1_1ehe0"]
-[ext_resource type="Script" uid="uid://dghijtnxv14l1" path="res://Scripts/menu_set.gd" id="1_28flt"]
+[ext_resource type="Script" uid="uid://dwj6fl455tj5t" path="res://Scripts/utils/switch_scene.gd" id="1_1ehe0"]
+[ext_resource type="Script" uid="uid://dghijtnxv14l1" path="res://Scripts/utils/oneoff/menu_set.gd" id="1_28flt"]
 [ext_resource type="PackedScene" uid="uid://bc2pdgvvigyy1" path="res://Scenes/game.tscn" id="2_ce3w2"]
 
 [node name="Control" type="Control"]

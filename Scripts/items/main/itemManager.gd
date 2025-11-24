@@ -17,11 +17,13 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("throw"):
+		animator.use()
 		if equiped_item:
 			throw()
 		else:
 			pickupDetect()
 	if Input.is_action_just_pressed("use"):
+		animator.use()
 		if equiped_item:
 			equipUse()
 		else:
@@ -61,7 +63,6 @@ func pickupDetect():
 			return
 
 func pickup(p_node: Node):
-	animator.use()
 	animator.hold(true)
 	p_node.reparent(itemHolder)
 	equiped_item = p_node
