@@ -1,10 +1,13 @@
 @tool
 class_name NB_resizer extends Area3D
 
+@export var key := 0
+
 @export var size := Vector3.ONE:
 	set(new_size):
 		size = new_size
 		resize()
+
 @export var resize_shape_arr: Array[CollisionShape3D]
 @export var resize_mesh_arr: Array[MeshInstance3D]
 

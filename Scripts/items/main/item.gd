@@ -4,6 +4,7 @@ enum ItemType {
 	GUN,
 	NAN,
 	USE,
+	KEY,
 	CONSUMABLE
 }
 
@@ -47,7 +48,10 @@ func _process(delta):
 func use(p_main) -> void:
 	match type:
 		ItemType.GUN:
-			extend_script.shoot()	
+			extend_script.shoot()
+		ItemType.KEY:
+			print(get_parent().params)
+			p_main.use(get_parent().params)
 		_:
 			p_main.use()
 

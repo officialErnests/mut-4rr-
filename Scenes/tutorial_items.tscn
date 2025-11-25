@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://88j7no5qpq55"]
+
+[ext_resource type="Script" uid="uid://cktt5pl0bvboc" path="res://Scripts/utils/global_node.gd" id="1_2ipc2"]
+[ext_resource type="PackedScene" uid="uid://b3o55eubyfvcu" path="res://Scenes/items/pistol.tscn" id="2_tiayv"]
+[ext_resource type="PackedScene" uid="uid://bg1vog6ifsvpi" path="res://Scenes/items/item_preset.tscn" id="3_1wofm"]
+[ext_resource type="PackedScene" uid="uid://ep6k8yqtrsmj" path="res://Scenes/items/key.tscn" id="4_tvaoo"]
+
+[node name="Items" type="Node3D"]
+
+[node name="GlobalNode" type="Node" parent="." node_paths=PackedStringArray("node_to_globalize")]
+script = ExtResource("1_2ipc2")
+global_name = "Items"
+node_to_globalize = NodePath("..")
+enabled = true
+
+[node name="Pistol" parent="." instance=ExtResource("2_tiayv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0729327, 0.29999995, -13.216144)
+
+[node name="Item_preset" parent="." instance=ExtResource("3_1wofm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4267366, 0.5, -3.396368)
+
+[node name="Item_preset3" parent="." instance=ExtResource("3_1wofm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.370803, 0.5, -6.2277126)
+
+[node name="Item_preset4" parent="." instance=ExtResource("3_1wofm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4267366, 0.5, -2.396368)
+
+[node name="Item_preset2" parent="." instance=ExtResource("4_tvaoo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.894635, 0.099999994, -31.563534)
+params = {
+"door_key": 1
+}
+
+[node name="Tutorial" type="Node3D" parent="."]

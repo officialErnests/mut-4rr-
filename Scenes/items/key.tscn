@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://ep6k8yqtrsmj"]
+[gd_scene load_steps=8 format=3 uid="uid://ep6k8yqtrsmj"]
 
 [ext_resource type="PackedScene" uid="uid://sniksy4nvnio" path="res://Scenes/items/item.tscn" id="1_kn0ow"]
+[ext_resource type="Script" uid="uid://bply58o1ccedl" path="res://Scripts/utils/value_exposer_items.gd" id="1_mtd5w"]
 [ext_resource type="Material" uid="uid://b3aqa3jh0vjre" path="res://Assets/Materials/metal.tres" id="2_4po2v"]
 [ext_resource type="Script" uid="uid://dls8qhndupmtp" path="res://Scripts/items/handle_usables.gd" id="2_mtd5w"]
 
@@ -21,10 +22,11 @@ size = Vector3(0.7, 0.2, 0.7)
 size = Vector3(0.90000004, 0.2, 0.3)
 
 [node name="Item_preset" type="RigidBody3D" groups=["item"]]
+script = ExtResource("1_mtd5w")
 
 [node name="MAIN" parent="." node_paths=PackedStringArray("itemRigid", "visual_outside") instance=ExtResource("1_kn0ow")]
 itemRigid = NodePath("..")
-type = 1
+type = 3
 speed_factor = 0.9
 visual_outside = NodePath("../CSGTorus3D")
 show_text = "TEST ITEM --"

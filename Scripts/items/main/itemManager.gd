@@ -32,10 +32,11 @@ func _process(delta: float) -> void:
 func equipUse():
 	equiped_item_script.use(self)
 
-func use():
+func use(p_params = {}):
 	for iter_node in detectFront():
 		if iter_node.is_in_group("Interactable"):
-			iter_node.get_node("MAIN").triggered()
+			print(p_params)
+			iter_node.get_node("MAIN").triggered(p_params)
 	pass
 
 func detectFront():

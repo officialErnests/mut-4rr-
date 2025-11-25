@@ -16,8 +16,10 @@ var action_timer = 0
 var active = false
 var start_position
 var activated = false
+var key = 0
 
 func _ready():
+	key = get_parent().key
 	refresh()
 
 func refresh():
@@ -36,8 +38,10 @@ func _process(delta: float) -> void:
 		type.SLIDE_DOOR:
 			sliderDoor()			
 
-func triggered():
+func triggered(p_params):
 	if activated: return 
+	if key != 0:
+		if not p_params.has("door_key") or p_params["door_key"] != key: return
 	action_timer = max_action_timer
 	active = not active
 	activated = true
