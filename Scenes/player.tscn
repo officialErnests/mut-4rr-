@@ -91,7 +91,7 @@ outer_radius = 0.6
 rings = 4
 ring_segments = 4
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
 collision_mask = 10
 
 [node name="Movement" type="Node" parent="." node_paths=PackedStringArray("charecter", "rotator")]

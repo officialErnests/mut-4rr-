@@ -2,16 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://cpwaa4s2klaho" path="res://Temp_assets/n0o0bPumkin.png" id="1_26yhd"]
 [ext_resource type="PackedScene" uid="uid://dgl4duluwfeeq" path="res://Scenes/interactables/door.tscn" id="1_ci6au"]
+[ext_resource type="PackedScene" uid="uid://bfdu64o0jubuk" path="res://Scenes/map_roof.tscn" id="2_p3ir5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p3ir5"]
 albedo_texture = ExtResource("1_26yhd")
 texture_filter = 0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_26yhd"]
-albedo_texture = ExtResource("1_26yhd")
-texture_filter = 0
-distance_fade_mode = 3
-distance_fade_min_distance = 5.0
 
 [node name="Map" type="Node3D"]
 
@@ -20,7 +15,7 @@ distance_fade_min_distance = 5.0
 [node name="XWALLLS" type="Node3D" parent="Static"]
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="Static/XWALLLS"]
-transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 4.5, 1.5, 0)
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 11.5, 1.5, 0)
 material_override = SubResource("StandardMaterial3D_p3ir5")
 use_collision = true
 collision_layer = 3
@@ -163,141 +158,40 @@ size = Vector3(8, 3, 1)
 
 [node name="ROOF" type="Node3D" parent="Static"]
 
-[node name="CSGBox3D10" type="CSGBox3D" parent="Static/ROOF"]
-transform = Transform3D(-4.371138e-08, -8.7422784e-08, -1, -8.742278e-08, 1, -8.7422784e-08, 1, 8.742278e-08, -4.371139e-08, 4.5, 3.5000007, -4.4999995)
-material_override = SubResource("StandardMaterial3D_26yhd")
-collision_layer = 3
-size = Vector3(10, 1, 10)
+[node name="Roof_1_0_0" parent="Static/ROOF" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("2_p3ir5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+neibour_roofs = [NodePath("../Roof_1_-1_0")]
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Static/ROOF/CSGBox3D10"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-light_energy = 0.1
-shadow_enabled = true
-shadow_bias = 0.05
-spot_range = 10.0
-spot_attenuation = -4.0
-spot_angle = 80.0
-spot_angle_attenuation = 92682.266
+[node name="Roof_1_-1_0" parent="Static/ROOF" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("2_p3ir5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 0)
+neibour_roofs = [NodePath("../Roof_1_0_0"), NodePath("../Roof_1_-1_-1"), NodePath("../Roof_1_-2_0")]
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="Static/ROOF/CSGBox3D10"]
-transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711392e-08, 1, 0, -1, -4.371138e-08, -9.000001, -7.1525574e-07, 4.7683716e-07)
-light_energy = 0.1
-shadow_enabled = true
-shadow_bias = 0.05
-spot_range = 10.0
-spot_attenuation = -4.0
-spot_angle = 80.0
-spot_angle_attenuation = 92682.266
+[node name="Roof_1_-1_-1" parent="Static/ROOF" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("2_p3ir5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 2)
+neibour_roofs = [NodePath("../Roof_1_-1_0"), NodePath("../Roof_1_-1_-2")]
 
-[node name="SpotLight3D3" type="SpotLight3D" parent="Static/ROOF/CSGBox3D10"]
-transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711395e-08, 1, 0, -1, -4.3711385e-08, -18, -1.4305115e-06, 9.536743e-07)
-light_energy = 0.1
-shadow_enabled = true
-shadow_bias = 0.05
-spot_range = 10.0
-spot_attenuation = -4.0
-spot_angle = 80.0
-spot_angle_attenuation = 92682.266
+[node name="Roof_1_-1_-2" parent="Static/ROOF" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("2_p3ir5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 4)
+neibour_roofs = [NodePath("../Roof_1_-1_-1"), NodePath("../Roof_1_-2_-2")]
 
-[node name="CSGBox3D11" type="CSGBox3D" parent="Static/ROOF"]
-transform = Transform3D(-4.371138e-08, -8.7422784e-08, -1, -8.742278e-08, 1, -8.7422784e-08, 1, 8.742278e-08, -4.371139e-08, 4.5000005, 3.5000017, -13.5)
-material_override = SubResource("StandardMaterial3D_26yhd")
-collision_layer = 3
-size = Vector3(10, 1, 10)
+[node name="Roof_1_-2_-2" parent="Static/ROOF" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("2_p3ir5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 4)
+neibour_roofs = [NodePath("../Roof_1_-1_-2"), NodePath("../Roof_1_-3_-2")]
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Static/ROOF/CSGBox3D11"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-light_energy = 0.1
-shadow_enabled = true
-shadow_bias = 0.05
-spot_range = 10.0
-spot_attenuation = -4.0
-spot_angle = 80.0
-spot_angle_attenuation = 92682.266
+[node name="Roof_1_-2_0" parent="Static/ROOF" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("2_p3ir5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 0)
+neibour_roofs = [NodePath("../Roof_1_-1_0"), NodePath("../Roof_1_-3_0")]
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="Static/ROOF/CSGBox3D11"]
-transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711392e-08, 1, 0, -1, -4.371138e-08, -8.999999, -7.1525574e-07, 4.7683716e-07)
-light_energy = 0.1
-shadow_enabled = true
-shadow_bias = 0.05
-spot_range = 10.0
-spot_attenuation = -4.0
-spot_angle = 80.0
-spot_angle_attenuation = 92682.266
+[node name="Roof_1_-3_0" parent="Static/ROOF" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("2_p3ir5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, 0)
+neibour_roofs = [NodePath("../Roof_1_-2_0"), NodePath("../Roof_1_-3_-1")]
 
-[node name="SpotLight3D3" type="SpotLight3D" parent="Static/ROOF/CSGBox3D11"]
-transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711395e-08, 1, 0, -1, -4.3711385e-08, -18, -1.66893e-06, 9.536743e-07)
-light_energy = 0.1
-shadow_enabled = true
-shadow_bias = 0.05
-spot_range = 10.0
-spot_attenuation = -4.0
-spot_angle = 80.0
-spot_angle_attenuation = 92682.266
+[node name="Roof_1_-3_-1" parent="Static/ROOF" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("2_p3ir5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, 2)
+neibour_roofs = [NodePath("../Roof_1_-3_0"), NodePath("../Roof_1_-3_-2")]
 
-[node name="CSGBox3D12" type="CSGBox3D" parent="Static/ROOF"]
-transform = Transform3D(-4.371138e-08, -8.7422784e-08, -1, -8.742278e-08, 1, -8.7422784e-08, 1, 8.742278e-08, -4.371139e-08, 4.500001, 3.5000024, -22.5)
-material_override = SubResource("StandardMaterial3D_26yhd")
-collision_layer = 3
-size = Vector3(10, 1, 10)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Static/ROOF/CSGBox3D12"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-light_energy = 0.1
-shadow_enabled = true
-shadow_bias = 0.05
-spot_range = 10.0
-spot_attenuation = -4.0
-spot_angle = 80.0
-spot_angle_attenuation = 92682.266
-
-[node name="CSGBox3D14" type="CSGBox3D" parent="Static/ROOF"]
-transform = Transform3D(-4.371138e-08, -8.7422784e-08, -1, -8.742278e-08, 1, -8.7422784e-08, 1, 8.742278e-08, -4.371139e-08, 4.500001, 3.5000024, -31.5)
-material_override = SubResource("StandardMaterial3D_26yhd")
-collision_layer = 3
-size = Vector3(10, 1, 10)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Static/ROOF/CSGBox3D14"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-light_energy = 0.1
-shadow_enabled = true
-shadow_bias = 0.05
-spot_range = 10.0
-spot_attenuation = -4.0
-spot_angle = 80.0
-spot_angle_attenuation = 92682.266
-
-[node name="CSGBox3D15" type="CSGBox3D" parent="Static/ROOF"]
-transform = Transform3D(-4.371138e-08, -8.7422784e-08, -1, -8.742278e-08, 1, -8.7422784e-08, 1, 8.742278e-08, -4.371139e-08, -4.499999, 3.5000024, -31.5)
-material_override = SubResource("StandardMaterial3D_26yhd")
-collision_layer = 3
-size = Vector3(10, 1, 10)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Static/ROOF/CSGBox3D15"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-light_energy = 0.1
-shadow_enabled = true
-shadow_bias = 0.05
-spot_range = 10.0
-spot_attenuation = -4.0
-spot_angle = 80.0
-spot_angle_attenuation = 92682.266
-
-[node name="CSGBox3D13" type="CSGBox3D" parent="Static/ROOF"]
-transform = Transform3D(-4.371138e-08, -8.7422784e-08, -1, -8.742278e-08, 1, -8.7422784e-08, 1, 8.742278e-08, -4.371139e-08, -4.499999, 3.5000017, -22.5)
-material_override = SubResource("StandardMaterial3D_26yhd")
-collision_layer = 3
-size = Vector3(10, 1, 10)
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Static/ROOF/CSGBox3D13"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
-light_energy = 0.1
-shadow_enabled = true
-shadow_bias = 0.05
-spot_range = 10.0
-spot_attenuation = -4.0
-spot_angle = 80.0
-spot_angle_attenuation = 92682.266
+[node name="Roof_1_-3_-2" parent="Static/ROOF" instance=ExtResource("2_p3ir5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, 4)
 
 [node name="Pillars" type="Node3D" parent="Static"]
 
