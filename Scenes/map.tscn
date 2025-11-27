@@ -190,8 +190,9 @@ neibour_roofs = [NodePath("../Roof_1_-2_0"), NodePath("../Roof_1_-3_-1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, 2)
 neibour_roofs = [NodePath("../Roof_1_-3_0"), NodePath("../Roof_1_-3_-2")]
 
-[node name="Roof_1_-3_-2" parent="Static/ROOF" instance=ExtResource("2_p3ir5")]
+[node name="Roof_1_-3_-2" parent="Static/ROOF" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("2_p3ir5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, 4)
+neibour_roofs = [NodePath("../Roof_1_-3_-1"), NodePath("../Roof_1_-2_-2")]
 
 [node name="Pillars" type="Node3D" parent="Static"]
 

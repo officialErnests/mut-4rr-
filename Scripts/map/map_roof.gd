@@ -12,45 +12,35 @@ var seek_step = 0
 func _ready() -> void:
 	trigger.body_entered.connect(roomEntered)
 	trigger.body_exited.connect(roomExited)
-	debug()
-
+	
 func roomEntered(body) -> void:
 	if body.is_in_group("Player"):
 		player_closenes = 0
-		spreadUpdate(update_step + 1, player_closenes)
+		expandZero(0, update_step + 1)
 
 func roomExited(body) -> void:
 	if body.is_in_group("Player"):
 		player_closenes = -1
-		seekUpdate(seek_step + 1)
-
-func spreadUpdate(s_update_step, value) -> void:
-	if update_step == s_update_step:
-		debug()
+		seekZero(seek_step + 1)
+	
+func expandZero(p_value, p_update_step) -> void:
+	if update_step == p_update_step:
+		if player_closenes >= p_value:
+			player_closenes = p_value
+			print("AHHHHHHHHHHHH")
+			for roof in neibour_roofs:
+				roof.expandZero(p_value + 1, p_update_step)
 		return
-	update_step = s_update_step
-
-	if not player_closenes == 0:
-		player_closenes = value + 1
-		debug()
-		return
-	else:
-		for iter_roof in neibour_roofs:
-			iter_roof.spreadUpdate(s_update_step, value + 1)
-		debug()
-
-func seekUpdate(s_update_step) -> bool:
-	if player_closenes == 0:
-		spreadUpdate(update_step + 1, player_closenes)
-		debug()
-		return true
-	if s_update_step != seek_step:
-		s_update_step = seek_step
 		
-		for iter_roof in neibour_roofs:
-			if await iter_roof.seekUpdate(s_update_step): return true
-	debug()
-	return false
+	update_step = p_update_step
+	player_closenes = p_value
+	for roof in neibour_roofs:
+		roof.expandZero(p_value + 1, p_update_step)
 
-func debug():
-	$Label3D.text = str(player_closenes)
+func seekZero(p_seek_step) -> void:
+	if seek_step == p_seek_step:
+		return
+	player_closenes = -1
+	seek_step = p_seek_step
+	for roof in neibour_roofs:
+		roof.seekZero(p_seek_step)
