@@ -18,12 +18,15 @@ func _ready() -> void:
 func roomEntered(body) -> void:
 	if body.is_in_group("Player"):
 		player_closenes = 0
+		updateRoof()
 		expandZero(0, update_step + 1)
 
 func roomExited(body) -> void:
 	if body.is_in_group("Player"):
-		player_closenes = -1
-		seekZero(seek_step + 1)
+		player_closenes = 1
+		# player_closenes = -1
+		updateRoof()
+		# seekZero(seek_step + 1)
 	
 func expandZero(p_value, p_update_step) -> void:
 	if update_step == p_update_step:
@@ -36,7 +39,6 @@ func expandZero(p_value, p_update_step) -> void:
 	
 	update_step = p_update_step
 	if player_closenes == 0:
-		updateRoof()
 		for roof in neibour_roofs:
 			roof.expandZero(1, p_update_step)
 		return
@@ -49,14 +51,22 @@ func seekZero(p_seek_step) -> int:
 	if seek_step == p_seek_step:
 		return -1
 	if player_closenes == 0:
-		return true
+		return 1
+	
 	player_closenes = -1
 	seek_step = p_seek_step
 	updateRoof()
+	var max_val = -1
 	for roof in neibour_roofs:
-		variable_return = roof.seekZero(p_seek_step)
-		if variable_return != -1:
-			return variable_return + 1
+		var variable_return = roof.seekZero(p_seek_step)
+		if max_val == -1:
+			max_val = variable_return
+		if variable_return < max_val and not variable_return == -1:
+			max_val = variable_return
+	if max_val != -1:
+		player_closenes = max_val
+		updateRoof()
+		return max_val + 1
 	return -1
 
 func updateRoof():

@@ -28,7 +28,6 @@ shadow_enabled = true
 shadow_bias = 0.05
 spot_range = 10.0
 spot_attenuation = -4.0
-spot_angle = 11.0
 spot_angle_attenuation = 92682.266
 
 [node name="Trigger" type="Area3D" parent="."]

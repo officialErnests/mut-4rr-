@@ -38,7 +38,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "QE CAMERA MOVEMENT"
+text = "Q/E + MB4/MB5 CAMERA MOVEMENT"
 
 [node name="CheckBox" type="CheckBox" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
