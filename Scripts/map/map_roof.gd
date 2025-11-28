@@ -3,17 +3,23 @@ class_name building_roof extends Node3D
 @export var player_closenes = -1
 @export var visible_distance = 1
 @export var light_distance = 1
+@export var start_room = false
 @export var neibour_roofs: Array[building_roof]
 
-@onready var visual :MeshInstance3D= $Visual
-@onready var trigger :Area3D = $Trigger
-@onready var light: Light3D = $Visual/SpotLight3D
+@export var visual :MeshInstance3D
+@export var trigger :Area3D  
+@export var light: Node3D
 var update_step = 0
 var seek_step = 0
+
 
 func _ready() -> void:
 	trigger.body_entered.connect(roomEntered)
 	trigger.body_exited.connect(roomExited)
+	if start_room:
+		player_closenes = 0
+		updateRoof()
+		expandZero(0, update_step + 1)
 
 func roomEntered(body) -> void:
 	if body.is_in_group("Player"):
@@ -70,11 +76,11 @@ func seekZero(p_seek_step) -> int:
 	return -1
 
 func updateRoof():
-	debug()
 	if player_closenes > light_distance or player_closenes == -1:
 		light.visible = false
 	else:
 		light.visible = true
-
-func debug():
-	$Label3D.text = str(player_closenes)
+	if player_closenes > visible_distance or player_closenes == -1:
+		visual.material_override.distance_fade_mode = BaseMaterial3D.DistanceFadeMode.DISTANCE_FADE_DISABLED
+	else:
+		visual.material_override.distance_fade_mode = BaseMaterial3D.DistanceFadeMode.DISTANCE_FADE_PIXEL_DITHER

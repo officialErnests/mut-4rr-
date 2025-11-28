@@ -35,7 +35,6 @@ func equipUse():
 func use(p_params = {}):
 	for iter_node in detectFront():
 		if iter_node.is_in_group("Interactable"):
-			print(p_params)
 			iter_node.get_node("MAIN").triggered(p_params)
 	pass
 

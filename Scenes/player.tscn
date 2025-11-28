@@ -21,10 +21,13 @@ height = 1.5999999
 size = Vector3(2, 2, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pu2lt"]
-blend_mode = 1
+transparency = 3
+alpha_hash_scale = 2.0
+alpha_antialiasing_mode = 0
+blend_mode = 3
 no_depth_test = true
 shading_mode = 0
-albedo_color = Color(0.02, 0.02, 0.02, 1)
+albedo_color = Color(2, 2, 2, 1)
 albedo_texture = ExtResource("6_f1ek2")
 billboard_mode = 1
 billboard_keep_scale = true
@@ -32,10 +35,10 @@ billboard_keep_scale = true
 [sub_resource type="QuadMesh" id="QuadMesh_ukyrk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dp3o"]
-blend_mode = 1
+blend_mode = 3
 no_depth_test = true
 shading_mode = 0
-albedo_color = Color(0.003921569, 0, 0, 1)
+albedo_color = Color(1, 0, 0, 1)
 grow = true
 grow_amount = -0.158
 
@@ -45,49 +48,50 @@ radial_segments = 4
 rings = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fd4e3"]
-blend_mode = 1
+blend_mode = 3
 cull_mode = 2
 no_depth_test = true
 shading_mode = 0
-albedo_color = Color(0, 0, 0.003921569, 1)
+albedo_color = Color(0, 0, 2, 1)
 heightmap_scale = 8.468
 grow_amount = -0.315
 point_size = 36.9
 fov_override = 50.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_qqcod"]
-inner_radius = 0.9
+inner_radius = 0.6
+outer_radius = 0.7
 rings = 4
 ring_segments = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_igrcy"]
-blend_mode = 1
+blend_mode = 3
 cull_mode = 2
 shading_mode = 0
-albedo_color = Color(0, 0.003921569, 0, 1)
+albedo_color = Color(0, 2, 0, 1)
 heightmap_scale = 8.468
 grow_amount = -0.315
 point_size = 36.9
 fov_override = 50.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_fs7ks"]
-inner_radius = 0.7
-outer_radius = 0.8
+inner_radius = 0.8
 rings = 4
 ring_segments = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l6n3p"]
-blend_mode = 1
+blend_mode = 3
 cull_mode = 2
 shading_mode = 0
-albedo_color = Color(0.003921569, 0, 0, 1)
+albedo_color = Color(2, 0, 0, 1)
 heightmap_scale = 8.468
 grow_amount = -0.315
 point_size = 36.9
 fov_override = 50.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_olqyp"]
-outer_radius = 0.6
+inner_radius = 1.1
+outer_radius = 1.4
 rings = 4
 ring_segments = 4
 
