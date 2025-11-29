@@ -1,43 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://bc2pdgvvigyy1"]
+[gd_scene load_steps=12 format=3 uid="uid://bc2pdgvvigyy1"]
 
 [ext_resource type="Texture2D" uid="uid://cpwaa4s2klaho" path="res://Temp_assets/n0o0bPumkin.png" id="1_ebmjs"]
+[ext_resource type="Script" uid="uid://cwietp32u5ei5" path="res://Scripts/setup/setup_world.gd" id="1_v158k"]
 [ext_resource type="PackedScene" uid="uid://bpgaix3cftid6" path="res://Scenes/player.tscn" id="2_qxrlw"]
 [ext_resource type="PackedScene" uid="uid://b3o55eubyfvcu" path="res://Scenes/items/pistol.tscn" id="3_wrm1d"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qxrlw"]
-sky_top_color = Color(0.5686275, 0.12941177, 0.16470589, 1)
-sky_horizon_color = Color(0.32991916, 0.22011521, 0.22893876, 1)
-ground_bottom_color = Color(0, 0, 0, 1)
-ground_horizon_color = Color(0.32991916, 0.22011521, 0.22893876, 1)
-
-[sub_resource type="Sky" id="Sky_wrm1d"]
-sky_material = SubResource("ProceduralSkyMaterial_qxrlw")
-
-[sub_resource type="Environment" id="Environment_3dryh"]
-background_mode = 2
-sky = SubResource("Sky_wrm1d")
-ambient_light_source = 1
-reflected_light_source = 1
-tonemap_mode = 3
-tonemap_exposure = 0.85
-tonemap_white = 16.0
-glow_enabled = true
-glow_normalized = true
-glow_intensity = 0.42
-glow_bloom = 1.0
-glow_blend_mode = 1
-adjustment_enabled = true
-adjustment_contrast = 4.0
-adjustment_saturation = 4.0
-
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_qxrlw"]
-auto_exposure_enabled = true
-auto_exposure_scale = 0.03
-auto_exposure_speed = 1.0
-dof_blur_far_enabled = true
-dof_blur_far_distance = 30.0
-dof_blur_far_transition = 20.0
-dof_blur_amount = 1.0
+[ext_resource type="Script" uid="uid://cktt5pl0bvboc" path="res://Scripts/utils/global_node.gd" id="4_3dryh"]
+[ext_resource type="PackedScene" uid="uid://bg1vog6ifsvpi" path="res://Scenes/items/item_preset.tscn" id="5_wowpa"]
+[ext_resource type="PackedScene" uid="uid://ep6k8yqtrsmj" path="res://Scenes/items/key.tscn" id="6_i6g32"]
+[ext_resource type="PackedScene" uid="uid://d3fr5ec77cm5i" path="res://Scenes/map.tscn" id="8_v158k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qxrlw"]
 albedo_texture = ExtResource("1_ebmjs")
@@ -52,44 +22,95 @@ size = Vector2(100, 100)
 [node name="Game" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_3dryh")
-camera_attributes = SubResource("CameraAttributesPractical_qxrlw")
+script = ExtResource("1_v158k")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="Floor" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
 collision_layer = 15
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor/StaticBody3D"]
 material_override = SubResource("StandardMaterial3D_qxrlw")
 mesh = SubResource("PlaneMesh_wrm1d")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("WorldBoundaryShape3D_3dryh")
-
-[node name="StaticBody3D2" type="StaticBody3D" parent="."]
-transform = Transform3D(0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 0, 0, 1, -19.5, 2.5, 0)
-collision_layer = 15
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
-material_override = SubResource("StandardMaterial3D_qxrlw")
-mesh = SubResource("PlaneMesh_wrm1d")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_3dryh")
 
 [node name="Player" parent="." instance=ExtResource("2_qxrlw")]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 1, 0)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 4.9999995, 1, -3.9999998)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.55, 2.0000002, -1.25)
-use_collision = true
-collision_layer = 3
-size = Vector3(4.1, 4.2000003, 3.5)
+[node name="Items" type="Node3D" parent="."]
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39999986, 2.0000002, 6.75)
-use_collision = true
-collision_layer = 3
-size = Vector3(14, 4.2000003, 3.5)
+[node name="GlobalNode" type="Node" parent="Items" node_paths=PackedStringArray("node_to_globalize")]
+script = ExtResource("4_3dryh")
+global_name = "Items"
+node_to_globalize = NodePath("..")
+enabled = true
 
-[node name="Pistol" parent="." instance=ExtResource("3_wrm1d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07293272, 0.29999995, -3.2161436)
+[node name="Pistol" parent="Items" instance=ExtResource("3_wrm1d")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -5.0729322, 0.29999995, -7.2161436)
+
+[node name="Item_preset" parent="Items" instance=ExtResource("5_wowpa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4732633, 0.5, -31.396368)
+
+[node name="tutorial2" type="Label3D" parent="Items/Item_preset"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.044065952, 1, 0.1686554)
+billboard = 1
+modulate = Color(0.02, 0.02, 0.02, 1)
+text = "RIGHT CLICK - PICKUP / THROW"
+font_size = 64
+
+[node name="Item_preset7" parent="Items" instance=ExtResource("5_wowpa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5267367, 0.5, -31.396368)
+
+[node name="tutorial2" type="Label3D" parent="Items/Item_preset7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.044065952, 1, 0.1686554)
+billboard = 1
+modulate = Color(0.02, 0.02, 0.02, 1)
+text = "QE - LOOK AROUND
+(CURSOR TO EDGE FOR FASTER)"
+font_size = 64
+
+[node name="Item_preset5" parent="Items" instance=ExtResource("5_wowpa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5267367, 0.5, -25.396368)
+
+[node name="tutorial2" type="Label3D" parent="Items/Item_preset5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.044065952, 1, 0.1686554)
+billboard = 1
+modulate = Color(0.02, 0.02, 0.02, 1)
+text = "LEFT CLICK - INTERACT"
+font_size = 64
+
+[node name="Item_preset6" parent="Items" instance=ExtResource("5_wowpa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5267367, 0.5, -13.396368)
+
+[node name="tutorial2" type="Label3D" parent="Items/Item_preset6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.044065952, 1, 0.1686554)
+billboard = 1
+modulate = Color(0.02, 0.02, 0.02, 1)
+text = "SHIFT - SPRINT"
+font_size = 64
+
+[node name="Item_preset3" parent="Items" instance=ExtResource("5_wowpa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5708027, 0.5, -6.2277126)
+
+[node name="tutorial" type="Label3D" parent="Items/Item_preset3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+billboard = 1
+modulate = Color(0.02, 0.02, 0.02, 1)
+text = "HELLO AND WELCOME
+[WASD] - MOVE"
+font_size = 64
+
+[node name="Item_preset4" parent="Items" instance=ExtResource("5_wowpa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4267366, 0.5, -2.396368)
+
+[node name="Item_preset2" parent="Items" instance=ExtResource("6_i6g32")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.105365, 0.099999994, -22.563534)
+params = {
+"door_key": 1
+}
+
+[node name="Tutorial" type="Node3D" parent="Items"]
+
+[node name="Map" parent="." instance=ExtResource("8_v158k")]

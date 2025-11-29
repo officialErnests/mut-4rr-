@@ -1,9 +1,8 @@
 [gd_resource type="StandardMaterial3D" format=3 uid="uid://b3aqa3jh0vjre"]
 
 [resource]
-metallic = 1.0
-metallic_specular = 0.0
-roughness = 0.08
+metallic_specular = 1.0
+roughness = 0.28
 rim = 0.0
 rim_tint = 1.0
 backlight = Color(1, 0, 0, 1)

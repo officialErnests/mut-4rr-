@@ -13,17 +13,16 @@ extends Node
 @export var smoothing: float = 1
 @export var below_cursor_distance = 2
 var prev_location = Vector3.FORWARD
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	POINTER.scroll_dir = -10
-	POINTER_LEFT.scroll_dir = -10
 
+signal UpdateText 
+# Called when the node enters the scene tree for the first time.
 func instaSet():
 	prev_location = LOOK_AT.global_position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if not enabled: return
+	
 	#Smooths cursor
 	prev_location += (LOOK_AT.global_position - prev_location) * delta * smoothing
 	prev_location.y = LOOK_AT.global_position.y
@@ -49,7 +48,7 @@ func _process(delta: float) -> void:
 	var cursor_raycast = castRay(look_position, look_position - Vector3(0, below_cursor_distance, 0), GUN.get_world_3d().direct_space_state, 4)
 	if cursor_raycast:
 		POINTER_GROUND_NORM.global_position = cursor_raycast["position"] + Vector3.UP * 0.2
-		POINTER_GROUND_NORM.look_at(POINTER_GROUND_NORM.global_position + cursor_raycast["normal"])
+		POINTER_GROUND_NORM.look_at(POINTER_GROUND_NORM.global_position + cursor_raycast["normal"] + Vector3.RIGHT * 0.01)
 		POINTER_GROUND_NORM.rotate_object_local(Vector3.LEFT, (PI / 2))
 
 		var ground_distance = look_position.distance_to(cursor_raycast["position"])

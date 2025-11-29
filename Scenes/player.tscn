@@ -1,17 +1,17 @@
 [gd_scene load_steps=25 format=3 uid="uid://bpgaix3cftid6"]
 
-[ext_resource type="Script" uid="uid://c73bn6ajbmaj" path="res://Scripts/player.gd" id="1_v0iea"]
-[ext_resource type="Script" uid="uid://1f0q4ofhgup" path="res://Scripts/gun_pointer.gd" id="2_cvnsp"]
-[ext_resource type="Script" uid="uid://dcpwb4aalddig" path="res://Scripts/gun_visual.gd" id="3_6t5aa"]
-[ext_resource type="Script" uid="uid://crc1oiqwmss8" path="res://Scripts/body_animator.gd" id="3_gymyn"]
-[ext_resource type="Script" uid="uid://cx0dgxu33maxl" path="res://Scripts/itemManager.gd" id="4_8erm5"]
-[ext_resource type="Script" uid="uid://c2qad2apg860v" path="res://Scripts/label_sizer.gd" id="4_vgqql"]
+[ext_resource type="Script" uid="uid://c73bn6ajbmaj" path="res://Scripts/player/player.gd" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://1f0q4ofhgup" path="res://Scripts/player/pointer_cursor.gd" id="2_cvnsp"]
+[ext_resource type="Script" uid="uid://dcpwb4aalddig" path="res://Scripts/player/cursor_visual_draw.gd" id="3_6t5aa"]
+[ext_resource type="Script" uid="uid://crc1oiqwmss8" path="res://Scripts/player/body_animator.gd" id="3_gymyn"]
+[ext_resource type="Script" uid="uid://cx0dgxu33maxl" path="res://Scripts/items/main/itemManager.gd" id="4_8erm5"]
+[ext_resource type="Script" uid="uid://c2qad2apg860v" path="res://Scripts/player/label_sizer.gd" id="4_vgqql"]
 [ext_resource type="Texture2D" uid="uid://b6apxjep8wnwf" path="res://Assets/cursor.png" id="6_f1ek2"]
-[ext_resource type="Script" uid="uid://c65dhkofbptrf" path="res://Scripts/look_at.gd" id="7_3smsa"]
-[ext_resource type="Script" uid="uid://bjuxy6pujas3c" path="res://Scripts/CursorToPoint.gd" id="7_8erm5"]
+[ext_resource type="Script" uid="uid://c65dhkofbptrf" path="res://Scripts/player/look_at.gd" id="7_3smsa"]
+[ext_resource type="Script" uid="uid://bjuxy6pujas3c" path="res://Scripts/player/CursorToPoint.gd" id="7_8erm5"]
 [ext_resource type="PackedScene" uid="uid://dtohjmomqtvq3" path="res://Scenes/body.tscn" id="7_f1ek2"]
-[ext_resource type="Script" uid="uid://clkaneisu7we7" path="res://Scripts/copyRot.gd" id="8_tx1dd"]
-[ext_resource type="Script" uid="uid://dbi36cvmg01de" path="res://Scripts/stick_to_head.gd" id="10_pu2lt"]
+[ext_resource type="Script" uid="uid://clkaneisu7we7" path="res://Scripts/utils/copyRot.gd" id="8_tx1dd"]
+[ext_resource type="Script" uid="uid://dbi36cvmg01de" path="res://Scripts/player/stick_to_head.gd" id="10_pu2lt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6t5aa"]
 radius = 0.2
@@ -21,10 +21,13 @@ height = 1.5999999
 size = Vector3(2, 2, 2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pu2lt"]
-blend_mode = 1
+transparency = 3
+alpha_hash_scale = 2.0
+alpha_antialiasing_mode = 0
+blend_mode = 3
 no_depth_test = true
 shading_mode = 0
-albedo_color = Color(0.02, 0.02, 0.02, 1)
+albedo_color = Color(2, 2, 2, 1)
 albedo_texture = ExtResource("6_f1ek2")
 billboard_mode = 1
 billboard_keep_scale = true
@@ -32,10 +35,10 @@ billboard_keep_scale = true
 [sub_resource type="QuadMesh" id="QuadMesh_ukyrk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dp3o"]
-blend_mode = 1
+blend_mode = 3
 no_depth_test = true
 shading_mode = 0
-albedo_color = Color(0.003921569, 0, 0, 1)
+albedo_color = Color(1, 0, 0, 1)
 grow = true
 grow_amount = -0.158
 
@@ -45,54 +48,55 @@ radial_segments = 4
 rings = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fd4e3"]
-blend_mode = 1
+blend_mode = 3
 cull_mode = 2
 no_depth_test = true
 shading_mode = 0
-albedo_color = Color(0, 0, 0.003921569, 1)
+albedo_color = Color(0, 0, 2, 1)
 heightmap_scale = 8.468
 grow_amount = -0.315
 point_size = 36.9
 fov_override = 50.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_qqcod"]
-inner_radius = 0.9
+inner_radius = 0.6
+outer_radius = 0.7
 rings = 4
 ring_segments = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_igrcy"]
-blend_mode = 1
+blend_mode = 3
 cull_mode = 2
 shading_mode = 0
-albedo_color = Color(0, 0.003921569, 0, 1)
+albedo_color = Color(0, 2, 0, 1)
 heightmap_scale = 8.468
 grow_amount = -0.315
 point_size = 36.9
 fov_override = 50.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_fs7ks"]
-inner_radius = 0.7
-outer_radius = 0.8
+inner_radius = 0.8
 rings = 4
 ring_segments = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l6n3p"]
-blend_mode = 1
+blend_mode = 3
 cull_mode = 2
 shading_mode = 0
-albedo_color = Color(0.003921569, 0, 0, 1)
+albedo_color = Color(2, 0, 0, 1)
 heightmap_scale = 8.468
 grow_amount = -0.315
 point_size = 36.9
 fov_override = 50.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_olqyp"]
-outer_radius = 0.6
+inner_radius = 1.1
+outer_radius = 1.4
 rings = 4
 ring_segments = 4
 
-[node name="Player" type="CharacterBody3D"]
-collision_mask = 8
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+collision_mask = 10
 
 [node name="Movement" type="Node" parent="." node_paths=PackedStringArray("charecter", "rotator")]
 script = ExtResource("1_v0iea")
@@ -110,7 +114,7 @@ script = ExtResource("3_gymyn")
 main_body = NodePath("..")
 animator = NodePath("../SkelBody")
 
-[node name="Items" type="Node" parent="." node_paths=PackedStringArray("itemHolder", "animator", "pickup_hitbox", "cursor_handler", "cam_shaker", "movement_manager")]
+[node name="Items" type="Node" parent="." node_paths=PackedStringArray("itemHolder", "animator", "pickup_hitbox", "cursor_handler", "cam_shaker", "movement_manager", "cursor_label_1", "cursor_label_2")]
 script = ExtResource("4_8erm5")
 itemHolder = NodePath("../ItemHolder/ItemSlot")
 animator = NodePath("../SkelBody")
@@ -118,6 +122,8 @@ pickup_hitbox = NodePath("../SkelBody/PickupArea")
 cursor_handler = NodePath("../ItemHolder/Pointer/Pointer")
 cam_shaker = NodePath("../Neck/Cursor_offset/CursorToPos")
 movement_manager = NodePath("../Movement")
+cursor_label_1 = NodePath("../ItemHolder/Pointer/POINTER")
+cursor_label_2 = NodePath("../ItemHolder/Pointer/POINTER_LEFT")
 
 [node name="PLayerCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
@@ -159,17 +165,17 @@ transform = Transform3D(1.0000001, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068,
 
 [node name="Player_spotlight" type="SpotLight3D" parent="Neck/Cursor_offset/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 0.93969256, 0.34202012, 0, -0.3420201, 0.9396926, 0, 0, 0)
+visible = false
 light_specular = 0.0
 spot_range = 100.0
-spot_attenuation = 2.0
+spot_attenuation = 3.0
 spot_angle = 20.0
-spot_angle_attenuation = 123.63955
+spot_angle_attenuation = 13.751929
 
 [node name="LookAt" type="Node" parent="Neck/Cursor_offset/Camera3D/Player_spotlight" node_paths=PackedStringArray("base", "look_node")]
 script = ExtResource("7_3smsa")
 base = NodePath("..")
 look_node = NodePath("../../../../../ItemHolder")
-offset = Vector3(0, -1, 0)
 
 [node name="ItemHolder" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8000001, 0)
@@ -197,20 +203,20 @@ LOOK_AT = NodePath("../../../Gun_Look_at")
 GUN = NodePath("..")
 POINTER = NodePath("../POINTER")
 POINTER_LEFT = NodePath("../POINTER_LEFT")
-POINTER_GOAL = NodePath("../POINTER_END")
+POINTER_GOAL = NodePath("../~")
 POINTER_GROUND = NodePath("../GROUND_POINTER")
 POINTER_GROUND_NORM = NodePath("../POINTER_BOTTOM")
 smoothing = 4.0
 below_cursor_distance = 10
 
-[node name="POINTER_END" type="MeshInstance3D" parent="ItemHolder/Pointer"]
+[node name="~" type="MeshInstance3D" parent="ItemHolder/Pointer"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0000001, 0)
 material_override = SubResource("StandardMaterial3D_pu2lt")
 mesh = SubResource("QuadMesh_ukyrk")
 skeleton = NodePath("")
 
 [node name="POINTER" type="Label3D" parent="ItemHolder/Pointer"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, -3)
+transform = Transform3D(-3.090862e-08, -0.70710677, 0.70710677, -3.090862e-08, 0.70710677, 0.70710677, -1, 0, -4.371139e-08, 0.2, 0, -3)
 double_sided = false
 alpha_cut = 1
 alpha_scissor_threshold = 0.7
@@ -218,14 +224,14 @@ texture_filter = 0
 modulate = Color(0.01, 0, 0, 1)
 outline_modulate = Color(0, 0.01, 0.01, 1)
 text = "A"
-font_size = 200
+font_size = 100
 outline_size = 20
 uppercase = true
 script = ExtResource("4_vgqql")
 scroll_dir = 10
 
 [node name="POINTER_LEFT" type="Label3D" parent="ItemHolder/Pointer"]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, -3)
+transform = Transform3D(-3.090862e-08, 0.7071068, -0.7071067, 3.090862e-08, 0.7071067, 0.7071068, 1, 0, -4.371139e-08, -0.2, 0, -3)
 double_sided = false
 alpha_cut = 1
 alpha_scissor_threshold = 0.7
@@ -234,7 +240,7 @@ modulate = Color(0.01, 0, 0, 1)
 outline_modulate = Color(0, 0.01, 0.01, 1)
 text = "A
 "
-font_size = 200
+font_size = 100
 outline_size = 20
 uppercase = true
 script = ExtResource("4_vgqql")

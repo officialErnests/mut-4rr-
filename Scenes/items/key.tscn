@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://ep6k8yqtrsmj"]
+
+[ext_resource type="PackedScene" uid="uid://sniksy4nvnio" path="res://Scenes/items/item.tscn" id="1_kn0ow"]
+[ext_resource type="Script" uid="uid://bply58o1ccedl" path="res://Scripts/utils/value_exposer_items.gd" id="1_mtd5w"]
+[ext_resource type="Material" uid="uid://b3aqa3jh0vjre" path="res://Assets/Materials/metal.tres" id="2_4po2v"]
+[ext_resource type="Script" uid="uid://dls8qhndupmtp" path="res://Scripts/items/handle_usables.gd" id="2_mtd5w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kn0ow"]
+blend_mode = 1
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0.038397167, 0.038397167, 0.03839716, 1)
+grow = true
+grow_amount = 0.001
+distance_fade_mode = 2
+distance_fade_min_distance = 6.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yr2tp"]
+size = Vector3(0.7, 0.2, 0.7)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kn0ow"]
+size = Vector3(0.90000004, 0.2, 0.3)
+
+[node name="Item_preset" type="RigidBody3D" groups=["item"]]
+script = ExtResource("1_mtd5w")
+
+[node name="MAIN" parent="." node_paths=PackedStringArray("itemRigid", "visual_outside") instance=ExtResource("1_kn0ow")]
+itemRigid = NodePath("..")
+type = 3
+speed_factor = 0.9
+visual_outside = NodePath("../CSGTorus3D")
+show_text = "TEST ITEM --"
+
+[node name="USABLES" type="Node" parent="."]
+script = ExtResource("2_mtd5w")
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+material_override = ExtResource("2_4po2v")
+material_overlay = SubResource("StandardMaterial3D_kn0ow")
+inner_radius = 0.3
+outer_radius = 0.5
+sides = 4
+ring_sides = 4
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGTorus3D"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0, 0, 0.75)
+size = Vector3(0.1, 0.1, 0.7)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGTorus3D"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0.15, 0, 1.05)
+size = Vector3(0.2, 0.1, 0.1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGTorus3D"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0.15, 0, 0.84999996)
+size = Vector3(0.2, 0.1, 0.1)
+
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, 0, 0)
+shape = SubResource("BoxShape3D_yr2tp")
+
+[node name="CSGBakedCollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(0, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, 0, -0.100000024, 0, -0.6500001)
+shape = SubResource("BoxShape3D_kn0ow")
