@@ -1,15 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://bvyc5gq1qi2qw"]
+[gd_scene load_steps=5 format=3 uid="uid://bvyc5gq1qi2qw"]
 
 [ext_resource type="PackedScene" uid="uid://dtohjmomqtvq3" path="res://Scenes/body.tscn" id="1_acqhf"]
+[ext_resource type="Script" uid="uid://cu87j6ixino62" path="res://Scripts/npc/npc_manager.gd" id="1_xxsvc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_acqhf"]
 radius = 0.29003906
 height = 1.5952148
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_acqhf"]
+radius = 2.0
+
 [node name="NPC" type="RigidBody3D"]
+script = ExtResource("1_xxsvc")
 
 [node name="Body" parent="." instance=ExtResource("1_acqhf")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7976074, 0)
 shape = SubResource("CapsuleShape3D_acqhf")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+shape = SubResource("SphereShape3D_acqhf")

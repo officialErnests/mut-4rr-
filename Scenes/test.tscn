@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ccjafp0ghukfb"]
+[gd_scene load_steps=11 format=3 uid="uid://ccjafp0ghukfb"]
 
 [ext_resource type="Texture2D" uid="uid://cpwaa4s2klaho" path="res://Temp_assets/n0o0bPumkin.png" id="1_lc1oi"]
 [ext_resource type="PackedScene" uid="uid://bpgaix3cftid6" path="res://Scenes/player.tscn" id="2_8od7v"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bg1vog6ifsvpi" path="res://Scenes/items/item_preset.tscn" id="4_i3aeo"]
 [ext_resource type="PackedScene" uid="uid://ep6k8yqtrsmj" path="res://Scenes/items/key.tscn" id="5_5wyu1"]
 [ext_resource type="PackedScene" uid="uid://bvyc5gq1qi2qw" path="res://Scenes/npc.tscn" id="6_0c07c"]
+[ext_resource type="Script" uid="uid://8lnxrs0kj4e2" path="res://Scripts/npc/main/npc_master.gd" id="6_5wyu1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8od7v"]
 albedo_texture = ExtResource("1_lc1oi")
@@ -40,5 +41,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5693569, -2)
 [node name="Item_preset2" parent="." instance=ExtResource("5_5wyu1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2)
 
-[node name="NPC" parent="." instance=ExtResource("6_0c07c")]
+[node name="NPC_MASTER" type="Node3D" parent="."]
+script = ExtResource("6_5wyu1")
+
+[node name="NPC" parent="NPC_MASTER" instance=ExtResource("6_0c07c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1.0135527, -5)
+all_callable_list = Array[Callable]([])
