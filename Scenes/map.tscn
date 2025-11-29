@@ -12,7 +12,6 @@ texture_filter = 0
 resource_local_to_scene = true
 albedo_texture = ExtResource("1_26yhd")
 texture_filter = 0
-distance_fade_mode = 2
 distance_fade_min_distance = 5.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_p3ir5"]
@@ -27,7 +26,6 @@ size = Vector3(8, 3, 27)
 resource_local_to_scene = true
 albedo_texture = ExtResource("1_26yhd")
 texture_filter = 0
-distance_fade_mode = 2
 distance_fade_min_distance = 5.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_myvm1"]
@@ -42,7 +40,6 @@ size = Vector3(17, 3, 8.5)
 resource_local_to_scene = true
 albedo_texture = ExtResource("1_26yhd")
 texture_filter = 0
-distance_fade_mode = 2
 distance_fade_min_distance = 5.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_np2xp"]
@@ -57,7 +54,6 @@ size = Vector3(8, 3, 9)
 resource_local_to_scene = true
 albedo_texture = ExtResource("1_26yhd")
 texture_filter = 0
-distance_fade_mode = 2
 distance_fade_min_distance = 5.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_q0mm3"]
