@@ -1,71 +1,84 @@
-extends RigidBody3D
-
-enum enum_toughts {
-	KILLTIME,
-	FINDITEM,
-	FINDROOM,
-	ATTACK,
-	DEFEND,
-	SURVIVE,
-	ACTIVATE,
-	EAT,
-	DRINK
-}
+class_name npc extends RigidBody3D
 
 @export var detection_hitbox: Area3D
-@export var priority_list: Array[enum_toughts] = []
+var priority_list: Array[Idea] = []
 
 func update():
 	var is_decision_made = false
 	var i = -1
-	while i < priority_list.size():
+	while i < priority_list.size() - 1:
 		i += 1
 		var tought = priority_list[i]
-		if functionFromEnum(tought): 
+		if tought.expand(): 
+			i = -1
+			continue
+		if tought.execute(): 
 			is_decision_made = true
 			break
 	# if no decision then killtime() needs to be added
 	# also make so that if the function can't be done it adds new element to array and tries that
 	return is_decision_made
 
-func functionFromEnum(p_enum: enum_toughts) -> bool:
-	match p_enum:
-		enum_toughts.KILLTIME: return killTime()
-		enum_toughts.FINDITEM: return findItem()
-		enum_toughts.FINDROOM: return findRoom()
-		enum_toughts.ATTACK: return attack()
-		enum_toughts.DEFEND: return defend()
-		enum_toughts.SURVIVE: return survive()
-		enum_toughts.ACTIVATE: return activate()
-		enum_toughts.EAT: return eat()
-		enum_toughts.DRINK: return drink()
-		_: return false
+#functions return true if rest needs to be skipped
+class Idea:
+	var type : enums.Toughts
+	var object_of_intrest : enums.ItemType
+	var exact_object_id : int
+	func _init(p_type : enums.Toughts, p_object_of_intrest : enums.ItemType, p_exact_object_id : int) -> void:
+		type = p_type
+		exact_object_id = p_exact_object_id
+		object_of_intrest = p_object_of_intrest
+	# if it needs somthing beforehand
+	func expand() -> bool:
+		return expandIdea(type, object_of_intrest, exact_object_id)
+	# aka whenever the idea is prime and ready XD
+	func execute() -> bool:
+		return executeIdea(type, object_of_intrest, exact_object_id)
 
-# ALL OF FUCNTIONALITY
-# if function returns true it means npc has decided what to do
-func killTime() -> bool:
-	return false
+	# returns true if the idea meets requirements
+	func expandIdea(p_type : enums.Toughts, p_object_of_intrest : enums.ItemType, p_exact_object_id : int) -> bool:
+		match p_type:
+			enums.Toughts.KILLTIME:
+				pass
+			enums.Toughts.FINDITEM:
+				pass
+			enums.Toughts.FINDROOM:
+				pass
+			enums.Toughts.ATTACK:
+				pass
+			enums.Toughts.DEFEND:
+				pass
+			enums.Toughts.SURVIVE:
+				pass
+			enums.Toughts.ACTIVATE:
+				pass
+			enums.Toughts.EAT:
+				pass
+			enums.Toughts.DRINK:
+				pass
+			_: return false
+		return true
 
-func findItem() -> bool:
-	return false
-
-func findRoom() -> bool:
-	return false
-
-func attack() -> bool:
-	return false
-	
-func defend() -> bool:
-	return false
-	
-func survive() -> bool:
-	return false
-	
-func activate() -> bool:
-	return false
-	
-func eat() -> bool:
-	return false
-	
-func drink() -> bool:
-	return false
+	# returns true if idea is executed aka no other ideas
+	func executeIdea(p_type : enums.Toughts, p_object_of_intrest : enums.ItemType, p_exact_object_id : int) -> bool:
+		match p_type:
+			enums.Toughts.KILLTIME:
+				pass
+			enums.Toughts.FINDITEM:
+				pass
+			enums.Toughts.FINDROOM:
+				pass
+			enums.Toughts.ATTACK:
+				pass
+			enums.Toughts.DEFEND:
+				pass
+			enums.Toughts.SURVIVE:
+				pass
+			enums.Toughts.ACTIVATE:
+				pass
+			enums.Toughts.EAT:
+				pass
+			enums.Toughts.DRINK:
+				pass
+			_: return false
+		return true
