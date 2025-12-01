@@ -2,6 +2,7 @@ class_name NB_item extends Node
 
 @export var itemRigid: RigidBody3D
 @export var type: enums.ItemType
+@export var type_id := 0
 @export var speed_factor: float
 @export var visual_outside: GeometryInstance3D
 @export var show_text:String

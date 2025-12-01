@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ccjafp0ghukfb"]
+[gd_scene load_steps=13 format=3 uid="uid://ccjafp0ghukfb"]
 
 [ext_resource type="Texture2D" uid="uid://cpwaa4s2klaho" path="res://Temp_assets/n0o0bPumkin.png" id="1_lc1oi"]
 [ext_resource type="PackedScene" uid="uid://bpgaix3cftid6" path="res://Scenes/player.tscn" id="2_8od7v"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ep6k8yqtrsmj" path="res://Scenes/items/key.tscn" id="5_5wyu1"]
 [ext_resource type="PackedScene" uid="uid://bvyc5gq1qi2qw" path="res://Scenes/npc.tscn" id="6_0c07c"]
 [ext_resource type="Script" uid="uid://8lnxrs0kj4e2" path="res://Scripts/npc/main/npc_master.gd" id="6_5wyu1"]
+[ext_resource type="Script" uid="uid://cktt5pl0bvboc" path="res://Scripts/utils/global_node.gd" id="7_0c07c"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_5wyu1"]
 vertices = PackedVector3Array(-49.5, 0.5, -49.5, -49.5, 0.5, 49.5, 49.5, 0.5, 49.5, 49.5, 0.5, -49.5)
@@ -26,15 +27,6 @@ size = Vector2(100, 100)
 
 [node name="Player" parent="." instance=ExtResource("2_8od7v")]
 
-[node name="Pistol" parent="." instance=ExtResource("3_qc4db")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2)
-
-[node name="Item_preset" parent="." instance=ExtResource("4_i3aeo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5693569, -2)
-
-[node name="Item_preset2" parent="." instance=ExtResource("5_5wyu1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2)
-
 [node name="NPC_MASTER" type="Node3D" parent="."]
 script = ExtResource("6_5wyu1")
 
@@ -53,3 +45,21 @@ mesh = SubResource("PlaneMesh_qc4db")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_ys1qc")
+
+[node name="Items" type="Node3D" parent="."]
+
+[node name="globalizator" type="Node" parent="Items" node_paths=PackedStringArray("node_to_globalize")]
+script = ExtResource("7_0c07c")
+global_name = "Items"
+node_to_globalize = NodePath("..")
+enabled = true
+metadata/_custom_type_script = "uid://cktt5pl0bvboc"
+
+[node name="Pistol" parent="Items" instance=ExtResource("3_qc4db")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2)
+
+[node name="Item_preset" parent="Items" instance=ExtResource("4_i3aeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5693569, -2)
+
+[node name="Item_preset2" parent="Items" instance=ExtResource("5_5wyu1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2)

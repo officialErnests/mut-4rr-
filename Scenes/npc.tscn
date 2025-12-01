@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvyc5gq1qi2qw"]
+[gd_scene load_steps=6 format=3 uid="uid://bvyc5gq1qi2qw"]
 
 [ext_resource type="PackedScene" uid="uid://dtohjmomqtvq3" path="res://Scenes/body.tscn" id="1_acqhf"]
 [ext_resource type="Script" uid="uid://cu87j6ixino62" path="res://Scripts/npc/npc_manager.gd" id="1_xxsvc"]
@@ -10,8 +10,15 @@ height = 1.5952148
 [sub_resource type="SphereShape3D" id="SphereShape3D_acqhf"]
 radius = 2.0
 
-[node name="NPC" type="RigidBody3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_xxsvc"]
+size = Vector3(2, 2, 2)
+
+[node name="NPC" type="RigidBody3D" node_paths=PackedStringArray("detection_hitbox", "pickup_hitbox")]
+axis_lock_angular_x = true
+axis_lock_angular_z = true
 script = ExtResource("1_xxsvc")
+detection_hitbox = NodePath("Vision")
+pickup_hitbox = NodePath("PickupArea")
 
 [node name="Body" parent="." instance=ExtResource("1_acqhf")]
 
@@ -19,11 +26,18 @@ script = ExtResource("1_xxsvc")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7976074, 0)
 shape = SubResource("CapsuleShape3D_acqhf")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Vision" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Vision"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 shape = SubResource("SphereShape3D_acqhf")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="PickupArea" type="Area3D" parent="."]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, -0.020662546, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+shape = SubResource("BoxShape3D_xxsvc")
