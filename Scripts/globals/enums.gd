@@ -12,6 +12,7 @@ enum Toughts {
 	KILLTIME,
 	ITEM_FIND,
 	ITEM_PICKUP,
+	ITEM_WALKTO,
 	FINDROOM,
 	ATTACK,
 	DEFEND,
@@ -19,5 +20,5 @@ enum Toughts {
 	ACTIVATE,
 	EAT,
 	DRINK,
-	WALKTO
+	ROOM_WALKTO
 }

@@ -7,9 +7,9 @@ func _ready():
 	updateNpcs()
 
 func updateNpcs():
-	for npc in npc_list:
-		npc.update()
+	for iter_npc in npc_list:
+		iter_npc.update()
 
 func initNpcList():
-	for npc in get_children():
-		npc_list.append(npc)
+	for iter_npc in get_children():
+		npc_list.append(iter_npc)
