@@ -4,6 +4,7 @@ var npc_list = []
 
 func _ready():
 	initNpcList()
+	await get_tree().create_timer(1).timeout
 	updateNpcs()
 
 func updateNpcs():

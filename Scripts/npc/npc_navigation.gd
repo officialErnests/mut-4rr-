@@ -4,29 +4,41 @@ extends NB_script
 @export var naviagtion_agent : NavigationAgent3D
 @export var rigid_body : RigidBody3D
 @export var body: Node3D
+var running := false
+var is_in_action = true
 
-func _ready() -> void:
-	moveTo(Vector3(0,0,0))
+signal done_moving
 
-#TODO make npc walk n shit
 func _physics_process(delta: float) -> void:
+	if not enabled: return
 	if not naviagtion_agent.is_navigation_finished():
 		var nextPos = naviagtion_agent.get_next_path_position()
 		rigid_body.look_at(nextPos)
 		rigid_body.rotation.x = 0
 		rigid_body.rotation.z = 0
-
+		
 		if rigid_body.position.distance_to(nextPos) > 0.5:
 			var normal = (naviagtion_agent.get_next_path_position() - rigid_body.global_position).normalized() * npc_speed
-			rigid_body.linear_velocity.x = normal.x
-			rigid_body.linear_velocity.z = normal.z
-			body.updateAnimation(body.AnimationStates.WALK)
+			rigid_body.linear_velocity.x = normal.x * (2 if running else 1)
+			rigid_body.linear_velocity.z = normal.z * (2 if running else 1)
+			if (running):
+				body.updateAnimation(body.AnimationStates.RUN)
+			else:
+				body.updateAnimation(body.AnimationStates.WALK)
 	else:
+		if is_in_action:
+			is_in_action = false
+			done_moving.emit()
 		body.updateAnimation(body.AnimationStates.IDLE)
 
-		
-	
-	
+func walkTo(p_position : Vector3) -> void:
+	running = false
+	moveTo(p_position)
+
+func runTo(p_position: Vector3) -> void:
+	running = true
+	moveTo(p_position)
 
 func moveTo(p_position : Vector3) -> void:
+	is_in_action = true
 	naviagtion_agent.set_target_position(p_position)

@@ -8,6 +8,8 @@ var idea_cycle_now := 0
 
 func _ready() -> void:
 	# Finds and picks up first key since funny shit XD
+	navigator.done_moving.connect(update)
+	priority_list.append(Idea.new(enums.Toughts.ITEM_PICKUP, enums.ItemType.GUN, {}, self))
 	priority_list.append(Idea.new(enums.Toughts.ITEM_PICKUP, enums.ItemType.KEY, {"door_key" : 1}, self))
 
 func update():
@@ -27,6 +29,7 @@ func update():
 		if tought.execute():
 			print("^ DOING ^")
 			is_decision_made = true
+			priority_list.remove_at(i)
 			break
 		if tought.expand():
 			i = -1
@@ -94,12 +97,14 @@ class Idea:
 		match tought_types:
 			enums.Toughts.ITEM_PICKUP:
 				var found_item = getIteractableItems()
+				print(found_item)
 				if not found_item: return false
 				print("DO PICKUP SHITERY")
 			enums.Toughts.ITEM_WALKTO:
 				var found_item = getVisableItems()
 				if not found_item: return false
-				print("DO WAlK SHITERY")
+				this_node.navigator.walkTo(found_item.global_position)
+
 			_: return false
 		return true
 
@@ -114,11 +119,11 @@ class Idea:
 		return checkForMatchingItem(items_inside_detection)
 	
 	#Helper functions
-	func checkForMatchingItem(p_nodes : Array[Node3D]) -> Node3D:
+	func checkForMatchingItem(p_nodes) -> Node3D:
 		for detected_body : Node3D in p_nodes:
 			if detected_body.is_in_group("item"):
 				var script_main = detected_body.get_node("MAIN")
-				if script_main.tought_types == tought_types:
+				if script_main.type == object_of_intrest:
 					var does_params_fit = true
 					for iter_param_key: String in object_params.keys():
 						if detected_body.params.has(iter_param_key):
