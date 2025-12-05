@@ -6,6 +6,8 @@ func _ready():
 	initNpcList()
 	await get_tree().create_timer(1).timeout
 	updateNpcs()
+	await get_tree().create_timer(5).timeout
+	updateNpcs()
 
 func updateNpcs():
 	for iter_npc in npc_list:

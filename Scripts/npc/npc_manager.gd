@@ -78,6 +78,8 @@ class Idea:
 				pass
 			enums.Toughts.ITEM_PICKUP:
 				print("- expanded into ITEM_WALKTO")
+				if this_node.item_manager.equiped_item:
+					this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_THROW, object_of_intrest, object_params, this_node))
 				this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_WALKTO, object_of_intrest, object_params, this_node))
 				print(global.arrToStr(this_node.priority_list, 2))
 			enums.Toughts.ITEM_WALKTO:
@@ -104,15 +106,18 @@ class Idea:
 	# returns true if idea is executed aka no other ideas
 	func executeIdea() -> bool:
 		match tought_types:
+			enums.Toughts.ITEM_THROW:
+				this_node.item_manager.nbThrow()
+				return false
 			enums.Toughts.ITEM_PICKUP:
 				var found_item = getIteractableItems()
 				if not found_item: return false
+				if this_node.item_manager.equiped_item: return false
 				this_node.item_manager.nbThrow()
 			enums.Toughts.ITEM_WALKTO:
 				var found_item = getVisableItems()
 				if not found_item: return false
 				this_node.navigator.runTo(found_item.global_position)
-
 			_: return false
 		return true
 

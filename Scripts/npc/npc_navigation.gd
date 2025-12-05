@@ -5,7 +5,7 @@ extends NB_script
 @export var rigid_body : RigidBody3D
 @export var body: Node3D
 var running := false
-var is_in_action = true
+var is_in_action = false
 var item_mul = 1
 signal done_moving
 
