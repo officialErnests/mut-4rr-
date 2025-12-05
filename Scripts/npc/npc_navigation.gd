@@ -6,7 +6,7 @@ extends NB_script
 @export var body: Node3D
 var running := false
 var is_in_action = true
-
+var item_mul = 1
 signal done_moving
 
 func _physics_process(delta: float) -> void:
@@ -19,8 +19,8 @@ func _physics_process(delta: float) -> void:
 		
 		if rigid_body.position.distance_to(nextPos) > 0.5:
 			var normal = (naviagtion_agent.get_next_path_position() - rigid_body.global_position).normalized() * npc_speed
-			rigid_body.linear_velocity.x = normal.x * (2 if running else 1)
-			rigid_body.linear_velocity.z = normal.z * (2 if running else 1)
+			rigid_body.linear_velocity.x = normal.x * (2 if running else 1) * item_mul
+			rigid_body.linear_velocity.z = normal.z * (2 if running else 1) * item_mul
 			if (running):
 				body.updateAnimation(body.AnimationStates.RUN)
 			else:

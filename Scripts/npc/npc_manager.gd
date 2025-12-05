@@ -3,14 +3,18 @@ class_name npc extends RigidBody3D
 @export var interaction_hitbox: Area3D
 @export var vision_hitbox: Area3D
 @export var navigator: Node
+@export var item_manager: Node	
+signal toughUpdate
+
 var priority_list: Array[Idea] = []
+var curent_idea_index = -1
 var idea_cycle_now := 0
 
 func _ready() -> void:
 	# Finds and picks up first key since funny shit XD
 	navigator.done_moving.connect(update)
-	priority_list.append(Idea.new(enums.Toughts.ITEM_PICKUP, enums.ItemType.GUN, {}, self))
 	priority_list.append(Idea.new(enums.Toughts.ITEM_PICKUP, enums.ItemType.KEY, {"door_key" : 1}, self))
+	priority_list.append(Idea.new(enums.Toughts.ITEM_PICKUP, enums.ItemType.GUN, {}, self))
 
 func update():
 	var is_decision_made = false
@@ -28,13 +32,17 @@ func update():
 		tought.idea_cycle = idea_cycle_now
 		if tought.execute():
 			print("^ DOING ^")
+			curent_idea_index = i
 			is_decision_made = true
 			priority_list.remove_at(i)
 			break
 		if tought.expand():
 			i = -1
 			continue
+	if not is_decision_made:
+		curent_idea_index = -1
 	print("END of tought\n" + global.arrToStr(priority_list, 0) + "")
+	toughUpdate.emit()
 	# if no decision then killtime() needs to be added
 	# also make so that if the function can't be done it adds new element to array and tries that
 	return is_decision_made
@@ -71,6 +79,7 @@ class Idea:
 			enums.Toughts.ITEM_PICKUP:
 				print("- expanded into ITEM_WALKTO")
 				this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_WALKTO, object_of_intrest, object_params, this_node))
+				print(global.arrToStr(this_node.priority_list, 2))
 			enums.Toughts.ITEM_WALKTO:
 				pass
 			enums.Toughts.FINDROOM:
@@ -97,13 +106,12 @@ class Idea:
 		match tought_types:
 			enums.Toughts.ITEM_PICKUP:
 				var found_item = getIteractableItems()
-				print(found_item)
 				if not found_item: return false
-				print("DO PICKUP SHITERY")
+				this_node.item_manager.nbThrow()
 			enums.Toughts.ITEM_WALKTO:
 				var found_item = getVisableItems()
 				if not found_item: return false
-				this_node.navigator.walkTo(found_item.global_position)
+				this_node.navigator.runTo(found_item.global_position)
 
 			_: return false
 		return true
