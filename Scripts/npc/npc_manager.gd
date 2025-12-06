@@ -26,19 +26,25 @@ func update():
 		DEBRAKER -= 1
 		if DEBRAKER <= 0: break
 		i += 1
+
 		print("ITER " + str(i))
 		var tought = priority_list[i]
+
 		if tought.idea_cycle >= idea_cycle_now: continue
 		tought.idea_cycle = idea_cycle_now
-		if tought.execute():
-			print("^ DOING ^")
-			curent_idea_index = i
+
+		var ret_expand = tought.expandUpon(i)
+
+		if ret_expand.has("removeRelative"): priority_list.remove_at(ret_expand["removeRelative"] + i)
+		if ret_expand.has("removeAbsolute"): priority_list.remove_at(ret_expand["removeAbsolute"])
+		
+		if ret_expand.has("exit"): 
 			is_decision_made = true
-			priority_list.remove_at(i)
 			break
-		if tought.expand():
-			i = -1
-			continue
+		
+		if ret_expand.has("indexAdd"): i += ret_expand["indexAdd"]
+		if ret_expand.has("indexSet"): i = ret_expand["indexSet"]
+
 	if not is_decision_made:
 		curent_idea_index = -1
 	print("END of tought\n" + global.arrToStr(priority_list, 0) + "")
@@ -60,30 +66,47 @@ class Idea:
 		object_of_intrest = p_object_of_intrest
 		this_node = p_parent_node
 		idea_cycle = p_parent_node.idea_cycle_now - 1
-	# aka whenever the idea is prime and ready XD
-	func execute() -> bool:
-		print("executing: " + str(self))
-		return executeIdea()
 	# if it needs somthing beforehand
-	func expand() -> bool:
+	func expandUpon(i) -> Dictionary:
 		print(".expanding: " + str(self))
-		return expandIdea()
+		return expandIdea(i)
 
 	# returns true if the idea meets requirements
-	func expandIdea() -> bool:
+	func expandIdea(i) -> Dictionary:
 		match tought_types:
+			enums.Toughts.ITEM_THROW:
+				this_node.item_manager.nbThrow()
+				return {"removeRelative": -1, "exit": true}
 			enums.Toughts.KILLTIME:
 				pass
 			enums.Toughts.ITEM_FIND:
 				pass
 			enums.Toughts.ITEM_PICKUP:
-				print("- expanded into ITEM_WALKTO")
+				if this_node.item_manager.equiped_item:
+					if itemMatch(this_node.item_manager.equiped_item):
+						return {"indexSet": -1, "removeRelative": 0}
+
+				var found_item = getIteractableItems()
+				if not found_item:
+					this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_WALKTO, object_of_intrest, object_params, this_node))
+					return {"indexSet": -1}
 				if this_node.item_manager.equiped_item:
 					this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_THROW, object_of_intrest, object_params, this_node))
-				this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_WALKTO, object_of_intrest, object_params, this_node))
-				print(global.arrToStr(this_node.priority_list, 2))
+					return {"indexSet": -1}
+				# DONE ^
+
+				this_node.item_manager.nbThrow()
+				if this_node.item_manager.equiped_item:
+					if not itemMatch(this_node.item_manager.equiped_item):
+						this_node.item_manager.nbThrow()
+						return {"exit": true}
+					return {"exit": true, "removeRelative": 0}
 			enums.Toughts.ITEM_WALKTO:
-				pass
+				var found_item = getVisableItems()
+				if not found_item: 
+					return {"removeRelative": 0}
+				this_node.navigator.runTo(found_item.global_position)
+				return {"removeRelative": 0, "exit": true}
 			enums.Toughts.FINDROOM:
 				pass
 			enums.Toughts.ATTACK:
@@ -100,26 +123,8 @@ class Idea:
 				pass
 			enums.Toughts.ROOM_WALKTO:
 				pass
-			_: return false
-		return true
-
-	# returns true if idea is executed aka no other ideas
-	func executeIdea() -> bool:
-		match tought_types:
-			enums.Toughts.ITEM_THROW:
-				this_node.item_manager.nbThrow()
-				return false
-			enums.Toughts.ITEM_PICKUP:
-				var found_item = getIteractableItems()
-				if not found_item: return false
-				if this_node.item_manager.equiped_item: return false
-				this_node.item_manager.nbThrow()
-			enums.Toughts.ITEM_WALKTO:
-				var found_item = getVisableItems()
-				if not found_item: return false
-				this_node.navigator.runTo(found_item.global_position)
-			_: return false
-		return true
+			_: return {}
+		return {}
 
 	#whole alot of checking if item fits description
 	func getIteractableItems() -> Node3D:
@@ -134,19 +139,31 @@ class Idea:
 	#Helper functions
 	func checkForMatchingItem(p_nodes) -> Node3D:
 		for detected_body : Node3D in p_nodes:
-			if detected_body.is_in_group("item"):
-				var script_main = detected_body.get_node("MAIN")
-				if script_main.type == object_of_intrest:
-					var does_params_fit = true
-					for iter_param_key: String in object_params.keys():
-						if detected_body.params.has(iter_param_key):
-							if detected_body.params[iter_param_key] == object_params[iter_param_key]:
-								continue
-						does_params_fit = false
-						break
-					if does_params_fit:
-						return detected_body
+			if itemMatchPre(detected_body):
+				return detected_body
 		return null
 	
+	func itemMatchPre(p_item) -> bool:
+		if p_item.is_in_group("item"):
+			return itemMatch(p_item)
+		return false
+
+	func itemMatch(p_item) -> bool:
+		var script_main = p_item.get_node("MAIN")
+		if script_main.type == object_of_intrest:
+			var does_params_fit = true
+			for iter_param_key: String in object_params.keys():
+				if p_item.params.has(iter_param_key):
+					if p_item.params[iter_param_key] == object_params[iter_param_key]:
+						continue
+				does_params_fit = false
+				print("..Params don't fit: " + iter_param_key)
+				break
+			if does_params_fit:
+				print("..Found!")
+				return true
+		print("..Wrong type")
+		return false
+
 	func _to_string() -> String:
 		return enums.Toughts.keys()[tought_types] + " | " + enums.ItemType.keys()[object_of_intrest] + " - " + JSON.stringify(object_params)
