@@ -18,3 +18,11 @@ func repeatString(p_string, p_times) -> String:
 	var result = ""
 	for x in range(p_times): result += p_string
 	return result
+
+var time_now := 0
+func _ready() -> void:
+	while true:
+		await get_tree().create_timer(1).timeout
+		time_now += 1
+func getTime() -> int:
+	return time_now

@@ -21,5 +21,6 @@ enum Toughts {
 	ACTIVATE,
 	EAT,
 	DRINK,
-	ROOM_WALKTO
+	ROOM_WALKTO,
+	TALK_TO,
 }

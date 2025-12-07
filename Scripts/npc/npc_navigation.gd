@@ -21,6 +21,7 @@ func _physics_process(delta: float) -> void:
 			var normal = (naviagtion_agent.get_next_path_position() - rigid_body.global_position).normalized() * npc_speed
 			rigid_body.linear_velocity.x = normal.x * (2 if running else 1) * item_mul
 			rigid_body.linear_velocity.z = normal.z * (2 if running else 1) * item_mul
+			rigid_body.linear_velocity.y = normal.y * (2 if running else 1) * item_mul
 			if (running):
 				body.updateAnimation(body.AnimationStates.RUN)
 			else:

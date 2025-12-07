@@ -10,6 +10,13 @@ var priority_list: Array[Idea] = []
 var curent_idea_index = -1
 var idea_cycle_now := 0
 
+#* TODO
+#* Make em cool aka make em rember the time and pos as well talk about this
+#* (Each talk can only exchange specific info about that :DD)
+var seen_objects: Array[Seen_object]
+var seen_person: Array[Seen_person]
+# var seen_people
+
 func _ready() -> void:
 	# Finds and picks up first key since funny shit XD
 	navigator.done_moving.connect(update)
@@ -33,7 +40,7 @@ func update():
 		if tought.idea_cycle >= idea_cycle_now: continue
 		tought.idea_cycle = idea_cycle_now
 
-		var ret_expand = tought.expandUpon(i)
+		var ret_expand = tought.expandUpon()
 
 		if ret_expand.has("removeRelative"): priority_list.remove_at(ret_expand["removeRelative"] + i)
 		if ret_expand.has("removeAbsolute"): priority_list.remove_at(ret_expand["removeAbsolute"])
@@ -46,39 +53,55 @@ func update():
 		if ret_expand.has("indexSet"): i = ret_expand["indexSet"]
 
 	if not is_decision_made:
+		if not navigator.is_in_action:
+			priority_list.push_back(Idea.new(enums.Toughts.KILLTIME, enums.ItemType.NAN, {}, self))
 		curent_idea_index = -1
+
 	print("END of tought\n" + global.arrToStr(priority_list, 0) + "")
 	toughUpdate.emit()
 	# if no decision then killtime() needs to be added
 	# also make so that if the function can't be done it adds new element to array and tries that
 	return is_decision_made
 
+class Seen_object extends Item:
+	var position: Vector3
+	var time_seen: int 
+	func _init(p_object_of_intrest: enums.ItemType, p_object_params: Dictionary, p_position: Vector3) -> void:
+		super(p_object_of_intrest, p_object_params)
+		position = p_position
+		time_seen = global.getTime()
+
+class Seen_person:
+	#* TODO
+	var position: Vector3
+	var time_seen: int
+	var apearance
+
 #functions return true if rest needs to be skipped
-class Idea:
+class Idea extends Item:
 	var tought_types: enums.Toughts
-	var object_of_intrest: enums.ItemType
-	var object_params: Dictionary
 	var this_node: Node
 	var idea_cycle : int
 	func _init(p_type: enums.Toughts, p_object_of_intrest: enums.ItemType, p_object_params: Dictionary, p_parent_node: Node) -> void:
+		super(p_object_of_intrest, p_object_params)
 		tought_types = p_type
-		object_params = p_object_params
-		object_of_intrest = p_object_of_intrest
 		this_node = p_parent_node
 		idea_cycle = p_parent_node.idea_cycle_now - 1
 	# if it needs somthing beforehand
-	func expandUpon(i) -> Dictionary:
+	func expandUpon() -> Dictionary:
 		print(".expanding: " + str(self))
-		return expandIdea(i)
+		return expandIdea()
 
 	# returns true if the idea meets requirements
-	func expandIdea(i) -> Dictionary:
+	func expandIdea() -> Dictionary:
 		match tought_types:
 			enums.Toughts.ITEM_THROW:
 				this_node.item_manager.nbThrow()
 				return {"removeRelative": -1, "exit": true}
 			enums.Toughts.KILLTIME:
-				pass
+				#* TODO Make it semi random so seed generation can be predictable
+				this_node.navigator.walkTo(this_node.global_position + Vector3(randf_range(-1,1),randf_range(-1,1),randf_range(-1,1) * 10))
+				return {"exit": true, "removeRelative": 0}
 			enums.Toughts.ITEM_FIND:
 				pass
 			enums.Toughts.ITEM_PICKUP:
@@ -167,3 +190,11 @@ class Idea:
 
 	func _to_string() -> String:
 		return enums.Toughts.keys()[tought_types] + " | " + enums.ItemType.keys()[object_of_intrest] + " - " + JSON.stringify(object_params)
+
+class Item:
+	var object_of_intrest: enums.ItemType
+	var object_params: Dictionary
+	func _init(p_object_of_intrest: enums.ItemType, p_object_params: Dictionary) -> void:
+		object_of_intrest = p_object_of_intrest
+		object_params = p_object_params
+	
