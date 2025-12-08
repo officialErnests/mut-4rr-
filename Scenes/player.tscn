@@ -99,11 +99,13 @@ ring_segments = 4
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 collision_mask = 10
 
+[node name="PickUp_pos" type="Marker3D" parent="."]
+
 [node name="PlayerProceser" type="Node" parent="." node_paths=PackedStringArray("item_manager")]
 script = ExtResource("1_ukyrk")
 item_manager = NodePath("Items")
 
-[node name="Items" type="Node" parent="PlayerProceser" node_paths=PackedStringArray("itemHolder", "animator", "pickup_hitbox", "cursor_handler", "cam_shaker", "movement_manager", "cursor_label_1", "cursor_label_2")]
+[node name="Items" type="Node" parent="PlayerProceser" node_paths=PackedStringArray("itemHolder", "animator", "pickup_hitbox", "cursor_handler", "cam_shaker", "movement_manager", "pickup_orgin", "cursor_label_1", "cursor_label_2")]
 script = ExtResource("4_8erm5")
 itemHolder = NodePath("../../ItemHolder/ItemSlot")
 animator = NodePath("../../SkelBody")
@@ -111,6 +113,7 @@ pickup_hitbox = NodePath("../../SkelBody/PickupArea")
 cursor_handler = NodePath("../../ItemHolder/Pointer/Pointer")
 cam_shaker = NodePath("../../Neck/Cursor_offset/CursorToPos")
 movement_manager = NodePath("../../Movement")
+pickup_orgin = NodePath("../../PickUp_pos")
 cursor_label_1 = NodePath("../../ItemHolder/Pointer/POINTER")
 cursor_label_2 = NodePath("../../ItemHolder/Pointer/POINTER_LEFT")
 

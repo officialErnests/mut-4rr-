@@ -31,12 +31,15 @@ item_manager = NodePath("Items")
 [node name="Body" parent="." instance=ExtResource("1_acqhf")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="Items" type="Node" parent="." node_paths=PackedStringArray("itemHolder", "animator", "pickup_hitbox", "movement_manager")]
+[node name="PickUp_pos" type="Marker3D" parent="."]
+
+[node name="Items" type="Node" parent="." node_paths=PackedStringArray("itemHolder", "animator", "pickup_hitbox", "movement_manager", "pickup_orgin")]
 script = ExtResource("3_1ig1v")
 itemHolder = NodePath("../ItemHolder/ItemSlot")
 animator = NodePath("../Body")
 pickup_hitbox = NodePath("../InteractionHitbox")
 movement_manager = NodePath("../Navigator")
+pickup_orgin = NodePath("../PickUp_pos")
 
 [node name="Navigator" type="Node" parent="." node_paths=PackedStringArray("naviagtion_agent", "rigid_body", "body")]
 script = ExtResource("3_g6unj")

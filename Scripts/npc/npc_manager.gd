@@ -9,6 +9,7 @@ signal toughUpdate
 var priority_list: Array[Idea] = []
 var curent_idea_index = -1
 var idea_cycle_now := 0
+var id
 
 #* TODO
 #* Make em cool aka make em rember the time and pos as well talk about this
@@ -19,6 +20,7 @@ var seen_person: Array[Seen_person]
 
 func _ready() -> void:
 	# Finds and picks up first key since funny shit XD
+	id = global.declareNpc(self)
 	navigator.done_moving.connect(update)
 	priority_list.append(Idea.new(enums.Toughts.ITEM_PICKUP, enums.ItemType.KEY, {"door_key" : 1}, self))
 	priority_list.append(Idea.new(enums.Toughts.ITEM_PICKUP, enums.ItemType.GUN, {}, self))
@@ -75,7 +77,8 @@ class Seen_person:
 	#* TODO
 	var position: Vector3
 	var time_seen: int
-	var apearance
+	var person_id: int
+
 
 #functions return true if rest needs to be skipped
 class Idea extends Item:
@@ -161,10 +164,22 @@ class Idea extends Item:
 	
 	#Helper functions
 	func checkForMatchingItem(p_nodes) -> Node3D:
+		var closest_item = null
+		var closest_item_distance = -1
 		for detected_body : Node3D in p_nodes:
 			if itemMatchPre(detected_body):
-				return detected_body
-		return null
+				var raycast = this_node.castRay(detected_body.global_position)
+				if raycast:
+					continue
+				else:
+					var temp_distance = detected_body.global_position.distance_to(this_node.vision_hitbox.global_position)
+					if not closest_item:
+						closest_item_distance = temp_distance
+						closest_item = detected_body
+					if temp_distance < closest_item_distance:
+						closest_item_distance = temp_distance
+						closest_item = detected_body
+		return closest_item
 	
 	func itemMatchPre(p_item) -> bool:
 		if p_item.is_in_group("item"):
@@ -198,3 +213,12 @@ class Item:
 		object_of_intrest = p_object_of_intrest
 		object_params = p_object_params
 	
+func castRay(p_end_position :Vector3):
+	var ray_point_start = vision_hitbox.global_position
+	var ray_point_end = p_end_position
+
+	var space_state = get_world_3d().direct_space_state
+
+	var params = PhysicsRayQueryParameters3D.create(ray_point_start, ray_point_end, 4)
+
+	return space_state.intersect_ray(params)

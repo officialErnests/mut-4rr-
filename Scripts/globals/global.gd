@@ -19,6 +19,7 @@ func repeatString(p_string, p_times) -> String:
 	for x in range(p_times): result += p_string
 	return result
 
+# time
 var time_now := 0
 func _ready() -> void:
 	while true:
@@ -26,3 +27,11 @@ func _ready() -> void:
 		time_now += 1
 func getTime() -> int:
 	return time_now
+
+# npc
+var next_id := 0
+var npc_ids : Array[RigidBody3D]
+func declareNpc(p_npc: RigidBody3D) -> int:
+	npc_ids.push_back(p_npc)
+	next_id += 1
+	return next_id - 1
