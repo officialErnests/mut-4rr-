@@ -62,3 +62,10 @@ shape = SubResource("BoxShape3D_yr2tp")
 [node name="CSGBakedCollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(0, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, 0, -0.100000024, 0, -0.6500001)
 shape = SubResource("BoxShape3D_kn0ow")
+
+[node name="VISIBLE" type="Node3D" parent="."]
+
+[node name="ViewPoint" type="Marker3D" parent="VISIBLE"]
+
+[node name="ViewPoint2" type="Marker3D" parent="VISIBLE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)

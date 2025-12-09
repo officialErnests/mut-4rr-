@@ -20,10 +20,13 @@ var seen_person: Array[Seen_person]
 
 func _ready() -> void:
 	# Finds and picks up first key since funny shit XD
-	id = global.declareNpc(self)
+	id = global.declareCharecter(self)
 	navigator.done_moving.connect(update)
 	priority_list.append(Idea.new(enums.Toughts.ITEM_PICKUP, enums.ItemType.KEY, {"door_key" : 1}, self))
 	priority_list.append(Idea.new(enums.Toughts.ITEM_PICKUP, enums.ItemType.GUN, {}, self))
+
+	vision_hitbox.body_entered.connect(visionSignal)
+	vision_hitbox.body_exited.connect(visionSignal)
 
 func update():
 	var is_decision_made = false
@@ -65,30 +68,48 @@ func update():
 	# also make so that if the function can't be done it adds new element to array and tries that
 	return is_decision_made
 
-class Seen_object extends Item:
+func visionSignal(body: Node3D):
+	if body.is_in_group("npc"):
+		pass
+	elif  body.is_in_group("item"):
+		pass
+	elif body.is_in_group("player"):
+		pass
+		
+
+func visionCanSee(object: Node3D):
+	castRay(object.global_position)
+	#* TODO make em work based on visible markers aka markers 3d
+
+class Seen_object:
 	var position: Vector3
 	var time_seen: int 
-	func _init(p_object_of_intrest: enums.ItemType, p_object_params: Dictionary, p_position: Vector3) -> void:
-		super(p_object_of_intrest, p_object_params)
+	var item: Item
+	func _init(p_position: Vector3, p_item: Item) -> void:
 		position = p_position
 		time_seen = global.getTime()
+		item = p_item
 
 class Seen_person:
-	#* TODO
 	var position: Vector3
 	var time_seen: int
 	var person_id: int
+	func _init(p_position: Vector3, p_person_id: int) -> void:
+		position = p_position
+		time_seen = global.getTime()
+		person_id = p_person_id
 
 
 #functions return true if rest needs to be skipped
-class Idea extends Item:
+class Idea:
 	var tought_types: enums.Toughts
 	var this_node: Node
 	var idea_cycle : int
-	func _init(p_type: enums.Toughts, p_object_of_intrest: enums.ItemType, p_object_params: Dictionary, p_parent_node: Node) -> void:
-		super(p_object_of_intrest, p_object_params)
+	var object_of_intrest
+	func _init(p_type: enums.Toughts, p_object_of_intrest, p_parent_node: Node) -> void:
 		tought_types = p_type
 		this_node = p_parent_node
+		object_of_intrest = p_object_of_intrest
 		idea_cycle = p_parent_node.idea_cycle_now - 1
 	# if it needs somthing beforehand
 	func expandUpon() -> Dictionary:
@@ -114,10 +135,10 @@ class Idea extends Item:
 
 				var found_item = getIteractableItems()
 				if not found_item:
-					this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_WALKTO, object_of_intrest, object_params, this_node))
+					this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_WALKTO, object_of_intrest.type, object_of_intrest.params, this_node))
 					return {"indexSet": -1}
 				if this_node.item_manager.equiped_item:
-					this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_THROW, object_of_intrest, object_params, this_node))
+					this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_THROW, object_of_intrest.type, object_of_intrest.params, this_node))
 					return {"indexSet": -1}
 				# DONE ^
 
@@ -181,38 +202,35 @@ class Idea extends Item:
 						closest_item = detected_body
 		return closest_item
 	
-	func itemMatchPre(p_item) -> bool:
+	func itemMatchPre(p_item : Node3D) -> bool:
 		if p_item.is_in_group("item"):
-			return itemMatch(p_item)
-		return false
-
-	func itemMatch(p_item) -> bool:
-		var script_main = p_item.get_node("MAIN")
-		if script_main.type == object_of_intrest:
-			var does_params_fit = true
-			for iter_param_key: String in object_params.keys():
-				if p_item.params.has(iter_param_key):
-					if p_item.params[iter_param_key] == object_params[iter_param_key]:
-						continue
-				does_params_fit = false
-				print("..Params don't fit: " + iter_param_key)
-				break
-			if does_params_fit:
-				print("..Found!")
-				return true
-		print("..Wrong type")
+			return this_node.itemMatch(this_node.nodeToItem(p_item), object_of_intrest)
 		return false
 
 	func _to_string() -> String:
 		return enums.Toughts.keys()[tought_types] + " | " + enums.ItemType.keys()[object_of_intrest] + " - " + JSON.stringify(object_params)
 
 class Item:
-	var object_of_intrest: enums.ItemType
-	var object_params: Dictionary
+	var type: enums.ItemType
+	var params: Dictionary
 	func _init(p_object_of_intrest: enums.ItemType, p_object_params: Dictionary) -> void:
-		object_of_intrest = p_object_of_intrest
-		object_params = p_object_params
+		type = p_object_of_intrest
+		params = p_object_params
 	
+func nodeToItem(p_node) -> Item:
+	var res_item = Item.new(p_node.getType(), p_node.getParams()) 
+
+func itemMatch(p_item: Item, p_item_min: Item) -> bool:
+		var script_main = p_item.get_node("MAIN")
+		if script_main.type == p_item_min.object_of_intrest:
+			for iter_param_key: String in p_item_min.object_params.keys():
+				if p_item.params.has(iter_param_key):
+					if p_item.params[iter_param_key] == p_item_min.object_params[iter_param_key]:
+						continue
+				return false
+			return true
+		return false
+
 func castRay(p_end_position :Vector3):
 	var ray_point_start = vision_hitbox.global_position
 	var ray_point_end = p_end_position

@@ -42,10 +42,15 @@ func use(p_main) -> void:
 		enums.ItemType.GUN:
 			extend_script.shoot()
 		enums.ItemType.KEY:
-			p_main.use(get_parent().params)
+			p_main.use(getParams())
 		_:
 			p_main.use()
 
+func getParams():
+	return get_parent().params
+
+func getType():
+	return type
 
 func drop() -> void:
 	item_equiped = false

@@ -30,8 +30,8 @@ func getTime() -> int:
 
 # npc
 var next_id := 0
-var npc_ids : Array[RigidBody3D]
-func declareNpc(p_npc: RigidBody3D) -> int:
-	npc_ids.push_back(p_npc)
+var charecter_ids : Array[RigidBody3D]
+func declareCharecter(p_npc: RigidBody3D) -> int:
+	charecter_ids.push_back(p_npc)
 	next_id += 1
 	return next_id - 1

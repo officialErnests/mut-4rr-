@@ -35,6 +35,7 @@ enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
 item=""
 Interactable=""
 Player=""
+npc=""
 
 [input]
 

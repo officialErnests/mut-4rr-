@@ -103,13 +103,13 @@ script = ExtResource("6_5wyu1")
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 3, 1.0135527, -13.111565)
 
 [node name="NPC2" parent="NPC_MASTER" instance=ExtResource("6_0c07c")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1, 1.0135527, -13.111565)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1, 5.0135527, -6.1115646)
 
 [node name="NPC3" parent="NPC_MASTER" instance=ExtResource("6_0c07c")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 5, 1.0135527, -13.111565)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -8, 1.0135527, -6.1115646)
 
 [node name="NPC4" parent="NPC_MASTER" instance=ExtResource("6_0c07c")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2, 1.0135527, -13.111565)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2, 1.0135527, 0.88843536)
 
 [node name="Items" type="Node3D" parent="."]
 
