@@ -19,6 +19,7 @@ distance_fade_max_distance = 0.0
 [sub_resource type="PrismMesh" id="PrismMesh_myoyh"]
 
 [node name="Item_preset" type="RigidBody3D" groups=["item"]]
+metadata/Equiper = 0
 
 [node name="MAIN" parent="." node_paths=PackedStringArray("itemRigid", "visual_outside") instance=ExtResource("1_y3qgv")]
 itemRigid = NodePath("..")

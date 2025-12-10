@@ -1,5 +1,6 @@
-[gd_scene load_steps=26 format=3 uid="uid://bpgaix3cftid6"]
+[gd_scene load_steps=27 format=3 uid="uid://bpgaix3cftid6"]
 
+[ext_resource type="Script" uid="uid://b4qgmftclp70i" path="res://Scripts/player/oneTime/id_getter.gd" id="1_7dp3o"]
 [ext_resource type="Script" uid="uid://o4n6xug4i5p5" path="res://Scripts/player/main/player_proceser.gd" id="1_ukyrk"]
 [ext_resource type="Script" uid="uid://c73bn6ajbmaj" path="res://Scripts/player/player.gd" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://1f0q4ofhgup" path="res://Scripts/player/pointer_cursor.gd" id="2_cvnsp"]
@@ -100,6 +101,9 @@ ring_segments = 4
 collision_mask = 10
 
 [node name="PickUp_pos" type="Marker3D" parent="."]
+
+[node name="IdGetter" type="Node" parent="."]
+script = ExtResource("1_7dp3o")
 
 [node name="PlayerProceser" type="Node" parent="." node_paths=PackedStringArray("item_manager")]
 script = ExtResource("1_ukyrk")

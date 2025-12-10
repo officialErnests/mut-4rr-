@@ -22,8 +22,10 @@ func _ready() -> void:
 	# Finds and picks up first key since funny shit XD
 	id = global.declareCharecter(self)
 	navigator.done_moving.connect(update)
-	priority_list.append(Idea.new(enums.Toughts.ITEM_PICKUP, enums.ItemType.KEY, {"door_key" : 1}, self))
-	priority_list.append(Idea.new(enums.Toughts.ITEM_PICKUP, enums.ItemType.GUN, {}, self))
+	var temp_key = Item.new(enums.ItemType.KEY, {"door_key" : 1})
+	var temp_gun = Item.new(enums.ItemType.KEY, {"door_key" : 1})
+	priority_list.append(Idea.new(enums.Toughts.ITEM_PICKUP, temp_key, self))
+	priority_list.append(Idea.new(enums.Toughts.ITEM_PICKUP, temp_gun, self))
 
 	vision_hitbox.body_entered.connect(visionSignal)
 	vision_hitbox.body_exited.connect(visionSignal)
@@ -59,7 +61,7 @@ func update():
 
 	if not is_decision_made:
 		if not navigator.is_in_action:
-			priority_list.push_back(Idea.new(enums.Toughts.KILLTIME, enums.ItemType.NAN, {}, self))
+			priority_list.push_back(Idea.new(enums.Toughts.KILLTIME, null, self))
 		curent_idea_index = -1
 
 	print("END of tought\n" + global.arrToStr(priority_list, 0) + "")
@@ -130,21 +132,21 @@ class Idea:
 				pass
 			enums.Toughts.ITEM_PICKUP:
 				if this_node.item_manager.equiped_item:
-					if itemMatch(this_node.item_manager.equiped_item):
+					if this_node.itemMatch(this_node.item_manager.equiped_item, object_of_intrest):
 						return {"indexSet": -1, "removeRelative": 0}
 
 				var found_item = getIteractableItems()
 				if not found_item:
-					this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_WALKTO, object_of_intrest.type, object_of_intrest.params, this_node))
+					this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_WALKTO, object_of_intrest, this_node))
 					return {"indexSet": -1}
 				if this_node.item_manager.equiped_item:
-					this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_THROW, object_of_intrest.type, object_of_intrest.params, this_node))
+					this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_THROW, object_of_intrest, this_node))
 					return {"indexSet": -1}
 				# DONE ^
 
 				this_node.item_manager.nbThrow()
 				if this_node.item_manager.equiped_item:
-					if not itemMatch(this_node.item_manager.equiped_item):
+					if not this_node.itemMatch(this_node.item_manager.equiped_item, object_of_intrest):
 						this_node.item_manager.nbThrow()
 						return {"exit": true}
 					return {"exit": true, "removeRelative": 0}
@@ -208,7 +210,7 @@ class Idea:
 		return false
 
 	func _to_string() -> String:
-		return enums.Toughts.keys()[tought_types] + " | " + enums.ItemType.keys()[object_of_intrest] + " - " + JSON.stringify(object_params)
+		return enums.Toughts.keys()[tought_types] + " | " + enums.ItemType.keys()[object_of_intrest] + " - " + JSON.stringify(object_of_intrest)
 
 class Item:
 	var type: enums.ItemType
@@ -216,20 +218,23 @@ class Item:
 	func _init(p_object_of_intrest: enums.ItemType, p_object_params: Dictionary) -> void:
 		type = p_object_of_intrest
 		params = p_object_params
+	func _to_string() -> String:
+		return enums.ItemType.keys()[type] + " | " + global.dicToString(params)
 	
 func nodeToItem(p_node) -> Item:
 	var res_item = Item.new(p_node.getType(), p_node.getParams()) 
+	#* TODO make this
 
 func itemMatch(p_item: Item, p_item_min: Item) -> bool:
-		var script_main = p_item.get_node("MAIN")
-		if script_main.type == p_item_min.object_of_intrest:
-			for iter_param_key: String in p_item_min.object_params.keys():
-				if p_item.params.has(iter_param_key):
-					if p_item.params[iter_param_key] == p_item_min.object_params[iter_param_key]:
-						continue
-				return false
-			return true
-		return false
+	var script_main = p_item.get_node("MAIN")
+	if script_main.type == p_item_min.object_of_intrest:
+		for iter_param_key: String in p_item_min.object_params.keys():
+			if p_item.params.has(iter_param_key):
+				if p_item.params[iter_param_key] == p_item_min.object_params[iter_param_key]:
+					continue
+			return false
+		return true
+	return false
 
 func castRay(p_end_position :Vector3):
 	var ray_point_start = vision_hitbox.global_position

@@ -14,6 +14,13 @@ func arrToStr(p_input_arr, p_indent) -> String:
 	result_string += "\n" + repeatString("\t", p_indent) +  "]"
 	return result_string
 
+func dicToString(p_dictionary) -> String:
+	var result_string = ""
+	for key in p_dictionary.keys():
+		result_string += key + ": "
+		result_string += str(p_dictionary[key]) + " "
+	return result_string
+
 func repeatString(p_string, p_times) -> String:
 	var result = ""
 	for x in range(p_times): result += p_string
