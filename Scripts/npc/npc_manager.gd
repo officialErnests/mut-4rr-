@@ -35,13 +35,13 @@ func update():
 	var i = -1
 	idea_cycle_now += 1
 	var DEBRAKER = 10
-	print("START of tought\n" + global.arrToStr(priority_list, 0) + "")
+	# print("START of tought\n" + global.arrToStr(priority_list, 0) + "")
 	while i < priority_list.size() - 1:
 		DEBRAKER -= 1
 		if DEBRAKER <= 0: break
 		i += 1
 
-		print("ITER " + str(i))
+		# print("ITER " + str(i))
 		var tought = priority_list[i]
 
 		if tought.idea_cycle >= idea_cycle_now: continue
@@ -64,7 +64,7 @@ func update():
 			priority_list.push_back(Idea.new(enums.Toughts.KILLTIME, null, self))
 		curent_idea_index = -1
 
-	print("END of tought\n" + global.arrToStr(priority_list, 0) + "")
+	# print("END of tought\n" + global.arrToStr(priority_list, 0) + "")
 	toughUpdate.emit()
 	# if no decision then killtime() needs to be added
 	# also make so that if the function can't be done it adds new element to array and tries that
@@ -115,7 +115,7 @@ class Idea:
 		idea_cycle = p_parent_node.idea_cycle_now - 1
 	# if it needs somthing beforehand
 	func expandUpon() -> Dictionary:
-		print(".expanding: " + str(self))
+		# print(".expanding: " + str(self))
 		return expandIdea()
 
 	# returns true if the idea meets requirements
