@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 global="*res://Scripts/globals/global.gd"
 enums="*res://Scripts/globals/enums.gd"
+classes="*res://Scripts/globals/classes.gd"
 
 [display]
 

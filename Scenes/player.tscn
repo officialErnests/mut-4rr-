@@ -102,8 +102,9 @@ collision_mask = 10
 
 [node name="PickUp_pos" type="Marker3D" parent="."]
 
-[node name="IdGetter" type="Node" parent="."]
+[node name="IdGetter" type="Node" parent="." node_paths=PackedStringArray("main_node")]
 script = ExtResource("1_7dp3o")
+main_node = NodePath("..")
 
 [node name="PlayerProceser" type="Node" parent="." node_paths=PackedStringArray("item_manager")]
 script = ExtResource("1_ukyrk")

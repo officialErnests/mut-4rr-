@@ -22,8 +22,8 @@ func _ready() -> void:
 	# Finds and picks up first key since funny shit XD
 	id = global.declareCharecter(self)
 	navigator.done_moving.connect(update)
-	var temp_key = Item.new(enums.ItemType.KEY, {"door_key" : 1})
-	var temp_gun = Item.new(enums.ItemType.KEY, {"door_key" : 1})
+	var temp_key = classes.Item.new(enums.ItemType.KEY, {"door_key" : 1})
+	var temp_gun = classes.Item.new(enums.ItemType.GUN, {})
 	priority_list.append(Idea.new(enums.Toughts.ITEM_PICKUP, temp_key, self))
 	priority_list.append(Idea.new(enums.Toughts.ITEM_PICKUP, temp_gun, self))
 
@@ -86,8 +86,8 @@ func visionCanSee(object: Node3D):
 class Seen_object:
 	var position: Vector3
 	var time_seen: int 
-	var item: Item
-	func _init(p_position: Vector3, p_item: Item) -> void:
+	var item: classes.Item
+	func _init(p_position: Vector3, p_item: classes.Item) -> void:
 		position = p_position
 		time_seen = global.getTime()
 		item = p_item
@@ -132,7 +132,7 @@ class Idea:
 				pass
 			enums.Toughts.ITEM_PICKUP:
 				if this_node.item_manager.equiped_item:
-					if this_node.itemMatch(this_node.item_manager.equiped_item, object_of_intrest):
+					if this_node.itemMatch(this_node.nodeToItem(this_node.item_manager.equiped_item), object_of_intrest):
 						return {"indexSet": -1, "removeRelative": 0}
 
 				var found_item = getIteractableItems()
@@ -146,7 +146,7 @@ class Idea:
 
 				this_node.item_manager.nbThrow()
 				if this_node.item_manager.equiped_item:
-					if not this_node.itemMatch(this_node.item_manager.equiped_item, object_of_intrest):
+					if not this_node.itemMatch(this_node.nodeToItem(this_node.item_manager.equiped_item), object_of_intrest):
 						this_node.item_manager.nbThrow()
 						return {"exit": true}
 					return {"exit": true, "removeRelative": 0}
@@ -210,27 +210,21 @@ class Idea:
 		return false
 
 	func _to_string() -> String:
-		return enums.Toughts.keys()[tought_types] + " | " + enums.ItemType.keys()[object_of_intrest] + " - " + JSON.stringify(object_of_intrest)
+		var return_string = ""
+		return_string = enums.Toughts.keys()[tought_types] + " | " 
+		if object_of_intrest: return_string += str(object_of_intrest)
+		return return_string
 
-class Item:
-	var type: enums.ItemType
-	var params: Dictionary
-	func _init(p_object_of_intrest: enums.ItemType, p_object_params: Dictionary) -> void:
-		type = p_object_of_intrest
-		params = p_object_params
-	func _to_string() -> String:
-		return enums.ItemType.keys()[type] + " | " + global.dicToString(params)
-	
-func nodeToItem(p_node) -> Item:
-	var res_item = Item.new(p_node.getType(), p_node.getParams()) 
-	#* TODO make this
+func nodeToItem(p_node: Node3D) -> classes.Item:
+	var temp_script = p_node.get_node("MAIN")
+	var res_item = classes.Item.new(temp_script.getType(), temp_script.getParams()) 
+	return res_item
 
-func itemMatch(p_item: Item, p_item_min: Item) -> bool:
-	var script_main = p_item.get_node("MAIN")
-	if script_main.type == p_item_min.object_of_intrest:
-		for iter_param_key: String in p_item_min.object_params.keys():
+func itemMatch(p_item: classes.Item, p_item_min: classes.Item) -> bool:
+	if p_item.type == p_item_min.type:
+		for iter_param_key: String in p_item_min.params.keys():
 			if p_item.params.has(iter_param_key):
-				if p_item.params[iter_param_key] == p_item_min.object_params[iter_param_key]:
+				if p_item.params[iter_param_key] == p_item_min.params[iter_param_key]:
 					continue
 			return false
 		return true

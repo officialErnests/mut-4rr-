@@ -46,7 +46,7 @@ func use(p_main) -> void:
 		_:
 			p_main.use()
 
-func getParams():
+func getParams() -> Dictionary:
 	return get_parent().params
 
 func getType():
