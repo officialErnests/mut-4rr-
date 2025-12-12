@@ -17,7 +17,8 @@ var id
 #* (Each talk can only exchange specific info about that :DD)
 var seen_objects: Array
 var seen_persons:  Array
-# var seen_people
+
+var PRECAL_VISIONRSQUARE: float
 
 func _ready() -> void:
 	# Finds and picks up first key since funny shit XD
@@ -27,7 +28,10 @@ func _ready() -> void:
 	vision_hitbox.body_entered.connect(visionSignal)
 	vision_hitbox.body_exited.connect(visionSignal)
 
-	await get_tree().create_timer(10).timeout
+	# precalculates some values
+	PRECAL_VISIONRSQUARE = vision_hitbox.get_node("CollisionShape3D").shape.radius**2
+
+	await get_tree().create_timer(1).timeout
 	var temp_key = classes.Item.new(enums.ItemType.KEY, {"door_key" : 1})
 	var temp_gun = classes.Item.new(enums.ItemType.GUN, {})
 	priority_list.append(Idea.new(enums.Toughts.ITEM_PICKUP, temp_key, self))
@@ -38,13 +42,14 @@ func update():
 	var i = -1
 	idea_cycle_now += 1
 	var DEBRAKER = 10
-	# print("START of tought\n" + global.arrToStr(priority_list, 0) + "")
+	testVision()
+	print("START of tought\n" + global.arrToStr(priority_list, 0) + "")
 	while i < priority_list.size() - 1:
 		DEBRAKER -= 1
 		if DEBRAKER <= 0: break
 		i += 1
 
-		# print("ITER " + str(i))
+		print("ITER " + str(i))
 		var tought = priority_list[i]
 
 		if tought.idea_cycle >= idea_cycle_now: continue
@@ -67,14 +72,25 @@ func update():
 			priority_list.push_back(Idea.new(enums.Toughts.KILLTIME, null, self))
 		curent_idea_index = -1
 
-	# print("END of tought\n" + global.arrToStr(priority_list, 0) + "")
+	print("END of tought\n" + global.arrToStr(priority_list, 0) + "")
 	toughUpdate.emit()
 	# if no decision then killtime() needs to be added
 	# also make so that if the function can't be done it adds new element to array and tries that
 	return is_decision_made
 
+func testVision() -> void:
+	var index = 0
+	for item: Seen_object in seen_objects:
+		if item.position.distance_squared_to(vision_hitbox.global_position) < PRECAL_VISIONRSQUARE:
+			var vision = castRay(eye_center.global_position, vision_hitbox.global_position, 8+16+32+64)
+			if not vision:
+				seen_objects.remove_at(index)
+		index += 1
+					
+#TODO give em some dimensia if the performance is bad XD
 func visionSignal(body: Node3D):
-	if visibile(body):
+	var visible_position := visibile(body)
+	if visible_position != Vector3.ZERO:
 		if body.is_in_group("npc"):
 			var body_array_position = global.checkArrayID(seen_persons, body.id)
 			if body_array_position == -1:
@@ -94,12 +110,12 @@ func visionSignal(body: Node3D):
 			else:
 				seen_persons[body_array_position].updatePosition(body.global_position)
 		
-func visibile(object: Node3D) -> bool:
+func visibile(object: Node3D) -> Vector3:
 	if object.get_node("VISIBLE"):
 		for visible_marker in object.get_node("VISIBLE").get_children():
-			var vision = castRay(visible_marker.global_position, object.global_position)
-			if not vision.has("collider"): return true
-	return false
+			var vision = castRay(eye_center.global_position, visible_marker.global_position, 16+32+64)
+			if not vision.has("collider"): return visible_marker.global_position
+	return Vector3.ZERO
 
 
 class Seen_object:
@@ -143,7 +159,7 @@ class Idea:
 		idea_cycle = p_parent_node.idea_cycle_now - 1
 	# if it needs somthing beforehand
 	func expandUpon() -> Dictionary:
-		# print(".expanding: " + str(self))
+		print(".expanding: " + str(self))
 		return expandIdea()
 
 	# returns true if the idea meets requirements
@@ -154,7 +170,7 @@ class Idea:
 				return {"removeRelative": -1, "exit": true}
 			enums.Toughts.KILLTIME:
 				#* TODO Make it semi random so seed generation can be predictable
-				this_node.navigator.walkTo(this_node.global_position + Vector3(randf_range(-1,1),randf_range(-1,1),randf_range(-1,1) * 10))
+				this_node.navigator.walkTo(this_node.global_position + Vector3(randf_range(-1,1),0,randf_range(-1,1) * 10))
 				return {"exit": true, "removeRelative": 0}
 			enums.Toughts.ITEM_FIND:
 				pass
@@ -168,15 +184,15 @@ class Idea:
 					this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_WALKTO, object_of_intrest, this_node))
 					return {"indexSet": -1}
 				if this_node.item_manager.equiped_item:
-					this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_THROW, object_of_intrest, this_node))
-					return {"indexSet": -1}
-				# DONE ^
+					this_node.item_manager.nbThrow()
 
 				this_node.item_manager.nbThrow()
 				if this_node.item_manager.equiped_item:
 					if not this_node.itemMatch(this_node.nodeToItem(this_node.item_manager.equiped_item), object_of_intrest):
 						this_node.item_manager.nbThrow()
+						print("EXIT 1")
 						return {"exit": true}
+					print("EXIT 2")
 					return {"exit": true, "removeRelative": 0}
 			enums.Toughts.ITEM_WALKTO:
 				var found_item = getVisableItems()
@@ -223,7 +239,7 @@ class Idea:
 		var closest_item_distance = -1
 		for detected_body : Node3D in p_nodes:
 			if itemMatchPre(detected_body):
-				var raycast = this_node.castRay(this_node.vision_hitbox.global_position, detected_body.global_position)
+				var raycast = this_node.castRay(this_node.vision_hitbox.global_position, detected_body.global_position, 16+32+64)
 				if raycast:
 					continue
 				else:
@@ -269,13 +285,13 @@ func itemMatch(p_item: classes.Item, p_item_min: classes.Item) -> bool:
 		return true
 	return false
 
-func castRay(start_position: Vector3, p_end_position :Vector3) -> Dictionary:
+func castRay(start_position: Vector3, p_end_position :Vector3, p_collision_layer: int) -> Dictionary:
 	var ray_point_start = vision_hitbox.global_position
 	var ray_point_end = p_end_position
 
 	var space_state = get_world_3d().direct_space_state
 	# floor - 32
 	# wall - 16
-	var params = PhysicsRayQueryParameters3D.create(ray_point_start, ray_point_end, 24)
+	var params = PhysicsRayQueryParameters3D.create(ray_point_start, ray_point_end, p_collision_layer)
 
 	return space_state.intersect_ray(params)

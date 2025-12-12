@@ -17,7 +17,7 @@ radius = 4.0
 [sub_resource type="BoxShape3D" id="BoxShape3D_xxsvc"]
 size = Vector3(2, 2, 2)
 
-[node name="NPC" type="RigidBody3D" node_paths=PackedStringArray("interaction_hitbox", "vision_hitbox", "navigator", "item_manager") groups=["npc"]]
+[node name="NPC" type="RigidBody3D" node_paths=PackedStringArray("interaction_hitbox", "vision_hitbox", "navigator", "item_manager", "eye_center") groups=["npc"]]
 collision_layer = 2
 collision_mask = 31
 axis_lock_angular_x = true
@@ -29,6 +29,7 @@ interaction_hitbox = NodePath("InteractionHitbox")
 vision_hitbox = NodePath("Vision")
 navigator = NodePath("Navigator")
 item_manager = NodePath("Items")
+eye_center = NodePath("Eye_center")
 
 [node name="Body" parent="." instance=ExtResource("1_acqhf")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
