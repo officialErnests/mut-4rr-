@@ -79,3 +79,11 @@ shadow_enabled = true
 spot_range = 100.0
 spot_angle = 80.0
 spot_angle_attenuation = 28.840166
+
+[node name="VISIBLE" type="Node3D" parent="."]
+
+[node name="ViewPoint" type="Marker3D" parent="VISIBLE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0.4)
+
+[node name="ViewPoint2" type="Marker3D" parent="VISIBLE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3)

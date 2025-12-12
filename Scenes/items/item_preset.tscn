@@ -41,3 +41,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 material_override = ExtResource("2_tqgrt")
 material_overlay = SubResource("StandardMaterial3D_uc2hg")
 mesh = SubResource("PrismMesh_myoyh")
+
+[node name="VISIBLE" type="Node3D" parent="."]
+
+[node name="ViewPoint" type="Marker3D" parent="VISIBLE"]

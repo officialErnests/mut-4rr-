@@ -8,4 +8,3 @@ class Item:
 		params = p_object_params
 	func _to_string() -> String:
 		return enums.ItemType.keys()[type] + " | " + global.dicToString(params)
-	

@@ -10,6 +10,7 @@ enum ItemType {
 
 enum Toughts {
 	KILLTIME,
+	ITEM_TALK,
 	ITEM_FIND,
 	ITEM_THROW,
 	ITEM_PICKUP,
