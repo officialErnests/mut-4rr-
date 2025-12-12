@@ -36,9 +36,26 @@ func getTime() -> int:
 	return time_now
 
 # npc
-var next_id := 0
+var next_charecter_id := 0
 var charecter_ids : Array[Node3D]
 func declareCharecter(p_npc: Node3D) -> int:
 	charecter_ids.push_back(p_npc)
-	next_id += 1
-	return next_id - 1
+	next_charecter_id += 1
+	return next_charecter_id - 1
+
+# item
+var next_item_id := 0
+var item_ids : Array[Node3D]
+func declareItem(p_item: Node3D) -> int:
+	item_ids.push_back(p_item)
+	next_item_id += 1
+	return next_item_id - 1
+
+#check if array contains obj
+func checkArrayID(p_array: Array, p_id: int) -> int:
+	var index := 0
+	for element in p_array:
+		if element.id == p_id:
+			return index 
+		index += 1
+	return -1

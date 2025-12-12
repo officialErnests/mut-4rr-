@@ -102,13 +102,10 @@ rings = 4
 ring_segments = 4
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
-collision_mask = 10
+collision_mask = 24
+script = ExtResource("1_7dp3o")
 
 [node name="PickUp_pos" type="Marker3D" parent="."]
-
-[node name="IdGetter" type="Node" parent="." node_paths=PackedStringArray("main_node")]
-script = ExtResource("1_7dp3o")
-main_node = NodePath("..")
 
 [node name="PlayerProceser" type="Node" parent="." node_paths=PackedStringArray("item_manager")]
 script = ExtResource("1_ukyrk")
@@ -149,22 +146,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.3, 0)
 [node name="Ground_snap" type="RayCast3D" parent="GroundSnapers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
 target_position = Vector3(0, -0.5, 0)
-collision_mask = 12
+collision_mask = 16
 
 [node name="Ground_snap2" type="RayCast3D" parent="GroundSnapers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.01, 0)
 target_position = Vector3(0, -0.5, 0)
-collision_mask = 12
+collision_mask = 16
 
 [node name="Ground_snap3" type="RayCast3D" parent="GroundSnapers"]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.10000001, 0.01, 0.1)
 target_position = Vector3(0, -0.5, 0)
-collision_mask = 12
+collision_mask = 16
 
 [node name="Ground_snap4" type="RayCast3D" parent="GroundSnapers"]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.099999994, 0.01, -0.1)
 target_position = Vector3(0, -0.5, 0)
-collision_mask = 12
+collision_mask = 16
 
 [node name="PLayerCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
@@ -189,6 +186,8 @@ offset = Vector3(0, 180, 0)
 
 [node name="PickupArea" type="Area3D" parent="SkelBody"]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, -0.020662546, 0)
+collision_layer = 0
+collision_mask = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SkelBody/PickupArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
@@ -326,3 +325,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="ViewPoint3" type="Marker3D" parent="VISIBLE"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="Eye_center" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)

@@ -4,6 +4,7 @@ class_name npc extends RigidBody3D
 @export var vision_hitbox: Area3D
 @export var navigator: Node
 @export var item_manager: Node	
+@export var eye_center: Marker3D
 signal toughUpdate
 
 var priority_list: Array[Idea] = []
@@ -14,21 +15,23 @@ var id
 #* TODO
 #* Make em cool aka make em rember the time and pos as well talk about this
 #* (Each talk can only exchange specific info about that :DD)
-var seen_objects: Array[Seen_object]
-var seen_person: Array[Seen_person]
+var seen_objects: Array
+var seen_persons:  Array
 # var seen_people
 
 func _ready() -> void:
 	# Finds and picks up first key since funny shit XD
 	id = global.declareCharecter(self)
 	navigator.done_moving.connect(update)
+
+	vision_hitbox.body_entered.connect(visionSignal)
+	vision_hitbox.body_exited.connect(visionSignal)
+
+	await get_tree().create_timer(10).timeout
 	var temp_key = classes.Item.new(enums.ItemType.KEY, {"door_key" : 1})
 	var temp_gun = classes.Item.new(enums.ItemType.GUN, {})
 	priority_list.append(Idea.new(enums.Toughts.ITEM_PICKUP, temp_key, self))
 	priority_list.append(Idea.new(enums.Toughts.ITEM_PICKUP, temp_gun, self))
-
-	vision_hitbox.body_entered.connect(visionSignal)
-	vision_hitbox.body_exited.connect(visionSignal)
 
 func update():
 	var is_decision_made = false
@@ -71,35 +74,60 @@ func update():
 	return is_decision_made
 
 func visionSignal(body: Node3D):
-	if body.is_in_group("npc"):
-		pass
-	elif  body.is_in_group("item"):
-		pass
-	elif body.is_in_group("player"):
-		pass
+	if visibile(body):
+		if body.is_in_group("npc"):
+			var body_array_position = global.checkArrayID(seen_persons, body.id)
+			if body_array_position == -1:
+				seen_persons.append(Seen_person.new(body.global_position, body.id))
+			else:
+				seen_persons[body_array_position].updatePosition(body.global_position)
+		elif  body.is_in_group("item"):
+			var body_array_position = global.checkArrayID(seen_objects, body.id)
+			if body_array_position == -1:
+				seen_objects.append(Seen_object.new(body.global_position, body.id, body.item))
+			else:
+				seen_objects[body_array_position].updatePosition(body.global_position)
+		elif body.is_in_group("player"):
+			var body_array_position = global.checkArrayID(seen_persons, body.id)
+			if body_array_position == -1:
+				seen_persons.append(Seen_person.new(body.global_position, body.id))
+			else:
+				seen_persons[body_array_position].updatePosition(body.global_position)
 		
+func visibile(object: Node3D) -> bool:
+	if object.get_node("VISIBLE"):
+		for visible_marker in object.get_node("VISIBLE").get_children():
+			var vision = castRay(visible_marker.global_position, object.global_position)
+			if not vision.has("collider"): return true
+	return false
 
-func visionCanSee(object: Node3D):
-	castRay(object.global_position)
-	#* TODO make em work based on visible markers aka markers 3d
 
 class Seen_object:
 	var position: Vector3
 	var time_seen: int 
 	var item: classes.Item
-	func _init(p_position: Vector3, p_item: classes.Item) -> void:
+	var id
+	func _init(p_position: Vector3, p_id: int, p_item: classes.Item) -> void:
 		position = p_position
 		time_seen = global.getTime()
 		item = p_item
+		id = p_id
+	func updatePosition(p_position: Vector3) -> void:
+		position = p_position
+		time_seen = global.getTime()
+
 
 class Seen_person:
 	var position: Vector3
 	var time_seen: int
-	var person_id: int
+	var id: int
 	func _init(p_position: Vector3, p_person_id: int) -> void:
 		position = p_position
 		time_seen = global.getTime()
-		person_id = p_person_id
+		id = p_person_id
+	func updatePosition(p_position: Vector3) -> void:
+		position = p_position
+		time_seen = global.getTime()
 
 
 #functions return true if rest needs to be skipped
@@ -152,10 +180,14 @@ class Idea:
 					return {"exit": true, "removeRelative": 0}
 			enums.Toughts.ITEM_WALKTO:
 				var found_item = getVisableItems()
-				if not found_item: 
-					return {"removeRelative": 0}
-				this_node.navigator.runTo(found_item.global_position)
-				return {"removeRelative": 0, "exit": true}
+				if found_item: 
+					this_node.navigator.runTo(found_item.global_position)
+					return {"removeRelative": 0, "exit": true}
+				var item_index = this_node.memFindItem(object_of_intrest)
+				if item_index != -1:
+					this_node.navigator.runTo(this_node.seen_objects[item_index].position)
+					return {"removeRelative": 0, "exit": true}
+				return {"removeRelative": 0}
 			enums.Toughts.FINDROOM:
 				pass
 			enums.Toughts.ATTACK:
@@ -191,7 +223,7 @@ class Idea:
 		var closest_item_distance = -1
 		for detected_body : Node3D in p_nodes:
 			if itemMatchPre(detected_body):
-				var raycast = this_node.castRay(detected_body.global_position)
+				var raycast = this_node.castRay(this_node.vision_hitbox.global_position, detected_body.global_position)
 				if raycast:
 					continue
 				else:
@@ -220,6 +252,13 @@ func nodeToItem(p_node: Node3D) -> classes.Item:
 	var res_item = classes.Item.new(temp_script.getType(), temp_script.getParams()) 
 	return res_item
 
+func memFindItem(p_item: classes.Item) -> int:
+	var index = 0
+	for item: Seen_object in seen_objects:
+		if itemMatch(item.item, p_item): return index
+		index += 1
+	return -1
+
 func itemMatch(p_item: classes.Item, p_item_min: classes.Item) -> bool:
 	if p_item.type == p_item_min.type:
 		for iter_param_key: String in p_item_min.params.keys():
@@ -230,12 +269,13 @@ func itemMatch(p_item: classes.Item, p_item_min: classes.Item) -> bool:
 		return true
 	return false
 
-func castRay(p_end_position :Vector3):
+func castRay(start_position: Vector3, p_end_position :Vector3) -> Dictionary:
 	var ray_point_start = vision_hitbox.global_position
 	var ray_point_end = p_end_position
 
 	var space_state = get_world_3d().direct_space_state
-
-	var params = PhysicsRayQueryParameters3D.create(ray_point_start, ray_point_end, 4)
+	# floor - 32
+	# wall - 16
+	var params = PhysicsRayQueryParameters3D.create(ray_point_start, ray_point_end, 24)
 
 	return space_state.intersect_ray(params)

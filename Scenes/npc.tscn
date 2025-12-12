@@ -18,6 +18,8 @@ radius = 4.0
 size = Vector3(2, 2, 2)
 
 [node name="NPC" type="RigidBody3D" node_paths=PackedStringArray("interaction_hitbox", "vision_hitbox", "navigator", "item_manager") groups=["npc"]]
+collision_layer = 2
+collision_mask = 31
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 linear_damp = 1.0
@@ -65,7 +67,8 @@ shape = SubResource("CapsuleShape3D_acqhf")
 
 [node name="Vision" type="Area3D" parent="."]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1.4, 0)
-collision_mask = 15
+collision_layer = 64
+collision_mask = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Vision"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
@@ -78,7 +81,8 @@ debug_enabled = true
 
 [node name="InteractionHitbox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, 1, 0, -0.020662546, 0)
-collision_mask = 15
+collision_layer = 64
+collision_mask = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionHitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
@@ -100,3 +104,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 billboard = 2
 vertical_alignment = 2
 script = ExtResource("6_6atyd")
+
+[node name="Eye_center" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)

@@ -45,7 +45,7 @@ func _process(delta: float) -> void:
 	POINTER_LEFT.renderText()
 	POINTER_LEFT.position.z = -0.4 + dist / -2
 
-	var cursor_raycast = castRay(look_position, look_position - Vector3(0, below_cursor_distance, 0), GUN.get_world_3d().direct_space_state, 4)
+	var cursor_raycast = castRay(look_position, look_position - Vector3(0, below_cursor_distance, 0), GUN.get_world_3d().direct_space_state, 24)
 	if cursor_raycast:
 		POINTER_GROUND_NORM.global_position = cursor_raycast["position"] + Vector3.UP * 0.2
 		POINTER_GROUND_NORM.look_at(POINTER_GROUND_NORM.global_position + cursor_raycast["normal"] + Vector3.RIGHT * 0.01)

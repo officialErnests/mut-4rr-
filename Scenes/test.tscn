@@ -69,7 +69,8 @@ shadow_enabled = true
 navigation_mesh = SubResource("NavigationMesh_5wyu1")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Map"]
-collision_layer = 15
+collision_layer = 24
+collision_mask = 0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Map/StaticBody3D"]
 material_override = SubResource("StandardMaterial3D_8od7v")
@@ -86,14 +87,16 @@ shape = SubResource("BoxShape3D_0c07c")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.5, -6.5)
 material_override = SubResource("StandardMaterial3D_0c07c")
 use_collision = true
-collision_layer = 15
+collision_layer = 24
+collision_mask = 0
 size = Vector3(13, 3, 4)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Map"]
 transform = Transform3D(0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0, 0, 1, -5.2868276, 0.11317286, -6.5)
 material_override = SubResource("StandardMaterial3D_2cgwh")
 use_collision = true
-collision_layer = 15
+collision_layer = 24
+collision_mask = 0
 size = Vector3(5.3, 3, 4)
 
 [node name="NPC_MASTER" type="Node3D" parent="."]
@@ -103,7 +106,7 @@ script = ExtResource("6_5wyu1")
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 3, 1.0135527, -13.111565)
 
 [node name="NPC2" parent="NPC_MASTER" instance=ExtResource("6_0c07c")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1, 5.0135527, -6.1115646)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1, 5.0135527, -6.1115646)
 
 [node name="NPC3" parent="NPC_MASTER" instance=ExtResource("6_0c07c")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -8, 1.0135527, -6.1115646)
