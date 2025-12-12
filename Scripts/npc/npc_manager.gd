@@ -6,7 +6,7 @@ class_name npc extends RigidBody3D
 @export var item_manager: Node	
 @export var eye_center: Marker3D
 @export_group("CONST")
-@export var MAX_TALK_TIMER = 1
+@export var MAX_TALK_TIMER = 5
 signal toughUpdate
 
 var priority_list: Array[Idea] = []
@@ -24,9 +24,14 @@ var seen_persons:  Array
 
 var PRECAL_VISIONRSQUARE: float
 
+var random = RandomNumberGenerator.new()
+var timer_random = RandomNumberGenerator.new()
+
 func _ready() -> void:
 	# Finds and picks up first key since funny shit XD
 	id = global.declareCharecter(self)
+	random.seed = global.getRadnom(id)
+	timer_random.seed = global.getRadnom(id)
 	navigator.done_moving.connect(update)
 
 	vision_hitbox.body_entered.connect(visionSignal)
@@ -42,6 +47,7 @@ func _ready() -> void:
 	priority_list.append(Idea.new(enums.Toughts.ITEM_PICKUP, temp_gun, self))
 
 func update():
+	await get_tree().create_timer(timer_random.randf_range(0, 0.5)).timeout
 	var is_decision_made = false
 	var i = -1
 	idea_cycle_now += 1
@@ -89,6 +95,7 @@ func testVision() -> void:
 			var vision = castRay(eye_center.global_position, vision_hitbox.global_position, 8+16+32+64)
 			if not vision:
 				seen_objects.remove_at(index)
+				visionSignal(global.item_ids[item.id])
 		index += 1
 					
 #TODO give em some dimensia if the performance is bad XD
@@ -117,7 +124,7 @@ func visionSignal(body: Node3D):
 func visibile(object: Node3D) -> Vector3:
 	if object.get_node("VISIBLE"):
 		for visible_marker in object.get_node("VISIBLE").get_children():
-			visible_marker.print_tree()
+			if not visible_marker.is_inside_tree(): continue
 			var vision = castRay(eye_center.global_position, visible_marker.global_position, 16+32+64)
 			if not vision.has("collider"): return visible_marker["position"]
 	return Vector3.ZERO
@@ -175,30 +182,35 @@ class Idea:
 				return {"removeRelative": -1, "exit": true}
 			enums.Toughts.KILLTIME:
 				#* TODO Make it semi random so seed generation can be predictable
-				this_node.navigator.walkTo(this_node.global_position + Vector3(randf_range(-1,1),0,randf_range(-1,1) * 10))
+				this_node.navigator.walkTo(this_node.global_position + Vector3(this_node.random.randf_range(-1,1),0,this_node.random.randf_range(-1,1) * 10))
 				if this_node.item_manager.equiped_item:
 					this_node.item_manager.nbThrow()
 				return {"exit": true, "removeRelative": 0}
 			enums.Toughts.ITEM_TALK:
-				if this_node.global_position.distance_squared_to(object_of_intrest.global_position) < 4:
+				if this_node.global_position.distance_squared_to(object_of_intrest.global_position) < 16:
 					this_node.look_at(object_of_intrest.global_position)
 					object_of_intrest.look_at(this_node.global_position)
+
 					var other_arr = object_of_intrest.seen_objects
 					for single_seen_object: Seen_object in this_node.seen_objects:
 						var body_array_position = global.checkArrayID(object_of_intrest.seen_objects, single_seen_object.id)
 						if body_array_position == -1:
-							object_of_intrest.seen_objects.append(Seen_object.new(single_seen_object.global_position, single_seen_object.id, single_seen_object.item))
+							print("Gave info")
+							object_of_intrest.seen_objects.append(single_seen_object)
 						else:
-							if single_seen_object.create_timer > object_of_intrest.seen_objects[body_array_position].create_timer:
-								object_of_intrest.seen_objects[body_array_position].updatePosition(single_seen_object.global_position)
+							print("Modified info")
+							if single_seen_object.time_seen > object_of_intrest.seen_objects[body_array_position].time_seen:
+								object_of_intrest.seen_objects[body_array_position].updatePosition(single_seen_object.position)
 					
 					for single_seen_object: Seen_object in other_arr:
 						var body_array_position = global.checkArrayID(this_node.seen_objects, single_seen_object.id)
 						if body_array_position == -1:
-							this_node.seen_objects.append(Seen_object.new(single_seen_object.global_position, single_seen_object.id, single_seen_object.item))
+							print("Gained info")
+							this_node.seen_objects.append(single_seen_object)
 						else:
-							if single_seen_object.create_timer > this_node.seen_objects[body_array_position].create_timer:
-								this_node.seen_objects[body_array_position].updatePosition(single_seen_object.global_position)
+							print("Got more info")
+							if single_seen_object.time_seen > this_node.seen_objects[body_array_position].time_seen:
+								this_node.seen_objects[body_array_position].updatePosition(single_seen_object.position)
 					return {"exit": true, "removeRelative": 0}
 				else:
 					this_node.navigator.runTo(object_of_intrest.global_position)
@@ -213,7 +225,7 @@ class Idea:
 				if selected_npc:
 					this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_TALK, selected_npc, this_node))
 					this_node.navigator.runTo(selected_npc.global_position)
-					return {"exit": true, "removeRelative": 0, "indexSet": -1}
+					return {"exit": true, "removeRelative": 1, "indexSet": -1}
 				return {"removeRelative": 0}
 
 			enums.Toughts.ITEM_PICKUP:

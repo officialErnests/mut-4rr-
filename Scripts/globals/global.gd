@@ -26,9 +26,12 @@ func repeatString(p_string, p_times) -> String:
 	for x in range(p_times): result += p_string
 	return result
 
+func _ready() -> void:
+	genRandom()
+	startTime()
 # time
 var time_now := 0
-func _ready() -> void:
+func startTime():
 	while true:
 		await get_tree().create_timer(1).timeout
 		time_now += 1
@@ -59,3 +62,13 @@ func checkArrayID(p_array: Array, p_id: int) -> int:
 			return index 
 		index += 1
 	return -1
+
+#random
+var random = RandomNumberGenerator.new()
+var random_table = []
+func genRandom():
+	random.seed = "Hello :DD".hash()
+func getRadnom(p_id):
+	while p_id >= random_table.size():
+		random_table.append(random.randf())
+	return random_table[p_id]
