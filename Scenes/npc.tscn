@@ -19,7 +19,7 @@ height = 0.5988037
 radius = 4.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xxsvc"]
-size = Vector3(2, 2, 2)
+size = Vector3(2, 2, 1)
 
 [node name="NPC" type="RigidBody3D" node_paths=PackedStringArray("interaction_hitbox", "vision_hitbox", "navigator", "item_manager", "eye_center") groups=["npc"]]
 collision_layer = 2
@@ -59,18 +59,18 @@ pickup_hitbox = NodePath("../InteractionHitbox")
 movement_manager = NodePath("../Navigator")
 pickup_orgin = NodePath("../PickUp_pos")
 
+[node name="Ground_snap" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.20000002)
+target_position = Vector3(0, -0.5, 0)
+collision_mask = 16
+
 [node name="Navigator" type="Node" parent="." node_paths=PackedStringArray("naviagtion_agent", "rigid_body", "body", "clamper")]
 script = ExtResource("3_g6unj")
 naviagtion_agent = NodePath("../NavigationAgent3D")
 rigid_body = NodePath("..")
 body = NodePath("../Body")
-clamper = NodePath("Ground_snap")
+clamper = NodePath("../Ground_snap")
 enabled = true
-
-[node name="Ground_snap" type="RayCast3D" parent="Navigator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.10000001)
-target_position = Vector3(0, -0.5, 0)
-collision_mask = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0.99641114, 0)
@@ -99,7 +99,7 @@ collision_layer = 64
 collision_mask = 7
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionHitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.5)
 shape = SubResource("BoxShape3D_xxsvc")
 
 [node name="ItemHolder" type="Node3D" parent="."]

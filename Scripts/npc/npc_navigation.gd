@@ -24,7 +24,6 @@ func _physics_process(delta: float) -> void:
 			rigid_body.linear_velocity.z = normal.z * (2 if running else 1) * item_mul
 			if clamper.is_colliding():
 				var temp_y = clamper.get_collision_point().y 
-				print(temp_y)
 				rigid_body.global_position.y = temp_y
 			if (running):
 				body.updateAnimation(body.AnimationStates.RUN)
