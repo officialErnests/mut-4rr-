@@ -41,6 +41,7 @@ spot_angle = 80.0
 spot_angle_attenuation = 92682.266
 
 [node name="Trigger" type="Area3D" parent="."]
+collision_layer = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Trigger"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)

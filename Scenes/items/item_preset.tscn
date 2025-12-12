@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bg1vog6ifsvpi"]
+[gd_scene load_steps=7 format=3 uid="uid://bg1vog6ifsvpi"]
 
+[ext_resource type="Script" uid="uid://bply58o1ccedl" path="res://Scripts/utils/value_exposer_items.gd" id="1_tqgrt"]
 [ext_resource type="PackedScene" uid="uid://sniksy4nvnio" path="res://Scenes/items/item.tscn" id="1_y3qgv"]
 [ext_resource type="Material" uid="uid://b3aqa3jh0vjre" path="res://Assets/Materials/metal.tres" id="2_tqgrt"]
 
@@ -19,6 +20,10 @@ distance_fade_max_distance = 0.0
 [sub_resource type="PrismMesh" id="PrismMesh_myoyh"]
 
 [node name="Item_preset" type="RigidBody3D" groups=["item"]]
+collision_layer = 4
+collision_mask = 15
+script = ExtResource("1_tqgrt")
+metadata/Equiper = 0
 
 [node name="MAIN" parent="." node_paths=PackedStringArray("itemRigid", "visual_outside") instance=ExtResource("1_y3qgv")]
 itemRigid = NodePath("..")
@@ -36,3 +41,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 material_override = ExtResource("2_tqgrt")
 material_overlay = SubResource("StandardMaterial3D_uc2hg")
 mesh = SubResource("PrismMesh_myoyh")
+
+[node name="VISIBLE" type="Node3D" parent="."]
+
+[node name="ViewPoint" type="Marker3D" parent="VISIBLE"]

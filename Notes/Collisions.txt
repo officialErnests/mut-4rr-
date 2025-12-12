@@ -1,0 +1,7 @@
+Layer
+1 - Player
+2 - NPC
+3 - Item
+4 - Map
+5 - Floor
+6 - Door

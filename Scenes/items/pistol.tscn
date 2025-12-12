@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3o55eubyfvcu"]
+[gd_scene load_steps=8 format=3 uid="uid://b3o55eubyfvcu"]
 
+[ext_resource type="Script" uid="uid://bply58o1ccedl" path="res://Scripts/utils/value_exposer_items.gd" id="1_6kuqx"]
 [ext_resource type="ArrayMesh" uid="uid://dgmu1dtilc8pi" path="res://Assets/pistol.obj" id="2_6kuqx"]
 [ext_resource type="PackedScene" uid="uid://sniksy4nvnio" path="res://Scenes/items/item.tscn" id="2_bgrny"]
 [ext_resource type="Material" uid="uid://b3aqa3jh0vjre" path="res://Assets/Materials/metal.tres" id="2_wnart"]
@@ -20,6 +21,9 @@ distance_fade_max_distance = 0.0
 size = Vector3(0.2, 0.5, 1)
 
 [node name="Pistol" type="RigidBody3D" groups=["item"]]
+collision_layer = 4
+collision_mask = 15
+script = ExtResource("1_6kuqx")
 
 [node name="Pistol" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
@@ -75,3 +79,11 @@ shadow_enabled = true
 spot_range = 100.0
 spot_angle = 80.0
 spot_angle_attenuation = 28.840166
+
+[node name="VISIBLE" type="Node3D" parent="."]
+
+[node name="ViewPoint" type="Marker3D" parent="VISIBLE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0.4)
+
+[node name="ViewPoint2" type="Marker3D" parent="VISIBLE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3)

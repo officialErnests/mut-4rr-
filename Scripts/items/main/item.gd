@@ -1,15 +1,8 @@
-extends Node
-
-enum ItemType {
-	GUN,
-	NAN,
-	USE,
-	KEY,
-	CONSUMABLE
-}
+class_name NB_item extends Node
 
 @export var itemRigid: RigidBody3D
-@export var type: ItemType
+@export var type: enums.ItemType
+@export var type_id := 0
 @export var speed_factor: float
 @export var visual_outside: GeometryInstance3D
 @export var show_text:String
@@ -29,12 +22,11 @@ func initalise(p_main):
 	cursor_label_2 = p_main.getLabel2()
 	
 	match type:
-		ItemType.GUN:
+		enums.ItemType.GUN:
 			extend_script.MAIN = self
 			extend_script.cursor_handler = p_main.getCursorHandler()
 			extend_script.cam_shaker = p_main.getCamShaker()
 			extend_script.enabled = true
-		# ItemType.USE:
 
 	return speed_factor
 
@@ -47,20 +39,25 @@ func _process(delta):
 
 func use(p_main) -> void:
 	match type:
-		ItemType.GUN:
+		enums.ItemType.GUN:
 			extend_script.shoot()
-		ItemType.KEY:
-			p_main.use(get_parent().params)
+		enums.ItemType.KEY:
+			p_main.use(getParams())
 		_:
 			p_main.use()
 
+func getParams() -> Dictionary:
+	return get_parent().params
+
+func getType():
+	return type
 
 func drop() -> void:
 	item_equiped = false
 	itemRigid.freeze = false
 	itemRigid.linear_velocity = -itemRigid.global_basis.z * throw_force
 	match type:
-		ItemType.GUN:
+		enums.ItemType.GUN:
 			extend_script.cursor_handler = null
 			extend_script.cam_shaker = null
 			extend_script.enabled = false

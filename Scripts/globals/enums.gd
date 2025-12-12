@@ -1,0 +1,27 @@
+extends Node
+
+enum ItemType {
+	GUN,
+	NAN,
+	USE,
+	KEY,
+	CONSUMABLE
+}
+
+enum Toughts {
+	KILLTIME,
+	ITEM_TALK,
+	ITEM_FIND,
+	ITEM_THROW,
+	ITEM_PICKUP,
+	ITEM_WALKTO,
+	FINDROOM,
+	ATTACK,
+	DEFEND,
+	SURVIVE,
+	ACTIVATE,
+	EAT,
+	DRINK,
+	ROOM_WALKTO,
+	TALK_TO,
+}

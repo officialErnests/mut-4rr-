@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 global="*res://Scripts/globals/global.gd"
+enums="*res://Scripts/globals/enums.gd"
+classes="*res://Scripts/globals/classes.gd"
 
 [display]
 
@@ -34,6 +36,7 @@ enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
 item=""
 Interactable=""
 Player=""
+npc=""
 
 [input]
 
@@ -89,6 +92,10 @@ rot_cam_right={
 , Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":256,"position":Vector2(231, 15),"global_position":Vector2(240, 63),"factor":1.0,"button_index":9,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
 
 [rendering]
 

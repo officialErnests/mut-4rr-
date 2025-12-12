@@ -22,6 +22,6 @@ func castRay():
 
 	var space_state = camera.get_world_3d().direct_space_state
 
-	var params = PhysicsRayQueryParameters3D.create(ray_point_start, ray_point_end, 4)
+	var params = PhysicsRayQueryParameters3D.create(ray_point_start, ray_point_end, 24)
 
 	return space_state.intersect_ray(params)
