@@ -15,9 +15,6 @@ var idea_cycle_now := 0
 var id
 var talk_limiter = MAX_TALK_TIMER
 
-#* TODO
-#* Make em cool aka make em rember the time and pos as well talk about this
-#* (Each talk can only exchange specific info about that :DD)
 var seen_objects: Array
 var seen_persons:  Array
 
@@ -40,13 +37,8 @@ func _ready() -> void:
 	# precalculates some values
 	PRECAL_VISIONRSQUARE = vision_hitbox.get_node("CollisionShape3D").shape.radius**2
 
-	await get_tree().create_timer(1).timeout
-	var temp_key = classes.Item.new(enums.ItemType.KEY, {"door_key" : 1})
-	var temp_gun = classes.Item.new(enums.ItemType.GUN, {})
-	priority_list.append(Idea.new(enums.Toughts.ITEM_PICKUP, temp_key, self))
-	priority_list.append(Idea.new(enums.Toughts.ITEM_PICKUP, temp_gun, self))
-
 func update():
+	if not get_tree(): return
 	await get_tree().create_timer(timer_random.randf_range(0, 0.5)).timeout
 	var is_decision_made = false
 	var i = -1
@@ -181,7 +173,6 @@ class Idea:
 				this_node.item_manager.nbThrow()
 				return {"removeRelative": -1, "exit": true}
 			enums.Toughts.KILLTIME:
-				#* TODO Make it semi random so seed generation can be predictable
 				this_node.navigator.walkTo(this_node.global_position + Vector3(this_node.random.randf_range(-1,1),0,this_node.random.randf_range(-1,1) * 10))
 				if this_node.item_manager.equiped_item:
 					this_node.item_manager.nbThrow()

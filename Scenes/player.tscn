@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bpgaix3cftid6"]
+[gd_scene load_steps=31 format=3 uid="uid://bpgaix3cftid6"]
 
 [ext_resource type="Script" uid="uid://b4qgmftclp70i" path="res://Scripts/player/oneTime/id_getter.gd" id="1_7dp3o"]
 [ext_resource type="Script" uid="uid://o4n6xug4i5p5" path="res://Scripts/player/main/player_proceser.gd" id="1_ukyrk"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://dtohjmomqtvq3" path="res://Scenes/body.tscn" id="7_f1ek2"]
 [ext_resource type="Script" uid="uid://clkaneisu7we7" path="res://Scripts/utils/copyRot.gd" id="8_tx1dd"]
 [ext_resource type="Script" uid="uid://dbi36cvmg01de" path="res://Scripts/player/stick_to_head.gd" id="10_pu2lt"]
+[ext_resource type="Theme" uid="uid://cbtndqatsbpnj" path="res://Assets/themes/player.tres" id="15_h4iuc"]
+[ext_resource type="Script" uid="uid://tscw6p720imx" path="res://Scripts/player/gui/panel_2.gd" id="16_fd4e3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6t5aa"]
 radius = 0.2
@@ -101,8 +103,14 @@ outer_radius = 1.4
 rings = 4
 ring_segments = 4
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4iuc"]
+bg_color = Color(0, 0.76, 0.30400008, 1)
+border_width_right = 45
+border_color = Color(0, 1, 0.23333335, 1)
+border_blend = true
+
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
-collision_mask = 24
+collision_mask = 56
 script = ExtResource("1_7dp3o")
 
 [node name="PickUp_pos" type="Marker3D" parent="."]
@@ -328,3 +336,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 
 [node name="Eye_center" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_top = 0.1
+anchor_right = 1.0
+anchor_bottom = 0.1
+offset_right = 5.0
+offset_bottom = 20.0
+rotation = -0.08726646
+pivot_offset = Vector2(0, 20)
+theme = ExtResource("15_h4iuc")
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(0, 20)
+theme_override_styles/panel = SubResource("StyleBoxFlat_h4iuc")
+script = ExtResource("16_fd4e3")

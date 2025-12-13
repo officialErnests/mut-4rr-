@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1dg24cxas7ge"]
+[gd_scene load_steps=3 format=3 uid="uid://d1dg24cxas7ge"]
 
 [ext_resource type="Script" uid="uid://dwj6fl455tj5t" path="res://Scripts/utils/switch_scene.gd" id="1_1ehe0"]
 [ext_resource type="Script" uid="uid://dghijtnxv14l1" path="res://Scripts/utils/oneoff/menu_set.gd" id="1_28flt"]
-[ext_resource type="PackedScene" uid="uid://bc2pdgvvigyy1" path="res://Scenes/game.tscn" id="2_ce3w2"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -27,11 +26,16 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 96
 text = "MUT4RR#"
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="Button" type="Button" parent="VBoxContainer" node_paths=PackedStringArray("seed_input_box")]
 layout_mode = 2
 text = "PLAY"
 script = ExtResource("1_1ehe0")
-scene = ExtResource("2_ce3w2")
+seed_input_box = NodePath("../LineEdit")
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Seed: (mut4rr for default)"
+metadata/_edit_group_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2

@@ -7,6 +7,10 @@ var main_item_holder: Node3D
 
 var global_nodes = {}
 
+func _ready() -> void:
+	StartTimer()
+
+#funcs
 func arrToStr(p_input_arr, p_indent) -> String:
 	var result_string = repeatString("\t", p_indent) + "["
 	for iter_string in p_input_arr:
@@ -26,11 +30,10 @@ func repeatString(p_string, p_times) -> String:
 	for x in range(p_times): result += p_string
 	return result
 
-func _ready() -> void:
-	genRandom()
-	startTime()
 # time
 var time_now := 0
+func resetStartTimer():
+	time_now = 0
 func startTime():
 	while true:
 		await get_tree().create_timer(1).timeout
@@ -67,8 +70,46 @@ func checkArrayID(p_array: Array, p_id: int) -> int:
 var random = RandomNumberGenerator.new()
 var random_table = []
 func genRandom():
-	random.seed = "Hello :DD".hash()
+	random.seed = seed_name.hash()
 func getRadnom(p_id):
 	while p_id >= random_table.size():
-		random_table.append(random.randf())
+		random_table.append(random.randi())
 	return random_table[p_id]
+
+#time till reset
+var reset_timer_max = 0.1 * 60
+var reset_timer = reset_timer_max
+var reset_timer_triggered = false
+func resetTimer():
+	reset_timer = reset_timer_max
+func StartTimer():
+	while true:
+		await get_tree().create_timer(1).timeout
+		reset_timer -= 1
+		if reset_timer <= 0:
+			if not reset_timer_triggered:
+				reset_timer_triggered = true
+				replay()
+		else:
+			reset_timer_triggered = false
+
+
+#loading game aka scene managment
+var main_game = preload("res://Scenes/test.tscn")
+var seed_name := "mut4rr"
+func play(p_seed_name: String) -> void:
+	if p_seed_name:
+		seed_name = p_seed_name
+	else:
+		seed_name = "mut4rr"
+	get_tree().change_scene_to_packed(main_game)
+	random_table = []
+	genRandom()
+	resetTimer()
+	resetStartTimer()
+func replay() -> void:
+	get_tree().change_scene_to_packed(main_game)
+	random_table = []
+	genRandom()
+	resetTimer()
+	resetStartTimer()
