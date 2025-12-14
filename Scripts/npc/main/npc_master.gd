@@ -8,6 +8,8 @@ func _ready():
 	updateNpcs()
 	while true:
 		await get_tree().create_timer(1).timeout
+		if not is_inside_tree(): return
+		if not get_tree(): return
 		updateNpcs()
 
 func updateNpcs():

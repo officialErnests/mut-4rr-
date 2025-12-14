@@ -38,6 +38,7 @@ func _ready() -> void:
 	PRECAL_VISIONRSQUARE = vision_hitbox.get_node("CollisionShape3D").shape.radius**2
 
 func update():
+	if not is_inside_tree(): return
 	if not get_tree(): return
 	await get_tree().create_timer(timer_random.randf_range(0, 0.5)).timeout
 	var is_decision_made = false
@@ -116,6 +117,8 @@ func visionSignal(body: Node3D):
 func visibile(object: Node3D) -> Vector3:
 	if object.get_node("VISIBLE"):
 		for visible_marker in object.get_node("VISIBLE").get_children():
+			
+			if not eye_center.is_inside_tree(): continue
 			if not visible_marker.is_inside_tree(): continue
 			var vision = castRay(eye_center.global_position, visible_marker.global_position, 16+32+64)
 			if not vision.has("collider"): return visible_marker["position"]

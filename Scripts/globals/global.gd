@@ -77,19 +77,26 @@ func getRadnom(p_id):
 	return random_table[p_id]
 
 #time till reset
-var reset_timer_max = 0.1 * 60
+var reset_timer_max = 5 * 60
+var reset_timer_mod = reset_timer_max
 var reset_timer = reset_timer_max
 var reset_timer_triggered = false
 func resetTimer():
-	reset_timer = reset_timer_max
+	reset_timer_mod -= 1
+	reset_timer = reset_timer_mod
 func StartTimer():
+	reset_timer_mod = reset_timer_max
 	while true:
 		await get_tree().create_timer(1).timeout
 		reset_timer -= 1
 		if reset_timer <= 0:
 			if not reset_timer_triggered:
 				reset_timer_triggered = true
-				replay()
+				if reset_timer_mod <= 1:
+					lost()
+					return
+				else:
+					replay()
 		else:
 			reset_timer_triggered = false
 
@@ -113,3 +120,5 @@ func replay() -> void:
 	genRandom()
 	resetTimer()
 	resetStartTimer()
+func lost() -> void:
+	reset_timer_mod = reset_timer_max
