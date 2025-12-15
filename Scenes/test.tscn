@@ -187,7 +187,7 @@ enabled = true
 metadata/_custom_type_script = "uid://cktt5pl0bvboc"
 
 [node name="Pistol" parent="Items" instance=ExtResource("3_qc4db")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 5, -6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -1)
 
 [node name="Item_preset" parent="Items" instance=ExtResource("4_i3aeo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4.569357, -8)

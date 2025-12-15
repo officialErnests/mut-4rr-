@@ -18,6 +18,10 @@ var talk_limiter = MAX_TALK_TIMER
 var seen_objects: Array
 var seen_persons:  Array
 
+@export var max_hp: float
+var hp:= max_hp
+
+
 
 var PRECAL_VISIONRSQUARE: float
 
@@ -81,6 +85,11 @@ func update():
 	# also make so that if the function can't be done it adds new element to array and tries that
 	return is_decision_made
 
+func shot_hit(dmg: float):
+	hp -= dmg
+	if hp <= 0:
+		queue_free()
+		
 func testVision() -> void:
 	var index = 0
 	for item: Seen_object in seen_objects:
@@ -351,8 +360,9 @@ func itemMatch(p_item: classes.Item, p_item_min: classes.Item) -> bool:
 		return true
 	return false
 
+
 func castRay(start_position: Vector3, p_end_position :Vector3, p_collision_layer: int) -> Dictionary:
-	var ray_point_start = vision_hitbox.global_position
+	var ray_point_start = start_position
 	var ray_point_end = p_end_position
 
 	var space_state = get_world_3d().direct_space_state

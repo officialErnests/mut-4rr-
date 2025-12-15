@@ -14,7 +14,7 @@ func _ready():
 
 func updateNpcs():
 	for iter_npc in npc_list:
-		iter_npc.update()
+		if iter_npc: iter_npc.update()
 
 func initNpcList():
 	for iter_npc in get_children():

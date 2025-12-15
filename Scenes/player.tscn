@@ -43,6 +43,7 @@ billboard_mode = 1
 billboard_keep_scale = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_ukyrk"]
+size = Vector2(0.5, 0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dp3o"]
 blend_mode = 3
@@ -54,6 +55,7 @@ grow_amount = -0.158
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_h4iuc"]
 top_radius = 0.0
+bottom_radius = 0.2
 radial_segments = 4
 rings = 0
 
@@ -69,8 +71,8 @@ point_size = 36.9
 fov_override = 50.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_qqcod"]
-inner_radius = 0.6
-outer_radius = 0.7
+inner_radius = 1.0
+outer_radius = 1.1
 rings = 4
 ring_segments = 4
 
@@ -85,7 +87,8 @@ point_size = 36.9
 fov_override = 50.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_fs7ks"]
-inner_radius = 0.8
+inner_radius = 2.0
+outer_radius = 2.2
 rings = 4
 ring_segments = 4
 
@@ -100,14 +103,28 @@ point_size = 36.9
 fov_override = 50.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_olqyp"]
-inner_radius = 1.1
-outer_radius = 1.4
+inner_radius = 3.0
+outer_radius = 3.3
 rings = 4
 ring_segments = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_igrcy"]
 shader = ExtResource("15_qqcod")
 shader_parameter/size = 10.0
+
+[sub_resource type="Animation" id="Animation_fs7ks"]
+resource_name = "Close"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(10, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="Animation" id="Animation_qqcod"]
 resource_name = "Open"
@@ -125,20 +142,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_igrcy"]
 length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:material:shader_parameter/size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(10, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
-[sub_resource type="Animation" id="Animation_fs7ks"]
-resource_name = "Close"
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -378,7 +381,7 @@ texture_filter = 0
 modulate = Color(0.01, 0, 0, 1)
 outline_modulate = Color(0, 0.01, 0.01, 1)
 text = "A"
-font_size = 100
+font_size = 40
 outline_size = 20
 uppercase = true
 script = ExtResource("4_vgqql")
@@ -394,7 +397,7 @@ modulate = Color(0.01, 0, 0, 1)
 outline_modulate = Color(0, 0.01, 0.01, 1)
 text = "A
 "
-font_size = 100
+font_size = 40
 outline_size = 20
 uppercase = true
 script = ExtResource("4_vgqql")

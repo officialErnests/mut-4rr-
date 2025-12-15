@@ -52,6 +52,9 @@ func getParams() -> Dictionary:
 func getType():
 	return type
 
+func getRigidBody():
+	return itemRigid
+
 func drop() -> void:
 	item_equiped = false
 	itemRigid.freeze = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b3o55eubyfvcu"]
+[gd_scene load_steps=10 format=3 uid="uid://b3o55eubyfvcu"]
 
 [ext_resource type="Script" uid="uid://bply58o1ccedl" path="res://Scripts/utils/value_exposer_items.gd" id="1_6kuqx"]
 [ext_resource type="ArrayMesh" uid="uid://dgmu1dtilc8pi" path="res://Assets/pistol.obj" id="2_6kuqx"]
@@ -16,6 +16,13 @@ grow_amount = 0.001
 distance_fade_mode = 2
 distance_fade_min_distance = 10.0
 distance_fade_max_distance = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6kuqx"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_qtbjq"]
+radius = 0.1
+height = 0.2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bgrny"]
 size = Vector3(0.2, 0.5, 1)
@@ -37,13 +44,22 @@ speed_factor = 0.5
 visual_outside = NodePath("../Pistol")
 extend_script = NodePath("../HandleShoot")
 
-[node name="HandleShoot" type="Node" parent="." node_paths=PackedStringArray("light", "light_pt2", "hiddens")]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_6kuqx")
+mesh = SubResource("SphereMesh_qtbjq")
+skeleton = NodePath("../HandleShoot")
+
+[node name="HandleShoot" type="Node" parent="." node_paths=PackedStringArray("light", "light_pt2", "hiddens", "shoot_point", "hit_marker")]
 script = ExtResource("4_1kwx8")
 light = NodePath("../XD")
 light_pt2 = NodePath("../FLASH2")
 hiddens = NodePath("../hiddens")
+shoot_point = NodePath("../Shoot_offset")
 light_time = 0.02
 delay = 0.04
+max_ammo = 5
+shot_damage = 5.0
+hit_marker = NodePath("../MeshInstance3D")
 metadata/_custom_type_script = "uid://b5kv5ttlwlpi5"
 
 [node name="Collider" type="CollisionShape3D" parent="."]
@@ -87,3 +103,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0.4)
 
 [node name="ViewPoint2" type="Marker3D" parent="VISIBLE"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3)
+
+[node name="Shoot_offset" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -0.5)
