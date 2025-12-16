@@ -86,10 +86,16 @@ func update():
 	return is_decision_made
 
 func shot_hit(dmg: float):
+	takeDmg(dmg)
+		
+func mele_hit(dmg: float):
+	takeDmg(dmg)
+
+func takeDmg(dmg: float):
 	hp -= dmg
 	if hp <= 0:
 		queue_free()
-		
+
 func testVision() -> void:
 	var index = 0
 	for item: Seen_object in seen_objects:

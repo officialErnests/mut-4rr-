@@ -1,4 +1,4 @@
-class_name Handle extends NB_script
+class_name Handle_gun extends NB_script
 
 @export var light: Node3D
 @export var light_pt2: Node3D
@@ -37,6 +37,7 @@ func setAmmoString():
 
 func shoot():
 	if light_countdown_timer > 0: return
+	if curent_ammo <= 0:return
 	setAmmoString()
 	cursor_handler.instaSet()
 	cam_shaker.shot(1)

@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3 uid="uid://hkpge45m4ptt"]
+
+[ext_resource type="Script" uid="uid://bply58o1ccedl" path="res://Scripts/utils/value_exposer_items.gd" id="1_b5b1n"]
+[ext_resource type="PackedScene" uid="uid://sniksy4nvnio" path="res://Scenes/items/item.tscn" id="2_lah1x"]
+[ext_resource type="Material" uid="uid://b3aqa3jh0vjre" path="res://Assets/Materials/metal.tres" id="3_5gohn"]
+[ext_resource type="Script" uid="uid://cjkh3tmv2m5on" path="res://Scripts/items/handle_mele.gd" id="3_lah1x"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b5b1n"]
+size = Vector3(0.4, 2.4, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uc2hg"]
+blend_mode = 1
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0.038397167, 0.038397167, 0.03839716, 1)
+grow = true
+grow_amount = 0.001
+distance_fade_mode = 2
+distance_fade_min_distance = 10.0
+distance_fade_max_distance = 0.0
+
+[sub_resource type="TextMesh" id="TextMesh_lah1x"]
+text = "KNIFE"
+font_size = 24
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lah1x"]
+size = Vector3(0.4, 0.7, 0.5)
+
+[node name="Item_preset" type="RigidBody3D" groups=["item"]]
+collision_layer = 4
+collision_mask = 15
+script = ExtResource("1_b5b1n")
+metadata/Equiper = 0
+
+[node name="MAIN" parent="." node_paths=PackedStringArray("itemRigid", "visual_outside") instance=ExtResource("2_lah1x")]
+itemRigid = NodePath("..")
+type = 1
+speed_factor = 0.8
+visual_outside = NodePath("../MeshInstance3D")
+show_text = "TEST ITEM --"
+throw_force = 10.0
+
+[node name="handle_mele" type="Node" parent="." node_paths=PackedStringArray("mele_hitbox")]
+script = ExtResource("3_lah1x")
+mele_hitbox = NodePath("../HitBox")
+mele_dmg = 10.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.09999998, 0)
+shape = SubResource("BoxShape3D_b5b1n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-7.941818e-08, -0.99999994, 0, 1.8168762, -4.3711385e-08, 0, 0, 0, 1, 0, 0.1, 0)
+material_override = ExtResource("3_5gohn")
+material_overlay = SubResource("StandardMaterial3D_uc2hg")
+mesh = SubResource("TextMesh_lah1x")
+
+[node name="VISIBLE" type="Node3D" parent="."]
+
+[node name="ViewPoint" type="Marker3D" parent="VISIBLE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="ViewPoint2" type="Marker3D" parent="VISIBLE"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+
+[node name="HitBox" type="Area3D" parent="."]
+collision_layer = 64
+collision_mask = 39
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="HitBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35000002, 0)
+shape = SubResource("BoxShape3D_lah1x")
