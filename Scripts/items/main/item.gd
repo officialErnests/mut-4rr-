@@ -14,6 +14,7 @@ var cursor_label_2 : Label3D = null
 
 var item_equiped = false
 
+#whenever it is picked up XD
 func initalise(p_main):
 	item_equiped = true
 	itemRigid.freeze = true
@@ -27,6 +28,8 @@ func initalise(p_main):
 			extend_script.cursor_handler = p_main.getCursorHandler()
 			extend_script.cam_shaker = p_main.getCamShaker()
 			extend_script.enabled = true
+		enums.ItemType.MELE:
+			extend_script.update_hitbox(p_main.getHitbox())
 
 	return speed_factor
 
@@ -38,13 +41,10 @@ func _process(delta):
 	visual_outside.material_overlay.grow_amount += ((2.0 if item_equiped else 0.1) - visual_outside.material_overlay.grow_amount) * delta * 8
 
 func use(p_main) -> void:
-	match type:
-		enums.ItemType.GUN:
-			extend_script.shoot()
-		enums.ItemType.KEY:
-			p_main.use(getParams())
-		_:
-			p_main.use()
+	if extend_script and extend_script.has_method("use"):
+		extend_script.use()
+	else:
+		p_main.use(getParams())
 
 func getParams() -> Dictionary:
 	return get_parent().params

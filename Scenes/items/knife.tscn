@@ -32,13 +32,14 @@ collision_mask = 15
 script = ExtResource("1_b5b1n")
 metadata/Equiper = 0
 
-[node name="MAIN" parent="." node_paths=PackedStringArray("itemRigid", "visual_outside") instance=ExtResource("2_lah1x")]
+[node name="MAIN" parent="." node_paths=PackedStringArray("itemRigid", "visual_outside", "extend_script") instance=ExtResource("2_lah1x")]
 itemRigid = NodePath("..")
 type = 1
 speed_factor = 0.8
 visual_outside = NodePath("../MeshInstance3D")
 show_text = "TEST ITEM --"
 throw_force = 10.0
+extend_script = NodePath("../handle_mele")
 
 [node name="handle_mele" type="Node" parent="." node_paths=PackedStringArray("mele_hitbox")]
 script = ExtResource("3_lah1x")

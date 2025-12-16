@@ -5,7 +5,8 @@ enum ItemType {
 	NAN,
 	USE,
 	KEY,
-	CONSUMABLE
+	CONSUMABLE,
+	MELE
 }
 
 enum Toughts {

@@ -95,3 +95,6 @@ func getCursorHandler():
 
 func getCamShaker():
 	return cam_shaker
+
+func getHitbox():
+	return pickup_hitbox

@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 func setAmmoString():
 	MAIN.setCursorText("AMMO: " + str(curent_ammo) + " // ")
 
-func shoot():
+func use():
 	if light_countdown_timer > 0: return
 	if curent_ammo <= 0:return
 	setAmmoString()
