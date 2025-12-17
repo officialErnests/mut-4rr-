@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 	prev_location += (LOOK_AT.global_position - prev_location) * delta * smoothing
 	prev_location.y = LOOK_AT.global_position.y
 	#Detects if there aren't no obstacles infront
-	var temp_raycast = castRay(GUN.global_position, prev_location, GUN.get_world_3d().direct_space_state, 2)
+	var temp_raycast = castRay(GUN.global_position, prev_location, GUN.get_world_3d().direct_space_state, 63)
 	var look_position = prev_location
 	if temp_raycast:
 		look_position = temp_raycast["position"]

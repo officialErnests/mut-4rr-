@@ -10,7 +10,7 @@ func _ready() -> void:
 
 func drawHp(dmg: float):
 	text = "["
-	print(parent_npc.hp, parent_npc.hp_max)
+	# print(parent_npc.hp, parent_npc.hp_max)
 	for i in range(ceil(parent_npc.hp / parent_npc.hp_max * 10)):
 		text += "#"
 	for i in range(floor((parent_npc.hp_max - parent_npc.hp)/ parent_npc.hp_max * 10)):

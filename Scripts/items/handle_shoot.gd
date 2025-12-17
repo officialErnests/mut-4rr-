@@ -59,7 +59,7 @@ func use():
 		if hit_marker: hit_marker.global_position = raycast_results["position"]
 		if raycast_results["collider"].has_method("shot_hit"): 
 			raycast_results["collider"].shot_hit(shot_damage)
-			print("SHOT HIT")
+			# print("SHOT HIT")
 
 func castRay(start_position: Vector3, p_end_position :Vector3, p_collision_layer: int) -> Dictionary:
 	var ray_point_start = start_position

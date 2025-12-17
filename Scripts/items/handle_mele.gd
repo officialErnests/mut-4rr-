@@ -14,7 +14,7 @@ func damage_body(body: Node3D):
 		body.mele_hit(mele_dmg)
 
 func update_hitbox(p_new_hitbox: Area3D):
-	print("HITBOX SET")
+	# print("HITBOX SET")
 	holder_hitbox = p_new_hitbox
 
 func use():

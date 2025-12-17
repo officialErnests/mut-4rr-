@@ -206,20 +206,20 @@ class Idea:
 					for single_seen_object: Seen_object in this_node.seen_objects:
 						var body_array_position = global.checkArrayID(object_of_intrest.seen_objects, single_seen_object.id)
 						if body_array_position == -1:
-							print("Gave info")
+							# print("Gave info")
 							object_of_intrest.seen_objects.append(single_seen_object)
 						else:
-							print("Modified info")
+							# print("Modified info")
 							if single_seen_object.time_seen > object_of_intrest.seen_objects[body_array_position].time_seen:
 								object_of_intrest.seen_objects[body_array_position].updatePosition(single_seen_object.position)
 					
 					for single_seen_object: Seen_object in other_arr:
 						var body_array_position = global.checkArrayID(this_node.seen_objects, single_seen_object.id)
 						if body_array_position == -1:
-							print("Gained info")
+							# print("Gained info")
 							this_node.seen_objects.append(single_seen_object)
 						else:
-							print("Got more info")
+							# print("Got more info")
 							if single_seen_object.time_seen > this_node.seen_objects[body_array_position].time_seen:
 								this_node.seen_objects[body_array_position].updatePosition(single_seen_object.position)
 					return {"exit": true, "removeRelative": 0}

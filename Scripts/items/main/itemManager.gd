@@ -102,5 +102,5 @@ func getCamShaker():
 	return cam_shaker
 
 func getHitbox():
-	print("HITBOX: ", pickup_hitbox)
+	# print("HITBOX: ", pickup_hitbox)
 	return pickup_hitbox
