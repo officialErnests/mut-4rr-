@@ -13,8 +13,11 @@ extends Node
 
 var equiped_item: RigidBody3D= null
 var equiped_item_script: Node = null
+
+var cooldown__timer: Timer = Timer.new()
 func _ready() -> void:
-	pass # Replace with function body.
+	add_child(cooldown__timer)
+	cooldown__timer.one_shot = true
 
 func nbThrow():
 	animator.use()
@@ -24,6 +27,8 @@ func nbThrow():
 		pickupDetect()
 
 func nbUse():
+	if cooldown__timer.time_left > 0: return
+	cooldown__timer.start(0.1)
 	animator.use()
 	if equiped_item:
 		equipUse()
@@ -97,4 +102,5 @@ func getCamShaker():
 	return cam_shaker
 
 func getHitbox():
+	print("HITBOX: ", pickup_hitbox)
 	return pickup_hitbox

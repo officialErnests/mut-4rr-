@@ -34,7 +34,7 @@ metadata/Equiper = 0
 
 [node name="MAIN" parent="." node_paths=PackedStringArray("itemRigid", "visual_outside", "extend_script") instance=ExtResource("2_lah1x")]
 itemRigid = NodePath("..")
-type = 1
+type = 5
 speed_factor = 0.8
 visual_outside = NodePath("../MeshInstance3D")
 show_text = "TEST ITEM --"
@@ -44,7 +44,7 @@ extend_script = NodePath("../handle_mele")
 [node name="handle_mele" type="Node" parent="." node_paths=PackedStringArray("mele_hitbox")]
 script = ExtResource("3_lah1x")
 mele_hitbox = NodePath("../HitBox")
-mele_dmg = 10.0
+mele_dmg = 5.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.09999998, 0)

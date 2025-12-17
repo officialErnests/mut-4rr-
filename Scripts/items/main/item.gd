@@ -41,6 +41,7 @@ func _process(delta):
 	visual_outside.material_overlay.grow_amount += ((2.0 if item_equiped else 0.1) - visual_outside.material_overlay.grow_amount) * delta * 8
 
 func use(p_main) -> void:
+	print("USE")
 	if extend_script and extend_script.has_method("use"):
 		extend_script.use()
 	else:

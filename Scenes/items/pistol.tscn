@@ -44,11 +44,6 @@ speed_factor = 0.5
 visual_outside = NodePath("../Pistol")
 extend_script = NodePath("../HandleShoot")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_6kuqx")
-mesh = SubResource("SphereMesh_qtbjq")
-skeleton = NodePath("../HandleShoot")
-
 [node name="HandleShoot" type="Node" parent="." node_paths=PackedStringArray("light", "light_pt2", "hiddens", "shoot_point", "hit_marker")]
 script = ExtResource("4_1kwx8")
 light = NodePath("../XD")
@@ -60,7 +55,13 @@ delay = 0.04
 max_ammo = 5
 shot_damage = 5.0
 hit_marker = NodePath("../MeshInstance3D")
+enabled = true
 metadata/_custom_type_script = "uid://b5kv5ttlwlpi5"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_6kuqx")
+mesh = SubResource("SphereMesh_qtbjq")
+skeleton = NodePath("../HandleShoot")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.050000012, 0)

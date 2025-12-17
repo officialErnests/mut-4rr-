@@ -16,11 +16,14 @@ class_name Handle_gun extends NB_script
 @export_category("DEBUG")
 @export var hit_marker: Node3D
 
-var curent_ammo = max_ammo
+var curent_ammo :int
 var cursor_handler: Node
 var cam_shaker: Node
 var light_countdown_timer = 0
 var MAIN: Node
+
+func  _ready() -> void:
+	curent_ammo = max_ammo
 
 func _process(delta: float) -> void:
 	if light_countdown_timer <= 0: return
@@ -37,8 +40,12 @@ func setAmmoString():
 
 func use():
 	if light_countdown_timer > 0: return
+	
+	#What is ammo XD
 	if curent_ammo <= 0:return
+	curent_ammo -= 1
 	setAmmoString()
+
 	cursor_handler.instaSet()
 	cam_shaker.shot(1)
 	light_countdown_timer = light_time + delay

@@ -18,6 +18,5 @@ func update_hitbox(p_new_hitbox: Area3D):
 	holder_hitbox = p_new_hitbox
 
 func use():
-	print("USE")
 	for hit_body in holder_hitbox.get_overlapping_bodies():
 		damage_body(hit_body)
