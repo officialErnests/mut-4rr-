@@ -18,10 +18,9 @@ var talk_limiter = MAX_TALK_TIMER
 var seen_objects: Array
 var seen_persons:  Array
 
-@export var max_hp: float
-var hp:= max_hp
-
-
+@export var hp_max: float
+var hp: float 
+signal hp_update()
 
 var PRECAL_VISIONRSQUARE: float
 
@@ -29,6 +28,8 @@ var random = RandomNumberGenerator.new()
 var timer_random = RandomNumberGenerator.new()
 
 func _ready() -> void:
+	hp = hp_max
+	hp_update.emit(hp_max)
 	# Finds and picks up first key since funny shit XD
 	id = global.declareCharecter(self)
 	random.seed = global.getRadnom(id)
@@ -93,6 +94,7 @@ func mele_hit(dmg: float):
 
 func takeDmg(dmg: float):
 	hp -= dmg
+	hp_update.emit(-dmg)
 	if hp <= 0:
 		queue_free()
 
