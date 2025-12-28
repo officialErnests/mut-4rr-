@@ -171,7 +171,8 @@ animation = &"Open"
 blend_point_0/node = SubResource("AnimationNodeAnimation_olqyp")
 blend_point_0/pos = 0.0
 blend_point_1/node = SubResource("AnimationNodeAnimation_wpjfl")
-blend_point_1/pos = 1.05
+blend_point_1/pos = 1.0
+max_space = 1.1
 
 [sub_resource type="Shader" id="Shader_igrcy"]
 code = "shader_type canvas_item;
@@ -462,7 +463,7 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="CanvasLayer2"]
 tree_root = SubResource("AnimationNodeBlendSpace1D_bi64h")
 anim_player = NodePath("../AnimationPlayer")
-parameters/blend_position = 0.0
+parameters/blend_position = -0.0022708178
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

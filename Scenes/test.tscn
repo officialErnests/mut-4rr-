@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bvyc5gq1qi2qw" path="res://Scenes/npc.tscn" id="6_0c07c"]
 [ext_resource type="Script" uid="uid://8lnxrs0kj4e2" path="res://Scripts/npc/main/npc_master.gd" id="6_5wyu1"]
 [ext_resource type="Script" uid="uid://cktt5pl0bvboc" path="res://Scripts/utils/global_node.gd" id="7_0c07c"]
-[ext_resource type="PackedScene" uid="uid://hkpge45m4ptt" path="res://Scenes/items/knife.tscn" id="10_iaow0"]
+[ext_resource type="PackedScene" uid="uid://hkpge45m4ptt" path="res://Scenes/items/wepons/knife.tscn" id="10_iaow0"]
 [ext_resource type="PackedScene" uid="uid://dgl4duluwfeeq" path="res://Scenes/interactables/door.tscn" id="11_qpfo2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0c07c"]

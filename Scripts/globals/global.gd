@@ -77,7 +77,7 @@ func getRadnom(p_id):
 	return random_table[p_id]
 
 #time till reset
-var reset_timer_max = 5 * 60
+var reset_timer_max = 1 * 60
 var reset_timer_mod = reset_timer_max
 var reset_timer = reset_timer_max
 var reset_timer_triggered = false

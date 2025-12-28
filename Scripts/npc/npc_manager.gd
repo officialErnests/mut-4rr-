@@ -105,7 +105,8 @@ func testVision() -> void:
 			var vision = castRay(eye_center.global_position, vision_hitbox.global_position, 8+16+32+64)
 			if not vision:
 				seen_objects.remove_at(index)
-				visionSignal(global.item_ids[item.id])
+				if global.item_ids[item.id]:
+					visionSignal(global.item_ids[item.id])
 		index += 1
 					
 #TODO give em some dimensia if the performance is bad XD
