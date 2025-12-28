@@ -21,13 +21,14 @@ func initalise(p_main):
 	itemRigid.transform = Transform3D.IDENTITY
 	cursor_label_1 = p_main.getLabel1()
 	cursor_label_2 = p_main.getLabel2()
-	
+	setCursorText(enums.ItemType.keys()[type] + "  //  ")
 	match type:
 		enums.ItemType.GUN:
 			extend_script.MAIN = self
 			extend_script.cursor_handler = p_main.getCursorHandler()
 			extend_script.cam_shaker = p_main.getCamShaker()
 			extend_script.enabled = true
+			setCursorText(enums.ItemType.keys()[type] + "  //  AMMO: " + str(extend_script.getAmmo()) + " // ")
 		enums.ItemType.MELE:
 			extend_script.update_hitbox(p_main.getHitbox())
 
@@ -60,6 +61,7 @@ func drop() -> void:
 	item_equiped = false
 	itemRigid.freeze = false
 	itemRigid.linear_velocity = -itemRigid.global_basis.z * throw_force
+	setCursorText(" // ")
 	match type:
 		enums.ItemType.GUN:
 			extend_script.cursor_handler = null

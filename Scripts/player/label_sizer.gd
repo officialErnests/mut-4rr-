@@ -1,6 +1,6 @@
 extends Label3D
 
-var curent_text = "NULL "
+var curent_text = " // "
 var distance = 4
 @export var scroll_dir = -10
 # Called when the node enters the scene tree for the first time.

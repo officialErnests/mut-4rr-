@@ -71,3 +71,6 @@ func castRay(start_position: Vector3, p_end_position :Vector3, p_collision_layer
 	var params = PhysicsRayQueryParameters3D.create(ray_point_start, ray_point_end, p_collision_layer)
 
 	return space_state.intersect_ray(params)
+
+func getAmmo() -> int:
+	return curent_ammo
