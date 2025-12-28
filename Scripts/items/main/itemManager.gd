@@ -104,3 +104,14 @@ func getCamShaker():
 func getHitbox():
 	# print("HITBOX: ", pickup_hitbox)
 	return pickup_hitbox
+
+func getParam(p_param: String):
+	var item_params = getParams()
+	if item_params.has(p_param):
+		return item_params[p_param]
+	return null
+
+func getParams() -> Dictionary:
+	if equiped_item_script:
+		return equiped_item_script.getParams()
+	return {}

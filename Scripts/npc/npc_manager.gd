@@ -319,9 +319,8 @@ class Idea:
 						this_node.item_manager.nbUse()
 						return {"exit": true, "removeRelative": 0}
 				else:
-					if this_node.item_manager.equiped_item and \
-						this_node.item_manager.equiped_item.getParams().has("door_key") and \
-						this_node.item_manager.equiped_item.getParams()["door_key"] == object_of_intrest.key:
+					var return_val = this_node.item_manager.getParam("door_key")
+					if return_val and return_val == object_of_intrest.key:
 						this_node.item_manager.nbUse()
 					else:
 						var key_to_find = classes.Item.new(
