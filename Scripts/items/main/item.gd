@@ -35,8 +35,9 @@ func initalise(p_main):
 	return speed_factor
 
 func setCursorText(p_text):
-	cursor_label_1.curent_text = p_text
-	cursor_label_2.curent_text = p_text
+	if cursor_label_1:
+		cursor_label_1.curent_text = p_text
+		cursor_label_2.curent_text = p_text
 
 func _process(delta):
 	visual_outside.material_overlay.grow_amount += ((2.0 if item_equiped else 0.1) - visual_outside.material_overlay.grow_amount) * delta * 8

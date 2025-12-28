@@ -142,6 +142,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 4.5, -6.4875736)
 key = 1
 size = Vector3(0.1, 3, 4)
 
+[node name="Door3" parent="." instance=ExtResource("11_qpfo2")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.5, 1.5, -8.387573)
+key = 1
+size = Vector3(0.1, 3, 4)
+
 [node name="NPC_MASTER" type="Node3D" parent="."]
 script = ExtResource("6_5wyu1")
 
@@ -240,6 +245,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 5, -5)
 
 [node name="Key" parent="Items" instance=ExtResource("5_5wyu1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, -5)
+params = {
+"door_key": 1
+}
+
+[node name="Item_preset7" parent="Items" instance=ExtResource("5_5wyu1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.105365, 0.099999994, -21.563534)
 params = {
 "door_key": 1
 }

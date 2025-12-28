@@ -2,6 +2,7 @@ class_name npc extends RigidBody3D
 
 @export var interaction_hitbox: Area3D
 @export var vision_hitbox: Area3D
+@export var door_hitbox: Area3D
 @export var navigator: Node
 @export var item_manager: Node	
 @export var eye_center: Marker3D
@@ -78,6 +79,11 @@ func update():
 	if not is_decision_made:
 		if not navigator.is_in_action:
 			priority_list.push_back(Idea.new(enums.Toughts.KILLTIME, null, self))
+		else:
+			if ideaFindTought(enums.Toughts.DOOR_OPEN) == -1:
+				for iter_bodie in getDoors():
+					priority_list.push_front(Idea.new(enums.Toughts.DOOR_OPEN, iter_bodie, self))
+					break
 		curent_idea_index = -1
 
 	# print("END of tought\n" + global.arrToStr(priority_list, 0) + "")
@@ -85,6 +91,25 @@ func update():
 	# if no decision then killtime() needs to be added
 	# also make so that if the function can't be done it adds new element to array and tries that
 	return is_decision_made
+
+func ideaFindTought(p_tought: enums.Toughts) -> int:
+	var index = 0
+	for idea in priority_list:
+		if idea.tought_types == p_tought:
+			return index
+		index += 1
+	return -1
+
+func ideaFindKey(p_key_lock: int) -> int:
+	var index = 0
+	for idea in priority_list:
+		if idea.tought_types == enums.Toughts.ITEM_PICKUP and \
+			idea.object_of_intrest.type == enums.ItemType.KEY and \
+			idea.object_of_intrest.params["door_key"] == p_key_lock:
+			print(idea.object_of_intrest)
+			return index
+		index += 1
+	return -1
 
 func shot_hit(dmg: float):
 	takeDmg(dmg)
@@ -230,6 +255,7 @@ class Idea:
 			enums.Toughts.ITEM_FIND:
 				if this_node.talk_limiter > 0:
 					this_node.talk_limiter -= 1
+					this_node.priority_list.push_front(Idea.new(enums.Toughts.KILLTIME, null, this_node))
 					return {"removeRelative": 0}
 				else:
 					this_node.talk_limiter = this_node.MAX_TALK_TIMER
@@ -284,6 +310,30 @@ class Idea:
 				pass
 			enums.Toughts.ROOM_WALKTO:
 				pass
+			enums.Toughts.DOOR_OPEN:
+				if object_of_intrest.key == 0:
+					if this_node.item_manager.equiped_item:
+						this_node.item_manager.nbThrow()
+						return {"exit": true}
+					else:
+						this_node.item_manager.nbUse()
+						return {"exit": true, "removeRelative": 0}
+				else:
+					if this_node.item_manager.equiped_item and \
+						this_node.item_manager.equiped_item.getParams().has("door_key") and \
+						this_node.item_manager.equiped_item.getParams()["door_key"] == object_of_intrest.key:
+						this_node.item_manager.nbUse()
+					else:
+						var key_to_find = classes.Item.new(
+									enums.ItemType.KEY, 
+									{
+										"door_key": object_of_intrest.key
+									})
+						if this_node.ideaFindKey(object_of_intrest.key) == -1:
+							this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_PICKUP, key_to_find, this_node))
+							this_node.navigator.walkTo(this_node.global_position + Vector3(this_node.random.randf_range(-1,1),0,this_node.random.randf_range(-1,1) * 10))
+							return {"exit": true}
+						return {}
 			_: return {}
 		return {}
 
@@ -314,9 +364,6 @@ class Idea:
 		return closest_npc
 					
 
-
-
-	
 	#Helper functions
 	func checkForMatchingItem(p_nodes) -> Node3D:
 		var closest_item = null
@@ -380,3 +427,11 @@ func castRay(start_position: Vector3, p_end_position :Vector3, p_collision_layer
 	var params = PhysicsRayQueryParameters3D.create(ray_point_start, ray_point_end, p_collision_layer)
 
 	return space_state.intersect_ray(params)
+
+func getIteractableItems() -> Array[Node3D]:
+	var items_inside_detection = interaction_hitbox.get_overlapping_bodies()
+	return items_inside_detection
+
+func getDoors() -> Array[Area3D]:
+	var doors_inside_hitbox = door_hitbox.get_overlapping_areas()
+	return doors_inside_hitbox

@@ -5,6 +5,7 @@ extends NB_script
 @export var rigid_body : RigidBody3D
 @export var body: Node3D
 @export var clamper: RayCast3D
+@export var ground: RayCast3D
 var running := false
 var is_in_action = false
 var item_mul = 1
@@ -18,7 +19,7 @@ func _physics_process(delta: float) -> void:
 		rigid_body.rotation.x = 0
 		rigid_body.rotation.z = 0
 		
-		if rigid_body.position.distance_to(nextPos) > 0.5:
+		if rigid_body.position.distance_to(nextPos) > 0.5 and ground.is_colliding():
 			var normal = (naviagtion_agent.get_next_path_position() - rigid_body.global_position).normalized() * npc_speed
 			rigid_body.linear_velocity.x = normal.x * (2 if running else 1) * item_mul
 			rigid_body.linear_velocity.z = normal.z * (2 if running else 1) * item_mul
@@ -29,6 +30,8 @@ func _physics_process(delta: float) -> void:
 				body.updateAnimation(body.AnimationStates.RUN)
 			else:
 				body.updateAnimation(body.AnimationStates.WALK)
+		else:
+			body.updateAnimation(body.AnimationStates.IDLE)
 	else:
 		if is_in_action:
 			is_in_action = false

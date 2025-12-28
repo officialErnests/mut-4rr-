@@ -37,6 +37,7 @@ item=""
 Interactable=""
 Player=""
 npc=""
+door=""
 
 [input]
 

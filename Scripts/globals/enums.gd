@@ -25,4 +25,5 @@ enum Toughts {
 	DRINK,
 	ROOM_WALKTO,
 	TALK_TO,
+	DOOR_OPEN,
 }
