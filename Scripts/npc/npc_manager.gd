@@ -16,6 +16,7 @@ var curent_idea_index = -1
 var idea_cycle_now := 0
 var id
 var talk_limiter = MAX_TALK_TIMER
+var run_attempts = -1
 
 var seen_objects: Array
 var seen_persons:  Array
@@ -125,15 +126,16 @@ func takeDmg(dmg: float):
 		queue_free()
 
 func testVision() -> void:
-	var index = 0
-	for item: Seen_object in seen_objects:
-		if item.position.distance_squared_to(vision_hitbox.global_position) < PRECAL_VISIONRSQUARE:
-			var vision = castRay(eye_center.global_position, vision_hitbox.global_position, 4+8+16+32+64)
-			if not vision:
-				seen_objects.remove_at(index)
-				if global.item_ids[item.id]:
-					visionSignal(global.item_ids[item.id])
-		index += 1
+	# var index = 0
+	# for item: Seen_object in seen_objects:
+	# 	if item.position.distance_squared_to(vision_hitbox.global_position) < PRECAL_VISIONRSQUARE:
+	# 		var vision = castRay(eye_center.global_position, vision_hitbox.global_position, 4+8+16+32+64)
+	# 		if not vision:
+	# 			seen_objects.remove_at(index)
+	# 			if global.item_ids[item.id]:
+	# 				visionSignal(global.item_ids[item.id])
+	# 	index += 1
+	pass
 					
 #TODO give em some dimensia if the performance is bad XD
 func visionSignal(body: Node3D):
@@ -146,6 +148,8 @@ func visionSignal(body: Node3D):
 			else:
 				seen_persons[body_array_position].updatePosition(body.global_position)
 		elif  body.is_in_group("item"):
+			if body.name == "Key": 
+				print("KEY ADD")
 			var body_array_position = global.checkArrayID(seen_objects, body.id)
 			if body_array_position == -1:
 				seen_objects.append(Seen_object.new(body.global_position, body.id, body.item))
@@ -162,11 +166,18 @@ func visionSignal(body: Node3D):
 func visibile(object: Node3D) -> Vector3:
 	if object.get_node("VISIBLE"):
 		for visible_marker in object.get_node("VISIBLE").get_children():
-			
 			if not eye_center.is_inside_tree(): continue
 			if not visible_marker.is_inside_tree(): continue
-			var vision = castRay(eye_center.global_position, visible_marker.global_position, 16+32+64)
-			if not vision.has("collider"): return visible_marker["position"]
+			var vision = castRay(eye_center.global_position, visible_marker.global_position, 8+16+32+64)
+			if not vision.has("collider"): return visible_marker.global_position
+			# var boxo = MeshInstance3D.new()
+			# var sphero = SphereMesh.new()
+			# sphero.radius = 0.05
+			# sphero.height = 0.1
+			# boxo.mesh = sphero
+			# boxo.global_position = vision["position"]
+			# add_child(boxo)
+
 	return Vector3.ZERO
 
 
@@ -253,7 +264,14 @@ class Idea:
 					return {"exit": true, "removeRelative": 0}
 				else:
 					this_node.navigator.runTo(object_of_intrest.global_position)
-					return {"exit": true}
+					if this_node.run_attempts == -1:
+						this_node.run_attempts = 1
+						return {"exit": true}
+					elif this_node.run_attempts == 0:
+						return {"removeRelative": 0}
+					else:
+						this_node.run_attempts -= 1
+						return {"exit": true}
 			enums.Toughts.ITEM_FIND:
 				if this_node.talk_limiter > 0:
 					this_node.talk_limiter -= 1

@@ -15,7 +15,9 @@ func _physics_process(delta: float) -> void:
 	if not enabled: return
 	if not naviagtion_agent.is_navigation_finished():
 		var nextPos = naviagtion_agent.get_next_path_position()
-		rigid_body.look_at(nextPos)
+		var preTrans = rigid_body.transform 
+		preTrans = preTrans.looking_at(nextPos)
+		rigid_body.transform = rigid_body.transform.interpolate_with(preTrans,0.1)
 		rigid_body.rotation.x = 0
 		rigid_body.rotation.z = 0
 		

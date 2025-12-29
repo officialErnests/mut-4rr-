@@ -1,7 +1,9 @@
 extends AudioStreamPlayer
 
 func _ready() -> void:
-	play(global.music_last_time)
+	pass
+	#TODO reenable
+	# play(global.music_last_time)
 
 func _process(delta: float) -> void:
 	pitch_scale = min(1, 1.5 - global.getLoopTimeProc())

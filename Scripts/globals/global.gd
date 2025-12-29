@@ -77,7 +77,7 @@ func getRadnom(p_id):
 	return random_table[p_id]
 
 #time till reset
-var reset_timer_max = 1 * 60
+var reset_timer_max = 2 * 60
 var reset_timer_mod = reset_timer_max
 var reset_timer = reset_timer_max
 var reset_timer_triggered = false
@@ -104,12 +104,12 @@ func getLoopTimeProc() -> float:
 
 #loading game aka scene managment
 var main_game = preload("res://Scenes/test.tscn")
-var seed_name := "mut4rr#"
+var seed_name := "mut4rr"
 func play(p_seed_name: String) -> void:
 	if p_seed_name:
 		seed_name = p_seed_name
 	else:
-		seed_name = "mut4rr#"
+		seed_name = "mut4rr"
 	get_tree().change_scene_to_packed(main_game)
 	random_table = []
 	genRandom()

@@ -169,7 +169,7 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -10,
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -10, 5.0135527, -10.111565)
 
 [node name="NPC8" parent="NPC_MASTER" instance=ExtResource("6_0c07c")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2, 5.0135527, -26.111565)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 10, 5.0135527, -1.1115646)
 
 [node name="NPC9" parent="NPC_MASTER" instance=ExtResource("6_0c07c")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -4, 5.0135527, -26.111565)
@@ -223,10 +223,10 @@ enabled = true
 metadata/_custom_type_script = "uid://cktt5pl0bvboc"
 
 [node name="Item_preset2" parent="Items" instance=ExtResource("10_iaow0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, -5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 1, -5)
 
 [node name="Pistol" parent="Items" instance=ExtResource("3_qc4db")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, -5)
 
 [node name="Item_preset" parent="Items" instance=ExtResource("4_i3aeo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4.569357, -8)
@@ -244,7 +244,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 5, -7)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 5, -5)
 
 [node name="Key" parent="Items" instance=ExtResource("5_5wyu1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 4, -5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 4, -22)
 params = {
 "door_key": 1
 }

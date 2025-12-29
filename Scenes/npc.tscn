@@ -134,13 +134,13 @@ offset = Vector3(0, 0.5, 0)
 
 [node name="DEBUGER" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+visible = false
 billboard = 2
 vertical_alignment = 2
 script = ExtResource("6_6atyd")
 
 [node name="DEBUGER2" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-visible = false
 billboard = 2
 vertical_alignment = 2
 script = ExtResource("7_8gudg")
