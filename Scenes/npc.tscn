@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bvyc5gq1qi2qw"]
+[gd_scene load_steps=13 format=3 uid="uid://bvyc5gq1qi2qw"]
 
 [ext_resource type="PackedScene" uid="uid://dtohjmomqtvq3" path="res://Scenes/body.tscn" id="1_acqhf"]
 [ext_resource type="Script" uid="uid://cu87j6ixino62" path="res://Scripts/npc/npc_manager.gd" id="1_xxsvc"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dbi36cvmg01de" path="res://Scripts/player/stick_to_head.gd" id="4_h1ryf"]
 [ext_resource type="Script" uid="uid://dqw6girvin442" path="res://Scripts/utils/debug/npc_mind_debug.gd" id="6_6atyd"]
 [ext_resource type="Script" uid="uid://dtesgc2rnqet" path="res://Scripts/npc/Debug/hp_debuger.gd" id="7_2xkex"]
+[ext_resource type="Script" uid="uid://j8i5j30qgu0r" path="res://Scripts/npc/Debug/debuger_2.gd" id="7_8gudg"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_acqhf"]
 radius = 0.2
@@ -136,6 +137,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 billboard = 2
 vertical_alignment = 2
 script = ExtResource("6_6atyd")
+
+[node name="DEBUGER2" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+visible = false
+billboard = 2
+vertical_alignment = 2
+script = ExtResource("7_8gudg")
 
 [node name="HP_DEBUGER" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)

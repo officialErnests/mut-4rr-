@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://bpgaix3cftid6"]
+[gd_scene load_steps=47 format=3 uid="uid://bpgaix3cftid6"]
 
 [ext_resource type="Script" uid="uid://b4qgmftclp70i" path="res://Scripts/player/oneTime/id_getter.gd" id="1_7dp3o"]
 [ext_resource type="Script" uid="uid://o4n6xug4i5p5" path="res://Scripts/player/main/player_proceser.gd" id="1_ukyrk"]
@@ -18,6 +18,8 @@
 [ext_resource type="Shader" uid="uid://djtm6o311rook" path="res://Assets/shaders/blink.gdshader" id="15_qqcod"]
 [ext_resource type="Script" uid="uid://tscw6p720imx" path="res://Scripts/player/gui/panel_2.gd" id="16_fd4e3"]
 [ext_resource type="Script" uid="uid://xqqf1gvxsaua" path="res://Scripts/player/oneTime/blinkers.gd" id="18_igrcy"]
+[ext_resource type="AudioStream" uid="uid://c1fxxcgmv0j3" path="res://Assets/music/72CRZY.mp3" id="19_fs7ks"]
+[ext_resource type="Script" uid="uid://b2w6yaeeestbj" path="res://Scripts/player/audio/audio_stream_player.gd" id="20_l6n3p"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6t5aa"]
 radius = 0.2
@@ -495,3 +497,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_h4iuc")
 [node name="Blinkers" type="Node" parent="CanvasLayer" node_paths=PackedStringArray("blinkers")]
 script = ExtResource("18_igrcy")
 blinkers = [NodePath("../Panel"), NodePath("../Panel/Control/Panel2")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_fs7ks")
+script = ExtResource("20_l6n3p")

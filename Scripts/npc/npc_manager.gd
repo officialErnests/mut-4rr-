@@ -9,6 +9,7 @@ class_name npc extends RigidBody3D
 @export_group("CONST")
 @export var MAX_TALK_TIMER = 5
 signal toughUpdate
+signal memUpdate
 
 var priority_list: Array[Idea] = []
 var curent_idea_index = -1
@@ -106,7 +107,7 @@ func ideaFindKey(p_key_lock: int) -> int:
 		if idea.tought_types == enums.Toughts.ITEM_PICKUP and \
 			idea.object_of_intrest.type == enums.ItemType.KEY and \
 			idea.object_of_intrest.params["door_key"] == p_key_lock:
-			print(idea.object_of_intrest)
+			# print(idea.object_of_intrest)
 			return index
 		index += 1
 	return -1
@@ -127,7 +128,7 @@ func testVision() -> void:
 	var index = 0
 	for item: Seen_object in seen_objects:
 		if item.position.distance_squared_to(vision_hitbox.global_position) < PRECAL_VISIONRSQUARE:
-			var vision = castRay(eye_center.global_position, vision_hitbox.global_position, 8+16+32+64)
+			var vision = castRay(eye_center.global_position, vision_hitbox.global_position, 4+8+16+32+64)
 			if not vision:
 				seen_objects.remove_at(index)
 				if global.item_ids[item.id]:
@@ -156,6 +157,7 @@ func visionSignal(body: Node3D):
 				seen_persons.append(Seen_person.new(body.global_position, body.id))
 			else:
 				seen_persons[body_array_position].updatePosition(body.global_position)
+	memUpdate.emit()
 		
 func visibile(object: Node3D) -> Vector3:
 	if object.get_node("VISIBLE"):
@@ -321,7 +323,12 @@ class Idea:
 				else:
 					var return_val = this_node.item_manager.getParam("door_key")
 					if return_val and return_val == object_of_intrest.key:
-						this_node.item_manager.nbUse()
+						if this_node.getDoors().has(object_of_intrest):
+							this_node.item_manager.nbUse()
+							return {"exit": true, "removeRelative": 0}
+						else:
+							this_node.navigator.runTo(object_of_intrest.global_position)
+							return {"exit": true}
 					else:
 						var key_to_find = classes.Item.new(
 									enums.ItemType.KEY, 

@@ -82,7 +82,7 @@ var reset_timer_mod = reset_timer_max
 var reset_timer = reset_timer_max
 var reset_timer_triggered = false
 func resetTimer():
-	reset_timer_mod -= 1
+	reset_timer_mod -= 5
 	reset_timer = reset_timer_mod
 func StartTimer():
 	reset_timer_mod = reset_timer_max
@@ -99,16 +99,17 @@ func StartTimer():
 					replay()
 		else:
 			reset_timer_triggered = false
-
+func getLoopTimeProc() -> float:
+	return float(reset_timer) / reset_timer_max
 
 #loading game aka scene managment
 var main_game = preload("res://Scenes/test.tscn")
-var seed_name := "mut4rr"
+var seed_name := "mut4rr#"
 func play(p_seed_name: String) -> void:
 	if p_seed_name:
 		seed_name = p_seed_name
 	else:
-		seed_name = "mut4rr"
+		seed_name = "mut4rr#"
 	get_tree().change_scene_to_packed(main_game)
 	random_table = []
 	genRandom()
@@ -122,3 +123,6 @@ func replay() -> void:
 	resetStartTimer()
 func lost() -> void:
 	reset_timer_mod = reset_timer_max
+
+#music
+var music_last_time = 0
