@@ -45,6 +45,8 @@ func _ready() -> void:
 	# precalculates some values
 	PRECAL_VISIONRSQUARE = vision_hitbox.get_node("CollisionShape3D").shape.radius**2
 
+	# priority_list.push_front(Idea.new(enums.Toughts.ATTACK, null, self))
+
 func update():
 	if not is_inside_tree(): return
 	if not get_tree(): return
@@ -318,6 +320,22 @@ class Idea:
 				pass
 			enums.Toughts.ATTACK:
 				pass
+				#! DEPRICATED
+				var player = getVisablePlayer()
+				if player:
+					#TODO add detect if you have wepon
+					var loc_equiped_item = this_node.item_manager.equiped_item
+					if loc_equiped_item and loc_equiped_item.type == enums.ItemType.MELE or loc_equiped_item.type == enums.ItemType.GUN:
+						#TODO attack the player
+						pass
+					else:
+						var item_temp_2 = classes.Item.new(enums.ItemType.MELE, {})
+						this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_PICKUP, item_temp_2, this_node))
+						var item_temp = classes.Item.new(enums.ItemType.GUN, {})
+						this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_PICKUP, item_temp, this_node))
+					pass
+				else:
+					return {}
 			enums.Toughts.DEFEND:
 				pass
 			enums.Toughts.SURVIVE:
@@ -386,7 +404,13 @@ class Idea:
 						closest_npc = singular_npc
 						closest_npc_distance = singular_npc.global_position.distance_squared_to(this_node.global_position)
 		return closest_npc
-					
+
+	func getVisablePlayer() -> Node3D:
+		var visible_bodies = this_node.vision_hitbox.get_overlapping_bodies()
+		for visible_bodie: Node3D in visible_bodies:
+			if visible_bodie.is_in_group("player"):
+				return visible_bodie
+		return null
 
 	#Helper functions
 	func checkForMatchingItem(p_nodes) -> Node3D:
