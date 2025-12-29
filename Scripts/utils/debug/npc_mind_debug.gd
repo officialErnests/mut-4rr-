@@ -3,6 +3,7 @@ extends Label3D
 @onready var parent_npc = $".."
 
 func _ready() -> void:
+	if not visible: return
 	drawText()
 	parent_npc.toughUpdate.connect(drawText)
 

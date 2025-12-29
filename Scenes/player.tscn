@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bpgaix3cftid6"]
+[gd_scene load_steps=47 format=3 uid="uid://bpgaix3cftid6"]
 
 [ext_resource type="Script" uid="uid://b4qgmftclp70i" path="res://Scripts/player/oneTime/id_getter.gd" id="1_7dp3o"]
 [ext_resource type="Script" uid="uid://o4n6xug4i5p5" path="res://Scripts/player/main/player_proceser.gd" id="1_ukyrk"]
@@ -14,6 +14,12 @@
 [ext_resource type="PackedScene" uid="uid://dtohjmomqtvq3" path="res://Scenes/body.tscn" id="7_f1ek2"]
 [ext_resource type="Script" uid="uid://clkaneisu7we7" path="res://Scripts/utils/copyRot.gd" id="8_tx1dd"]
 [ext_resource type="Script" uid="uid://dbi36cvmg01de" path="res://Scripts/player/stick_to_head.gd" id="10_pu2lt"]
+[ext_resource type="Theme" uid="uid://cbtndqatsbpnj" path="res://Assets/themes/player.tres" id="15_h4iuc"]
+[ext_resource type="Shader" uid="uid://djtm6o311rook" path="res://Assets/shaders/blink.gdshader" id="15_qqcod"]
+[ext_resource type="Script" uid="uid://tscw6p720imx" path="res://Scripts/player/gui/panel_2.gd" id="16_fd4e3"]
+[ext_resource type="Script" uid="uid://xqqf1gvxsaua" path="res://Scripts/player/oneTime/blinkers.gd" id="18_igrcy"]
+[ext_resource type="AudioStream" uid="uid://c1fxxcgmv0j3" path="res://Assets/music/72CRZY.mp3" id="19_fs7ks"]
+[ext_resource type="Script" uid="uid://b2w6yaeeestbj" path="res://Scripts/player/audio/audio_stream_player.gd" id="20_l6n3p"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6t5aa"]
 radius = 0.2
@@ -39,6 +45,7 @@ billboard_mode = 1
 billboard_keep_scale = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_ukyrk"]
+size = Vector2(0.5, 0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dp3o"]
 blend_mode = 3
@@ -50,6 +57,7 @@ grow_amount = -0.158
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_h4iuc"]
 top_radius = 0.0
+bottom_radius = 0.2
 radial_segments = 4
 rings = 0
 
@@ -65,8 +73,8 @@ point_size = 36.9
 fov_override = 50.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_qqcod"]
-inner_radius = 0.6
-outer_radius = 0.7
+inner_radius = 1.0
+outer_radius = 1.1
 rings = 4
 ring_segments = 4
 
@@ -81,7 +89,8 @@ point_size = 36.9
 fov_override = 50.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_fs7ks"]
-inner_radius = 0.8
+inner_radius = 2.0
+outer_radius = 2.2
 rings = 4
 ring_segments = 4
 
@@ -96,14 +105,121 @@ point_size = 36.9
 fov_override = 50.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_olqyp"]
-inner_radius = 1.1
-outer_radius = 1.4
+inner_radius = 3.0
+outer_radius = 3.3
 rings = 4
 ring_segments = 4
 
-[node name="Player" type="CharacterBody3D" groups=["Player"]]
-collision_mask = 24
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_igrcy"]
+shader = ExtResource("15_qqcod")
+shader_parameter/size = 10.0
+
+[sub_resource type="Animation" id="Animation_fs7ks"]
+resource_name = "Close"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(10, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_qqcod"]
+resource_name = "Open"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_igrcy"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(10, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l6n3p"]
+_data = {
+&"Close": SubResource("Animation_fs7ks"),
+&"Open": SubResource("Animation_qqcod"),
+&"RESET": SubResource("Animation_igrcy")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_olqyp"]
+animation = &"Close"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wpjfl"]
+animation = &"Open"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_bi64h"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_olqyp")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_wpjfl")
+blend_point_1/pos = 1.0
+max_space = 1.1
+
+[sub_resource type="Shader" id="Shader_igrcy"]
+code = "shader_type canvas_item;
+uniform float size = 0.0;
+void fragment() {
+	COLOR = vec4(COLOR.r,COLOR.g,COLOR.b,abs(UV.y-0.5)*2.0*size+abs(UV.x-0.5)*0.1*size*size);
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fs7ks"]
+shader = SubResource("Shader_igrcy")
+shader_parameter/size = 5.0
+
+[sub_resource type="Shader" id="Shader_l6n3p"]
+code = "shader_type canvas_item;
+uniform float size = 0.0;
+void fragment() {
+	COLOR = vec4(COLOR.r,COLOR.g,COLOR.b,abs(UV.y-0.5)*2.0*size+abs(UV.x-0.5)*0.1*size*size);
+}
+
+//void light() {
+//	// Called for every pixel for every light affecting the CanvasItem.
+//	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_olqyp"]
+shader = SubResource("Shader_l6n3p")
+shader_parameter/size = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h4iuc"]
+bg_color = Color(0, 0.76, 0.30400008, 1)
+border_width_top = 215
+border_color = Color(0, 1, 0.23333335, 1)
+border_blend = true
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("blinker") groups=["Player"]]
+collision_mask = 56
 script = ExtResource("1_7dp3o")
+blinker = NodePath("CanvasLayer2/AnimationTree")
 
 [node name="PickUp_pos" type="Marker3D" parent="."]
 
@@ -187,7 +303,7 @@ offset = Vector3(0, 180, 0)
 [node name="PickupArea" type="Area3D" parent="SkelBody"]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, -0.020662546, 0)
 collision_layer = 0
-collision_mask = 7
+collision_mask = 39
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SkelBody/PickupArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
@@ -268,7 +384,7 @@ texture_filter = 0
 modulate = Color(0.01, 0, 0, 1)
 outline_modulate = Color(0, 0.01, 0.01, 1)
 text = "A"
-font_size = 100
+font_size = 40
 outline_size = 20
 uppercase = true
 script = ExtResource("4_vgqql")
@@ -284,7 +400,7 @@ modulate = Color(0.01, 0, 0, 1)
 outline_modulate = Color(0, 0.01, 0.01, 1)
 text = "A
 "
-font_size = 100
+font_size = 40
 outline_size = 20
 uppercase = true
 script = ExtResource("4_vgqql")
@@ -328,3 +444,60 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 
 [node name="Eye_center" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
+material = SubResource("ShaderMaterial_igrcy")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.06133331, 0, 0.16, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer2"]
+libraries = {
+&"": SubResource("AnimationLibrary_l6n3p")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="CanvasLayer2"]
+tree_root = SubResource("AnimationNodeBlendSpace1D_bi64h")
+anim_player = NodePath("../AnimationPlayer")
+parameters/blend_position = -0.0022708178
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_fs7ks")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("15_h4iuc")
+
+[node name="Control" type="Control" parent="CanvasLayer/Panel"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_fd4e3")
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/Panel/Control"]
+material = SubResource("ShaderMaterial_olqyp")
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+pivot_offset = Vector2(0, 20)
+theme_override_styles/panel = SubResource("StyleBoxFlat_h4iuc")
+
+[node name="Blinkers" type="Node" parent="CanvasLayer" node_paths=PackedStringArray("blinkers")]
+script = ExtResource("18_igrcy")
+blinkers = [NodePath("../Panel"), NodePath("../Panel/Control/Panel2")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_fs7ks")
+script = ExtResource("20_l6n3p")

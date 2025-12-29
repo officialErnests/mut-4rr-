@@ -1,7 +1,10 @@
 Layer
-1 - Player
-2 - NPC
-3 - Item
-4 - Map
-5 - Floor
-6 - Door
+1 - 1 - Player
+2 - 2 - NPC
+4 - 3 - Item
+8 - 4 - Map
+
+16 - 5 - Floor
+32 - 6 - Door
+64 - 7 - Areas
+128 - 8 - Raycast_catcher

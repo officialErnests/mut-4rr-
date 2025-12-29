@@ -1,40 +1,23 @@
 [gd_scene load_steps=12 format=3 uid="uid://bc2pdgvvigyy1"]
 
-[ext_resource type="Texture2D" uid="uid://cpwaa4s2klaho" path="res://Temp_assets/n0o0bPumkin.png" id="1_ebmjs"]
+[ext_resource type="Environment" uid="uid://c2synjn8oyfw1" path="res://Assets/game_world_env.tres" id="1_rku1e"]
 [ext_resource type="Script" uid="uid://cwietp32u5ei5" path="res://Scripts/setup/setup_world.gd" id="1_v158k"]
 [ext_resource type="PackedScene" uid="uid://bpgaix3cftid6" path="res://Scenes/player.tscn" id="2_qxrlw"]
+[ext_resource type="CameraAttributesPractical" uid="uid://3kkkrxy42ck3" path="res://Scenes/game_world_cam.tres" id="2_rfjv2"]
 [ext_resource type="PackedScene" uid="uid://b3o55eubyfvcu" path="res://Scenes/items/pistol.tscn" id="3_wrm1d"]
 [ext_resource type="Script" uid="uid://cktt5pl0bvboc" path="res://Scripts/utils/global_node.gd" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://bg1vog6ifsvpi" path="res://Scenes/items/item_preset.tscn" id="5_wowpa"]
 [ext_resource type="PackedScene" uid="uid://ep6k8yqtrsmj" path="res://Scenes/items/key.tscn" id="6_i6g32"]
 [ext_resource type="PackedScene" uid="uid://d3fr5ec77cm5i" path="res://Scenes/map.tscn" id="8_v158k"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qxrlw"]
-albedo_texture = ExtResource("1_ebmjs")
-uv1_scale = Vector3(100, 100, 100)
-texture_filter = 0
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_wrm1d"]
-size = Vector2(100, 100)
-
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_3dryh"]
+[ext_resource type="Script" uid="uid://8lnxrs0kj4e2" path="res://Scripts/npc/main/npc_master.gd" id="11_1phco"]
+[ext_resource type="PackedScene" uid="uid://bvyc5gq1qi2qw" path="res://Scenes/npc.tscn" id="12_nb51f"]
 
 [node name="Game" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_rku1e")
+camera_attributes = ExtResource("2_rfjv2")
 script = ExtResource("1_v158k")
-
-[node name="Floor" type="Node3D" parent="."]
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
-collision_layer = 15
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor/StaticBody3D"]
-material_override = SubResource("StandardMaterial3D_qxrlw")
-mesh = SubResource("PlaneMesh_wrm1d")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
-shape = SubResource("WorldBoundaryShape3D_3dryh")
 
 [node name="Player" parent="." instance=ExtResource("2_qxrlw")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 4.9999995, 1, -3.9999998)
@@ -114,3 +97,9 @@ params = {
 [node name="Tutorial" type="Node3D" parent="Items"]
 
 [node name="Map" parent="." instance=ExtResource("8_v158k")]
+
+[node name="NPC_MASTER" type="Node3D" parent="."]
+script = ExtResource("11_1phco")
+
+[node name="NPC" parent="NPC_MASTER" instance=ExtResource("12_nb51f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.482298, 0.07794857, -4.745804)

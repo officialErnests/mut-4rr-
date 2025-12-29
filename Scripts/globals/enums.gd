@@ -5,7 +5,8 @@ enum ItemType {
 	NAN,
 	USE,
 	KEY,
-	CONSUMABLE
+	CONSUMABLE,
+	MELE
 }
 
 enum Toughts {
@@ -24,4 +25,5 @@ enum Toughts {
 	DRINK,
 	ROOM_WALKTO,
 	TALK_TO,
+	DOOR_OPEN,
 }

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MUT4RR#"
-run/main_scene="uid://ccjafp0ghukfb"
+run/main_scene="uid://d1dg24cxas7ge"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -37,6 +37,7 @@ item=""
 Interactable=""
 Player=""
 npc=""
+door=""
 
 [input]
 

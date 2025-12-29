@@ -8,11 +8,13 @@ func _ready():
 	updateNpcs()
 	while true:
 		await get_tree().create_timer(1).timeout
+		if not is_inside_tree(): return
+		if not get_tree(): return
 		updateNpcs()
 
 func updateNpcs():
 	for iter_npc in npc_list:
-		iter_npc.update()
+		if iter_npc: iter_npc.update()
 
 func initNpcList():
 	for iter_npc in get_children():

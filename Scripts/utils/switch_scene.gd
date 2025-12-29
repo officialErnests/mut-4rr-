@@ -1,9 +1,9 @@
 extends Button
 
-@export var scene: PackedScene
+@export var seed_input_box: LineEdit
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pressed.connect(clicked)
 
 func clicked():
-	get_tree().change_scene_to_packed(scene)
+	global.play(seed_input_box.text)
