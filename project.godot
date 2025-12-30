@@ -38,6 +38,7 @@ Interactable=""
 Player=""
 npc=""
 door=""
+statue=""
 
 [input]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ccjafp0ghukfb"]
+[gd_scene load_steps=23 format=3 uid="uid://ccjafp0ghukfb"]
 
 [ext_resource type="Texture2D" uid="uid://cpwaa4s2klaho" path="res://Temp_assets/n0o0bPumkin.png" id="1_lc1oi"]
 [ext_resource type="PackedScene" uid="uid://bpgaix3cftid6" path="res://Scenes/player.tscn" id="2_8od7v"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://cktt5pl0bvboc" path="res://Scripts/utils/global_node.gd" id="7_0c07c"]
 [ext_resource type="PackedScene" uid="uid://hkpge45m4ptt" path="res://Scenes/items/wepons/knife.tscn" id="10_iaow0"]
 [ext_resource type="PackedScene" uid="uid://dgl4duluwfeeq" path="res://Scenes/interactables/door.tscn" id="11_qpfo2"]
+[ext_resource type="PackedScene" uid="uid://njasiktbkswh" path="res://Scenes/statue.tscn" id="12_yb21e"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0c07c"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -254,3 +255,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.105365, 0.099999994, -21.
 params = {
 "door_key": 1
 }
+
+[node name="Statues" type="Node3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, -4)
+
+[node name="statue" parent="Statues" instance=ExtResource("12_yb21e")]

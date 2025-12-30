@@ -306,7 +306,7 @@ offset = Vector3(0, 180, 0)
 [node name="PickupArea" type="Area3D" parent="SkelBody"]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, -0.020662546, 0)
 collision_layer = 0
-collision_mask = 39
+collision_mask = 47
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SkelBody/PickupArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
