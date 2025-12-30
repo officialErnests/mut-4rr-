@@ -30,6 +30,10 @@ func repeatString(p_string, p_times) -> String:
 	for x in range(p_times): result += p_string
 	return result
 
+#main
+func gameReset() -> void:
+	statueReset()
+
 # time
 var time_now := 0
 func resetStartTimer():
@@ -116,6 +120,7 @@ func play(p_seed_name: String) -> void:
 	resetTimer()
 	resetStartTimer()
 func replay() -> void:
+	gameReset()
 	get_tree().change_scene_to_packed(main_game)
 	random_table = []
 	genRandom()
@@ -126,3 +131,15 @@ func lost() -> void:
 
 #music
 var music_last_time = 0
+
+#statues
+var statuesAlive = 0
+signal statuesDown()
+func statueAdd() -> void:
+	statuesAlive += 1
+func statueRemove() -> void:
+	statuesAlive -= 1
+	if statuesAlive <= 0:
+		statuesDown.emit()
+func statueReset() -> void:
+	statuesAlive = 0

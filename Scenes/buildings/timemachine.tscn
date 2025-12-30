@@ -1,7 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://msoik8yh21b0"]
+[gd_scene load_steps=19 format=3 uid="uid://msoik8yh21b0"]
 
+[ext_resource type="Script" uid="uid://bofmk0l0ift70" path="res://Scripts/timemachine/event/timemachine.gd" id="1_ld4a4"]
 [ext_resource type="Texture2D" uid="uid://ctx06ekxiqf8u" path="res://Temp_assets/s7.jpg" id="1_x1xjb"]
 [ext_resource type="Texture2D" uid="uid://0ib15ei7d4f7" path="res://Temp_assets/s4.jpg" id="2_58pg1"]
+[ext_resource type="Texture2D" uid="uid://eyap3jn2o7m5" path="res://Assets/Enemy_faces.png" id="3_58pg1"]
+[ext_resource type="Script" uid="uid://cvm23k7o7jv8s" path="res://Scripts/timemachine/event/gpu_particles_3d.gd" id="4_ecwew"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5ckng"]
 size = Vector3(5, 2, 2)
@@ -33,9 +36,43 @@ albedo_texture = ExtResource("2_58pg1")
 [sub_resource type="BoxMesh" id="BoxMesh_x1xjb"]
 size = Vector3(1, 1, 4)
 
-[node name="Node3D" type="StaticBody3D"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ecwew"]
+lifetime_randomness = 0.5
+emission_shape_scale = Vector3(2, 0, 1)
+emission_shape = 2
+emission_sphere_radius = 1.0
+inherit_velocity_ratio = 1.0
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = -10.0
+initial_velocity_max = -10.0
+radial_velocity_min = 9.999977
+radial_velocity_max = 9.999977
+gravity = Vector3(0, -50, 0)
+radial_accel_min = -100.0
+radial_accel_max = -100.0
+tangential_accel_min = 99.99999
+tangential_accel_max = 99.99999
+damping_min = 100.00001
+damping_max = 100.00001
+scale_max = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3i24"]
+transparency = 3
+alpha_hash_scale = 2.0
+alpha_antialiasing_mode = 0
+depth_test = 1
+shading_mode = 0
+albedo_texture = ExtResource("3_58pg1")
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_0btyk"]
+material = SubResource("StandardMaterial3D_j3i24")
+
+[node name="Node3D" type="StaticBody3D" groups=["time_machine"]]
 collision_layer = 8
 collision_mask = 0
+script = ExtResource("1_ld4a4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -65,3 +102,14 @@ mesh = SubResource("BoxMesh_58pg1")
 transform = Transform3D(-4.371139e-08, 0, 1, -0.70710677, 0.70710677, -3.090862e-08, -0.70710677, -0.70710677, -3.090862e-08, -0.4, 1.25, 0)
 material_override = SubResource("StandardMaterial3D_six0t")
 mesh = SubResource("BoxMesh_x1xjb")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+amount = 16
+lifetime = 0.5
+explosiveness = 0.5
+fixed_fps = 8
+transform_align = 3
+process_material = SubResource("ParticleProcessMaterial_ecwew")
+draw_pass_1 = SubResource("QuadMesh_0btyk")
+script = ExtResource("4_ecwew")

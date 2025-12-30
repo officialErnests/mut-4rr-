@@ -224,7 +224,7 @@ enabled = true
 metadata/_custom_type_script = "uid://cktt5pl0bvboc"
 
 [node name="Item_preset2" parent="Items" instance=ExtResource("10_iaow0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 1, -5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -2)
 
 [node name="Pistol" parent="Items" instance=ExtResource("3_qc4db")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, -5)
@@ -260,3 +260,13 @@ params = {
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, -4)
 
 [node name="statue" parent="Statues" instance=ExtResource("12_yb21e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="statue2" parent="Statues" instance=ExtResource("12_yb21e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.9604645e-08)
+
+[node name="statue3" parent="Statues" instance=ExtResource("12_yb21e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="statue4" parent="Statues" instance=ExtResource("12_yb21e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3841858e-07, 0, 3.9999998)
