@@ -63,8 +63,12 @@ alpha_hash_scale = 2.0
 alpha_antialiasing_mode = 0
 depth_test = 1
 shading_mode = 0
+albedo_color = Color(0.2, 0.2, 0.2, 1)
 albedo_texture = ExtResource("3_58pg1")
 texture_filter = 0
+distance_fade_mode = 2
+distance_fade_min_distance = 20.0
+distance_fade_max_distance = 0.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_0btyk"]
 material = SubResource("StandardMaterial3D_j3i24")

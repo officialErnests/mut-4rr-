@@ -29,6 +29,7 @@ var PRECAL_VISIONRSQUARE: float
 
 var random = RandomNumberGenerator.new()
 var timer_random = RandomNumberGenerator.new()
+var random_attack = RandomNumberGenerator.new()
 
 func _ready() -> void:
 	hp = hp_max
@@ -37,6 +38,7 @@ func _ready() -> void:
 	id = global.declareCharecter(self)
 	random.seed = global.getRadnom(id)
 	timer_random.seed = global.getRadnom(id)
+	random_attack.seed = global.getRadnom(id)
 	navigator.done_moving.connect(update)
 
 	vision_hitbox.body_entered.connect(visionSignal)
@@ -45,7 +47,7 @@ func _ready() -> void:
 	# precalculates some values
 	PRECAL_VISIONRSQUARE = vision_hitbox.get_node("CollisionShape3D").shape.radius**2
 
-	# priority_list.push_front(Idea.new(enums.Toughts.ATTACK, null, self))
+	priority_list.push_front(Idea.new(enums.Toughts.ATTACK, null, self))
 
 func update():
 	if not is_inside_tree(): return
@@ -150,8 +152,6 @@ func visionSignal(body: Node3D):
 			else:
 				seen_persons[body_array_position].updatePosition(body.global_position)
 		elif  body.is_in_group("item"):
-			if body.name == "Key": 
-				print("KEY ADD")
 			var body_array_position = global.checkArrayID(seen_objects, body.id)
 			if body_array_position == -1:
 				seen_objects.append(Seen_object.new(body.global_position, body.id, body.item))
@@ -166,7 +166,7 @@ func visionSignal(body: Node3D):
 	memUpdate.emit()
 		
 func visibile(object: Node3D) -> Vector3:
-	if object.get_node("VISIBLE"):
+	if object.has_node("VISIBLE"):
 		for visible_marker in object.get_node("VISIBLE").get_children():
 			if not eye_center.is_inside_tree(): continue
 			if not visible_marker.is_inside_tree(): continue
@@ -354,21 +354,20 @@ class Idea:
 			enums.Toughts.FINDROOM:
 				pass
 			enums.Toughts.ATTACK:
-				pass
-				#! DEPRICATED
 				var player = getVisablePlayer()
 				if player:
 					#TODO add detect if you have wepon
 					var loc_equiped_item = this_node.item_manager.equiped_item
+					this_node.look_at(player.global_position)
 					if loc_equiped_item and loc_equiped_item.type == enums.ItemType.MELE or loc_equiped_item.type == enums.ItemType.GUN:
-						#TODO attack the player
-						pass
+						if this_node.random_attack.randi_range(0,1) == 0:
+							this_node.navigator.runTo(player.global_position)
+						else:
+							this_node.item_manager.nbUse()
+						return {"removeRelative": 0, "exit": 1}
 					else:
-						var item_temp_2 = classes.Item.new(enums.ItemType.MELE, {})
-						this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_PICKUP, item_temp_2, this_node))
-						var item_temp = classes.Item.new(enums.ItemType.GUN, {})
-						this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_PICKUP, item_temp, this_node))
-					pass
+						this_node.navigator.runTo(this_node.global_position + Vector3(this_node.random.randf_range(-1,1),0,this_node.random.randf_range(-1,1) * 10))
+						return {}
 				else:
 					return {}
 			enums.Toughts.DEFEND:

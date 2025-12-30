@@ -1,7 +1,140 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1dg24cxas7ge"]
+[gd_scene load_steps=22 format=3 uid="uid://d1dg24cxas7ge"]
 
 [ext_resource type="Script" uid="uid://dwj6fl455tj5t" path="res://Scripts/utils/switch_scene.gd" id="1_1ehe0"]
 [ext_resource type="Script" uid="uid://dghijtnxv14l1" path="res://Scripts/utils/oneoff/menu_set.gd" id="1_28flt"]
+[ext_resource type="PackedScene" uid="uid://bc2pdgvvigyy1" path="res://Scenes/game.tscn" id="2_opfnp"]
+[ext_resource type="Texture2D" uid="uid://kdnc0q67l1h8" path="res://Assets/Player_faces.png" id="3_1ehe0"]
+[ext_resource type="PackedScene" uid="uid://ccjafp0ghukfb" path="res://Scenes/test.tscn" id="3_cp0ys"]
+[ext_resource type="Script" uid="uid://60a6jklodkpr" path="res://Scripts/setup/animated_sprite_2d.gd" id="4_ce3w2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n45e2"]
+bg_color = Color(1, 0, 1, 1)
+skew = Vector2(-5, 0)
+border_width_right = 425
+border_color = Color(0, 1, 0, 1)
+border_blend = true
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ce3w2"]
+bg_color = Color(0, 1, 0, 1)
+skew = Vector2(1, 0)
+border_width_right = 425
+border_color = Color(1, 0, 1, 1)
+border_blend = true
+corner_radius_top_right = 785
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_opfnp"]
+bg_color = Color(0, 1, 1, 1)
+skew = Vector2(-0.5, 0)
+border_width_left = 10
+border_width_right = 10
+border_color = Color(1, 0, 0, 1)
+corner_radius_bottom_right = 2265
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ehe0"]
+bg_color = Color(1, 1, 0, 1)
+border_width_left = 35
+border_width_right = 35
+border_color = Color(0, 0, 0, 0)
+border_blend = true
+
+[sub_resource type="Theme" id="Theme_n45e2"]
+Button/colors/font_color = Color(0.88, 0, 0, 1)
+Button/styles/disabled = null
+Button/styles/focus = null
+Button/styles/hover = SubResource("StyleBoxFlat_n45e2")
+Button/styles/normal = SubResource("StyleBoxFlat_ce3w2")
+Button/styles/pressed = SubResource("StyleBoxFlat_opfnp")
+Label/colors/font_color = Color(1, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0.93333316, 1, 1)
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 3
+LineEdit/colors/caret_color = Color(0, 1, 1, 1)
+LineEdit/colors/clear_button_color = Color(0, 1, 1, 1)
+LineEdit/colors/clear_button_color_pressed = Color(0, 1, 1, 1)
+LineEdit/colors/font_color = Color(0, 0, 1, 1)
+LineEdit/colors/font_outline_color = Color(1, 1, 1, 1)
+LineEdit/colors/font_placeholder_color = Color(0, 0, 0, 1)
+LineEdit/colors/font_selected_color = Color(0, 1, 1, 1)
+LineEdit/colors/font_uneditable_color = Color(0.875, 0.875, 0.875, 0.5)
+LineEdit/colors/selection_color = Color(0, 1, 1, 1)
+LineEdit/constants/caret_width = 10
+LineEdit/constants/outline_size = 5
+LineEdit/styles/focus = null
+LineEdit/styles/normal = SubResource("StyleBoxFlat_1ehe0")
+LineEdit/styles/read_only = null
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opfnp"]
+atlas = ExtResource("3_1ehe0")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cp0ys"]
+atlas = ExtResource("3_1ehe0")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yhxw7"]
+atlas = ExtResource("3_1ehe0")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trj04"]
+atlas = ExtResource("3_1ehe0")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16hvj"]
+atlas = ExtResource("3_1ehe0")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vr1f0"]
+atlas = ExtResource("3_1ehe0")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1dhk"]
+atlas = ExtResource("3_1ehe0")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5egv6"]
+atlas = ExtResource("3_1ehe0")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtepg"]
+atlas = ExtResource("3_1ehe0")
+region = Rect2(256, 256, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8dnnj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_opfnp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cp0ys")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yhxw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trj04")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16hvj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vr1f0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t1dhk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5egv6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtepg")
+}],
+"loop": true,
+"name": &"yess",
+"speed": 5.0
+}]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,6 +143,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_n45e2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 649.0
+offset_bottom = 373.0
+color = Color(0, 0, 0, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -28,9 +168,26 @@ text = "MUT4RR#"
 
 [node name="Button" type="Button" parent="VBoxContainer" node_paths=PackedStringArray("seed_input_box")]
 layout_mode = 2
+text = "TUTORIAL
+"
+script = ExtResource("1_1ehe0")
+seed_input_box = NodePath("../LineEdit")
+scene = ExtResource("2_opfnp")
+
+[node name="Button2" type="Button" parent="VBoxContainer" node_paths=PackedStringArray("seed_input_box")]
+layout_mode = 2
 text = "PLAY"
 script = ExtResource("1_1ehe0")
 seed_input_box = NodePath("../LineEdit")
+scene = ExtResource("2_opfnp")
+
+[node name="Button3" type="Button" parent="VBoxContainer" node_paths=PackedStringArray("seed_input_box")]
+layout_mode = 2
+text = "TEST
+"
+script = ExtResource("1_1ehe0")
+seed_input_box = NodePath("../LineEdit")
+scene = ExtResource("3_cp0ys")
 
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
@@ -62,3 +219,10 @@ layout_mode = 2
 button_pressed = true
 script = ExtResource("1_28flt")
 globa_value = "cam_controll_mouse"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(552, 72)
+sprite_frames = SubResource("SpriteFrames_8dnnj")
+animation = &"yess"
+frame_progress = 0.15034689
+script = ExtResource("4_ce3w2")

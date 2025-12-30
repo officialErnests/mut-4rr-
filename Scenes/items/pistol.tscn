@@ -28,7 +28,7 @@ height = 0.2
 size = Vector3(0.2, 0.5, 1)
 
 [node name="Pistol" type="RigidBody3D" groups=["item"]]
-collision_layer = 4
+collision_layer = 63
 collision_mask = 15
 script = ExtResource("1_6kuqx")
 

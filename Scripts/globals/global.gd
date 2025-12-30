@@ -109,11 +109,12 @@ func getLoopTimeProc() -> float:
 #loading game aka scene managment
 var main_game = preload("res://Scenes/test.tscn")
 var seed_name := "mut4rr"
-func play(p_seed_name: String) -> void:
+func play(p_game_scene: PackedScene, p_seed_name: String) -> void:
 	if p_seed_name:
 		seed_name = p_seed_name
 	else:
 		seed_name = "mut4rr"
+	main_game = p_game_scene
 	get_tree().change_scene_to_packed(main_game)
 	random_table = []
 	genRandom()
@@ -121,13 +122,16 @@ func play(p_seed_name: String) -> void:
 	resetStartTimer()
 func replay() -> void:
 	gameReset()
-	get_tree().change_scene_to_packed(main_game)
+	get_tree().change_scene_to_packed.call_deferred(main_game)
 	random_table = []
 	genRandom()
 	resetTimer()
 	resetStartTimer()
 func lost() -> void:
 	reset_timer_mod = reset_timer_max
+	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+func win() -> void:
+	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 
 #music
 var music_last_time = 0
@@ -141,5 +145,7 @@ func statueRemove() -> void:
 	statuesAlive -= 1
 	if statuesAlive <= 0:
 		statuesDown.emit()
+func statusGet() -> int:
+	return statuesAlive
 func statueReset() -> void:
 	statuesAlive = 0

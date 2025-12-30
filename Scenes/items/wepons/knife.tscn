@@ -24,11 +24,11 @@ text = "KNIFE"
 font_size = 24
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lah1x"]
-size = Vector3(0.4, 0.7, 0.5)
+size = Vector3(0.4, 0.7, 0.4)
 
 [node name="Item_preset" type="RigidBody3D" groups=["item"]]
 collision_layer = 4
-collision_mask = 15
+collision_mask = 63
 script = ExtResource("1_b5b1n")
 metadata/Equiper = 0
 
@@ -69,5 +69,5 @@ collision_layer = 64
 collision_mask = 39
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="HitBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35000002, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 shape = SubResource("BoxShape3D_lah1x")

@@ -51,7 +51,7 @@ size = Vector2(0.5, 0.5)
 blend_mode = 3
 no_depth_test = true
 shading_mode = 0
-albedo_color = Color(1, 0, 0, 1)
+albedo_color = Color(0.5, 0, 0, 1)
 grow = true
 grow_amount = -0.158
 
@@ -66,7 +66,7 @@ blend_mode = 3
 cull_mode = 2
 no_depth_test = true
 shading_mode = 0
-albedo_color = Color(0, 0, 2, 1)
+albedo_color = Color(0, 0, 0.58566546, 1)
 heightmap_scale = 8.468
 grow_amount = -0.315
 point_size = 36.9
@@ -82,7 +82,7 @@ ring_segments = 4
 blend_mode = 3
 cull_mode = 2
 shading_mode = 0
-albedo_color = Color(0, 2, 0, 1)
+albedo_color = Color(0, 1.0262072, 0, 1)
 heightmap_scale = 8.468
 grow_amount = -0.315
 point_size = 36.9
@@ -98,7 +98,7 @@ ring_segments = 4
 blend_mode = 3
 cull_mode = 2
 shading_mode = 0
-albedo_color = Color(2, 0, 0, 1)
+albedo_color = Color(1.0262072, 0, 0, 1)
 heightmap_scale = 8.468
 grow_amount = -0.315
 point_size = 36.9
@@ -473,7 +473,7 @@ parameters/blend_position = -0.0022708178
 [node name="health" type="CanvasLayer" parent="."]
 
 [node name="Panel" type="Panel" parent="health"]
-anchors_preset = -1
+anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -100.0
@@ -528,4 +528,5 @@ blinkers = [NodePath("../Panel"), NodePath("../Panel/Control/Panel2")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_fs7ks")
+volume_db = -20.0
 script = ExtResource("20_l6n3p")
