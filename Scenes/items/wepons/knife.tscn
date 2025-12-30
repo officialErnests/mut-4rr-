@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://hkpge45m4ptt"]
+[gd_scene load_steps=11 format=3 uid="uid://hkpge45m4ptt"]
 
 [ext_resource type="Script" uid="uid://bply58o1ccedl" path="res://Scripts/utils/value_exposer_items.gd" id="1_b5b1n"]
 [ext_resource type="PackedScene" uid="uid://sniksy4nvnio" path="res://Scenes/items/item.tscn" id="2_lah1x"]
@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://cjkh3tmv2m5on" path="res://Scripts/items/handle_mele.gd" id="3_lah1x"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b5b1n"]
-size = Vector3(0.4, 2.4, 0.1)
+size = Vector3(0.2, 2.4, 0.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uc2hg"]
 blend_mode = 1
@@ -19,12 +19,18 @@ distance_fade_mode = 2
 distance_fade_min_distance = 10.0
 distance_fade_max_distance = 0.0
 
-[sub_resource type="TextMesh" id="TextMesh_lah1x"]
-text = "KNIFE"
-font_size = 24
+[sub_resource type="PrismMesh" id="PrismMesh_q1jsb"]
+size = Vector3(0.05, 0.3, 0.8)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lah1x"]
-size = Vector3(0.4, 0.7, 0.4)
+size = Vector3(0.4, 0.8040527, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q1jsb"]
+albedo_color = Color(0.56, 0.56, 0.56, 1)
+metallic_specular = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_k4b7b"]
+size = Vector3(0.1, 1.2, 0.1)
 
 [node name="Item_preset" type="RigidBody3D" groups=["item"]]
 collision_layer = 4
@@ -47,16 +53,17 @@ mele_hitbox = NodePath("../HitBox")
 mele_dmg = 5.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.09999998, 0)
+transform = Transform3D(-2.1855694e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.1855694e-08, 0.020407908, 0.59999996, 0.08163162)
 shape = SubResource("BoxShape3D_b5b1n")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(-7.941818e-08, -0.99999994, 0, 1.8168762, -4.3711385e-08, 0, 0, 0, 1, 0, 0.1, 0)
+transform = Transform3D(1.816876, 7.1054274e-15, 4.371138e-08, -7.9418164e-08, 1.9106846e-15, 0.9999999, 7.1054274e-15, -0.9999999, 1.910685e-15, 0.020407915, 0.8, -0.12040791)
 material_override = ExtResource("3_5gohn")
 material_overlay = SubResource("StandardMaterial3D_uc2hg")
-mesh = SubResource("TextMesh_lah1x")
+mesh = SubResource("PrismMesh_q1jsb")
 
 [node name="VISIBLE" type="Node3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.020407908, 0.5, -0.020407908)
 
 [node name="ViewPoint" type="Marker3D" parent="VISIBLE"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
@@ -65,9 +72,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
 
 [node name="HitBox" type="Area3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.020407908, 0.5, -0.020407908)
 collision_layer = 64
 collision_mask = 39
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="HitBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.2968018, 0)
 shape = SubResource("BoxShape3D_lah1x")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.020407908, 0.59999996, 0.079592094)
+material_override = SubResource("StandardMaterial3D_q1jsb")
+mesh = SubResource("BoxMesh_k4b7b")

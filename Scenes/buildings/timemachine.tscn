@@ -61,14 +61,15 @@ scale_max = 2.0
 transparency = 3
 alpha_hash_scale = 2.0
 alpha_antialiasing_mode = 0
+blend_mode = 1
 depth_test = 1
 shading_mode = 0
-albedo_color = Color(0.2, 0.2, 0.2, 1)
+albedo_color = Color(18.892157, 18.892157, 18.892157, 1)
 albedo_texture = ExtResource("3_58pg1")
 texture_filter = 0
 distance_fade_mode = 2
-distance_fade_min_distance = 20.0
-distance_fade_max_distance = 0.0
+distance_fade_min_distance = 10.0
+distance_fade_max_distance = 5.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_0btyk"]
 material = SubResource("StandardMaterial3D_j3i24")
@@ -111,9 +112,15 @@ mesh = SubResource("BoxMesh_x1xjb")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 amount = 16
 lifetime = 0.5
-explosiveness = 0.5
+explosiveness = 0.2
 fixed_fps = 8
 transform_align = 3
 process_material = SubResource("ParticleProcessMaterial_ecwew")
 draw_pass_1 = SubResource("QuadMesh_0btyk")
 script = ExtResource("4_ecwew")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 3, 3)
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.70710677, 0.7071067, 0, -0.7071067, -0.70710677, 0, 3, -3)

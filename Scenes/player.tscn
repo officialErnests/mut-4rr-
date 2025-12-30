@@ -48,10 +48,10 @@ billboard_keep_scale = true
 size = Vector2(0.5, 0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dp3o"]
-blend_mode = 3
+blend_mode = 1
 no_depth_test = true
 shading_mode = 0
-albedo_color = Color(0.5, 0, 0, 1)
+albedo_color = Color(1, 0, 0, 1)
 grow = true
 grow_amount = -0.158
 
@@ -62,11 +62,11 @@ radial_segments = 4
 rings = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fd4e3"]
-blend_mode = 3
+blend_mode = 1
 cull_mode = 2
 no_depth_test = true
 shading_mode = 0
-albedo_color = Color(0, 0, 0.58566546, 1)
+albedo_color = Color(0, 0, 1, 1)
 heightmap_scale = 8.468
 grow_amount = -0.315
 point_size = 36.9
@@ -79,7 +79,7 @@ rings = 4
 ring_segments = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_igrcy"]
-blend_mode = 3
+blend_mode = 1
 cull_mode = 2
 shading_mode = 0
 albedo_color = Color(0, 1.0262072, 0, 1)
@@ -95,7 +95,7 @@ rings = 4
 ring_segments = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l6n3p"]
-blend_mode = 3
+blend_mode = 1
 cull_mode = 2
 shading_mode = 0
 albedo_color = Color(1.0262072, 0, 0, 1)
@@ -385,7 +385,7 @@ alpha_cut = 1
 alpha_scissor_threshold = 0.7
 texture_filter = 0
 modulate = Color(0.01, 0, 0, 1)
-outline_modulate = Color(0, 0.01, 0.01, 1)
+outline_modulate = Color(0, 1, 1, 1)
 text = "A"
 font_size = 40
 outline_size = 20
@@ -400,7 +400,7 @@ alpha_cut = 1
 alpha_scissor_threshold = 0.7
 texture_filter = 0
 modulate = Color(0.01, 0, 0, 1)
-outline_modulate = Color(0, 0.01, 0.01, 1)
+outline_modulate = Color(0, 1, 1, 1)
 text = "A
 "
 font_size = 40
