@@ -113,7 +113,7 @@ metadata/Equiper = 0
 [node name="MAIN" parent="." node_paths=PackedStringArray("itemRigid", "visual_outside", "extend_script") instance=ExtResource("2_lah1x")]
 itemRigid = NodePath("..")
 type = 5
-speed_factor = 0.8
+speed_factor = 0.9
 visual_outside = NodePath("../Plane")
 show_text = "TEST ITEM --"
 throw_force = 10.0

@@ -20,6 +20,8 @@ func shot_hit(dmg: float):
 func mele_hit(dmg: float):
 	takeDmg(dmg)
 func takeDmg(p_dmg: float) -> void:
-	hp -= p_dmg
-	if hp <= 0:
-		global.replay()
+	pass
+	#TODO make so player cant hit itself
+	# hp -= p_dmg
+	# if hp <= 0:
+	# 	global.replay()

@@ -1,11 +1,13 @@
-[gd_scene load_steps=22 format=3 uid="uid://d1dg24cxas7ge"]
+[gd_scene load_steps=29 format=3 uid="uid://d1dg24cxas7ge"]
 
 [ext_resource type="Script" uid="uid://dwj6fl455tj5t" path="res://Scripts/utils/switch_scene.gd" id="1_1ehe0"]
 [ext_resource type="Script" uid="uid://dghijtnxv14l1" path="res://Scripts/utils/oneoff/menu_set.gd" id="1_28flt"]
 [ext_resource type="PackedScene" uid="uid://bc2pdgvvigyy1" path="res://Scenes/game.tscn" id="2_opfnp"]
 [ext_resource type="Texture2D" uid="uid://kdnc0q67l1h8" path="res://Assets/Player_faces.png" id="3_1ehe0"]
 [ext_resource type="PackedScene" uid="uid://ccjafp0ghukfb" path="res://Scenes/test.tscn" id="3_cp0ys"]
+[ext_resource type="PackedScene" uid="uid://3m80nsty0llh" path="res://Scenes/map1.tscn" id="3_yhxw7"]
 [ext_resource type="Script" uid="uid://60a6jklodkpr" path="res://Scripts/setup/animated_sprite_2d.gd" id="4_ce3w2"]
+[ext_resource type="Texture2D" uid="uid://eyap3jn2o7m5" path="res://Assets/Enemy_faces.png" id="8_yhxw7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n45e2"]
 bg_color = Color(1, 0, 1, 1)
@@ -136,6 +138,42 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dnnj"]
+atlas = ExtResource("8_yhxw7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3bi6"]
+atlas = ExtResource("8_yhxw7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wyh8j"]
+atlas = ExtResource("8_yhxw7")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujyyl"]
+atlas = ExtResource("8_yhxw7")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mkpwh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8dnnj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3bi6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wyh8j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ujyyl")
+}],
+"loop": true,
+"name": &"yess",
+"speed": 4.0
+}]
+
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -179,7 +217,7 @@ layout_mode = 2
 text = "PLAY"
 script = ExtResource("1_1ehe0")
 seed_input_box = NodePath("../LineEdit")
-scene = ExtResource("2_opfnp")
+scene = ExtResource("3_yhxw7")
 
 [node name="Button3" type="Button" parent="VBoxContainer" node_paths=PackedStringArray("seed_input_box")]
 layout_mode = 2
@@ -221,8 +259,18 @@ script = ExtResource("1_28flt")
 globa_value = "cam_controll_mouse"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 position = Vector2(552, 72)
 sprite_frames = SubResource("SpriteFrames_8dnnj")
 animation = &"yess"
 frame_progress = 0.15034689
+script = ExtResource("4_ce3w2")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(563.625, 312.625)
+scale = Vector2(2.835938, 2.835938)
+sprite_frames = SubResource("SpriteFrames_mkpwh")
+animation = &"yess"
+frame_progress = 0.7237901
 script = ExtResource("4_ce3w2")

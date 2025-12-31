@@ -1,7 +1,10 @@
-[gd_scene load_steps=122 format=4 uid="uid://3m80nsty0llh"]
+[gd_scene load_steps=126 format=4 uid="uid://3m80nsty0llh"]
 
 [ext_resource type="Texture2D" uid="uid://cpwaa4s2klaho" path="res://Temp_assets/n0o0bPumkin.png" id="1_4pqaf"]
+[ext_resource type="Environment" uid="uid://c2synjn8oyfw1" path="res://Assets/game_world_env.tres" id="2_0650q"]
 [ext_resource type="Texture2D" uid="uid://cdlvxehhjnh8k" path="res://Assets/Lol.png" id="2_xgpx1"]
+[ext_resource type="CameraAttributesPractical" uid="uid://3kkkrxy42ck3" path="res://Scenes/game_world_cam.tres" id="3_rxi31"]
+[ext_resource type="Script" uid="uid://cwietp32u5ei5" path="res://Scripts/setup/setup_world.gd" id="4_73eik"]
 [ext_resource type="PackedScene" uid="uid://bpgaix3cftid6" path="res://Scenes/player.tscn" id="5_wouuh"]
 [ext_resource type="PackedScene" uid="uid://dgl4duluwfeeq" path="res://Scenes/interactables/door.tscn" id="6_rxi31"]
 [ext_resource type="Script" uid="uid://8lnxrs0kj4e2" path="res://Scripts/npc/main/npc_master.gd" id="7_wouuh"]
@@ -337,6 +340,10 @@ distance_fade_min_distance = 5.0
 resource_local_to_scene = true
 size = Vector3(9, 0.2, 18)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_5i6b2"]
+resource_local_to_scene = true
+size = Vector3(18, 3, 9)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5k6n"]
 resource_local_to_scene = true
 albedo_texture = ExtResource("1_4pqaf")
@@ -581,16 +588,10 @@ distance_fade_min_distance = 5.0
 
 [node name="coolerMap" type="Node3D"]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-visible = false
-shadow_enabled = true
-
 [node name="Node3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_4pqaf")
 
 [node name="Floor_visual" type="Node3D" parent="Node3D"]
-visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/Floor_visual"]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 4.5, 0, -4.5)
@@ -1667,7 +1668,6 @@ mesh = SubResource("ArrayMesh_tyl2l")
 skeleton = NodePath("")
 
 [node name="WallsX" type="Node3D" parent="Node3D"]
-visible = false
 
 [node name="Cube40" type="MeshInstance3D" parent="Node3D/WallsX"]
 transform = Transform3D(-3.934025e-08, 0, -0.05, 0, 1, 0, 0.9, 0, -2.1855695e-09, 45, 1.5, -22.5)
@@ -2018,7 +2018,6 @@ mesh = SubResource("ArrayMesh_tyl2l")
 skeleton = NodePath("")
 
 [node name="WallsX_doorways" type="Node3D" parent="Node3D"]
-visible = false
 
 [node name="Cube51" type="MeshInstance3D" parent="Node3D/WallsX_doorways"]
 transform = Transform3D(-1.3113417e-08, 0, -0.05, 0, 1, 0, 0.3, 0, -2.1855695e-09, 36, 1.5, -10.5)
@@ -2811,6 +2810,11 @@ shape = SubResource("BoxShape3D_0ladm")
 [node name="Player" parent="Others" instance=ExtResource("5_wouuh")]
 transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 4.9999995, 0.3, -3.9999998)
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Others"]
+environment = ExtResource("2_0650q")
+camera_attributes = ExtResource("3_rxi31")
+script = ExtResource("4_73eik")
+
 [node name="Doors" type="Node3D" parent="."]
 
 [node name="DoorX" type="Node3D" parent="Doors"]
@@ -3101,7 +3105,6 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 23, 
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 21, 0.21355267, 40.888435)
 
 [node name="Roof" type="Node3D" parent="."]
-visible = false
 
 [node name="Roof_0" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.5, 3, -22.5)
@@ -3243,11 +3246,35 @@ material_override = SubResource("StandardMaterial3D_cjqyo")
 mesh = SubResource("BoxMesh_tnejx")
 
 [node name="SpotLight3D" parent="Roof/Roof_6/Visual/Lights" index="0"]
-transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711406e-08, 1, 0, -1, -4.3711395e-08, -13, -1.1920929e-06, 0)
 light_energy = 1.0
 spot_range = 20.0
 spot_attenuation = -0.5
 spot_angle_attenuation = 1.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Roof/Roof_6/Visual/Lights" index="1"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.371141e-08, 1, 0, -1, -4.37114e-08, -4.999999, -4.7683716e-07, 0)
+shadow_enabled = true
+shadow_bias = 0.05
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle = 80.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Roof/Roof_6/Visual/Lights" index="2"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711413e-08, 1, 0, -1, -4.3711402e-08, 6, 4.7683716e-07, -1.9073486e-06)
+shadow_enabled = true
+shadow_bias = 0.05
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle = 80.0
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Roof/Roof_6/Visual/Lights" index="3"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711417e-08, 1, 0, -1, -4.3711406e-08, 14, 1.1920929e-06, -3.8146973e-06)
+shadow_enabled = true
+shadow_bias = 0.05
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle = 80.0
 
 [node name="CollisionShape3D" parent="Roof/Roof_6/Trigger" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 4.5)
@@ -3315,8 +3342,8 @@ spot_attenuation = -0.5
 spot_angle = 80.0
 
 [node name="CollisionShape3D" parent="Roof/Roof_9/Trigger" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
-shape = SubResource("BoxShape3D_gg3vl")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, -1.5, 0)
+shape = SubResource("BoxShape3D_5i6b2")
 
 [node name="Roof_10" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 3, 40.5)
@@ -3923,7 +3950,7 @@ shape = SubResource("BoxShape3D_gg3vl")
 
 [node name="Roof_37" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 3, 4.5)
-neibour_roofs = [NodePath("../Roof_34")]
+neibour_roofs = [NodePath("../Roof_34"), NodePath("../Roof_40")]
 
 [node name="Visual" parent="Roof/Roof_37" index="0"]
 material_override = SubResource("StandardMaterial3D_end2f")
@@ -3981,7 +4008,7 @@ shape = SubResource("BoxShape3D_gg3vl")
 
 [node name="Roof_40" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 3, -13.5)
-neibour_roofs = [NodePath("../Roof_38"), NodePath("../Roof_41"), NodePath("../Roof_23")]
+neibour_roofs = [NodePath("../Roof_38"), NodePath("../Roof_41"), NodePath("../Roof_23"), NodePath("../Roof_37")]
 
 [node name="Visual" parent="Roof/Roof_40" index="0"]
 transform = Transform3D(-4.371138e-08, -8.7422784e-08, -1, -8.742278e-08, 1, -8.7422784e-08, 1, 8.742278e-08, -4.371139e-08, 0, 0, -4.5)

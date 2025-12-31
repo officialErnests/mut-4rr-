@@ -6,7 +6,7 @@ func _ready() -> void:
 	#TODO reenable
 
 func _process(delta: float) -> void:
-	pitch_scale = min(1, 1.5 - global.getLoopTimeProc())
+	pitch_scale = min(1, 1.9 - global.getLoopTimeProc())
 
 func _exit_tree() -> void:
 	looping()

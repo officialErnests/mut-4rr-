@@ -270,3 +270,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
 [node name="statue4" parent="Statues" instance=ExtResource("12_yb21e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3841858e-07, 0, 3.9999998)
+
+[node name="statue5" parent="Statues" instance=ExtResource("12_yb21e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7683716e-07, 0, -10)
+
+[node name="statue6" parent="Statues" instance=ExtResource("12_yb21e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7683716e-07, 0, -8)
+
+[node name="statue7" parent="Statues" instance=ExtResource("12_yb21e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7683716e-07, 0, -6)
+
+[node name="statue8" parent="Statues" instance=ExtResource("12_yb21e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="statue9" parent="Statues" instance=ExtResource("12_yb21e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.536743e-07, 0, -18)
+
+[node name="statue10" parent="Statues" instance=ExtResource("12_yb21e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7683716e-07, 0, -16)
+
+[node name="statue11" parent="Statues" instance=ExtResource("12_yb21e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7683716e-07, 0, -14)
+
+[node name="statue12" parent="Statues" instance=ExtResource("12_yb21e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7683716e-07, 0, -12)

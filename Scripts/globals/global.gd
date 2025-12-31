@@ -81,12 +81,13 @@ func getRadnom(p_id):
 	return random_table[p_id]
 
 #time till reset
-var reset_timer_max = 2 * 60
+var reset_timer_max = 3 * 60
 var reset_timer_mod = reset_timer_max
 var reset_timer = reset_timer_max
 var reset_timer_triggered = false
 func resetTimer():
-	reset_timer_mod -= 5
+	#TODO set to bigger number when gameplay gets refined ;-;
+	reset_timer_mod -= 0
 	reset_timer = reset_timer_mod
 func StartTimer():
 	reset_timer_mod = reset_timer_max
