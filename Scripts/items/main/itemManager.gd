@@ -115,3 +115,8 @@ func getParams() -> Dictionary:
 	if equiped_item_script:
 		return equiped_item_script.getParams()
 	return {}
+
+func getType() -> enums.ItemType:
+	if equiped_item_script:
+		return equiped_item_script.type
+	return enums.ItemType.NAN

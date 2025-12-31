@@ -23,5 +23,5 @@ glow_intensity = 0.42
 glow_bloom = 1.0
 glow_blend_mode = 1
 adjustment_enabled = true
-adjustment_contrast = 4.0
-adjustment_saturation = 4.0
+adjustment_brightness = 0.8
+adjustment_contrast = 8.0

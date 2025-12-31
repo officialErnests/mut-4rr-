@@ -29,6 +29,7 @@ var PRECAL_VISIONRSQUARE: float
 
 var random = RandomNumberGenerator.new()
 var timer_random = RandomNumberGenerator.new()
+var random_attack = RandomNumberGenerator.new()
 
 func _ready() -> void:
 	hp = hp_max
@@ -37,6 +38,7 @@ func _ready() -> void:
 	id = global.declareCharecter(self)
 	random.seed = global.getRadnom(id)
 	timer_random.seed = global.getRadnom(id)
+	random_attack.seed = global.getRadnom(id)
 	navigator.done_moving.connect(update)
 
 	vision_hitbox.body_entered.connect(visionSignal)
@@ -44,6 +46,8 @@ func _ready() -> void:
 
 	# precalculates some values
 	PRECAL_VISIONRSQUARE = vision_hitbox.get_node("CollisionShape3D").shape.radius**2
+
+	priority_list.push_front(Idea.new(enums.Toughts.ATTACK, null, self))
 
 func update():
 	if not is_inside_tree(): return
@@ -148,8 +152,6 @@ func visionSignal(body: Node3D):
 			else:
 				seen_persons[body_array_position].updatePosition(body.global_position)
 		elif  body.is_in_group("item"):
-			if body.name == "Key": 
-				print("KEY ADD")
 			var body_array_position = global.checkArrayID(seen_objects, body.id)
 			if body_array_position == -1:
 				seen_objects.append(Seen_object.new(body.global_position, body.id, body.item))
@@ -164,7 +166,7 @@ func visionSignal(body: Node3D):
 	memUpdate.emit()
 		
 func visibile(object: Node3D) -> Vector3:
-	if object.get_node("VISIBLE"):
+	if object.has_node("VISIBLE"):
 		for visible_marker in object.get_node("VISIBLE").get_children():
 			if not eye_center.is_inside_tree(): continue
 			if not visible_marker.is_inside_tree(): continue
@@ -232,9 +234,43 @@ class Idea:
 				this_node.item_manager.nbThrow()
 				return {"removeRelative": -1, "exit": true}
 			enums.Toughts.KILLTIME:
-				this_node.navigator.walkTo(this_node.global_position + Vector3(this_node.random.randf_range(-1,1),0,this_node.random.randf_range(-1,1) * 10))
-				if this_node.item_manager.equiped_item:
-					this_node.item_manager.nbThrow()
+				var loc_euiped_itme = this_node.item_manager
+				if loc_euiped_itme and loc_euiped_itme.equiped_item:
+					if loc_euiped_itme.getType() == enums.ItemType.GUN or loc_euiped_itme.getType() == enums.ItemType.MELE:
+						this_node.navigator.walkTo(this_node.global_position + Vector3(this_node.random.randf_range(-1,1),0,this_node.random.randf_range(-1,1) * 10))
+					else:
+						this_node.item_manager.nbThrow()
+				else:
+					var items_inside_detection = this_node.vision_hitbox.get_overlapping_bodies()
+					var attack_nodes = []
+
+					var closest_item = null
+					var closest_item_distance = -1
+					for item in items_inside_detection:
+						if item.is_in_group("item"):
+							var loc_item_type = item.get_node("MAIN").type
+							if loc_item_type == enums.ItemType.GUN and loc_item_type == enums.ItemType.GUN:
+								var raycast = this_node.castRay(this_node.vision_hitbox.global_position, item.global_position, 16+32+64)
+								if raycast:
+									continue
+								else:
+									var temp_distance = item.global_position.distance_to(this_node.vision_hitbox.global_position)
+									if not closest_item:
+										closest_item_distance = temp_distance
+										closest_item = item
+									if temp_distance < closest_item_distance:
+										closest_item_distance = temp_distance
+										closest_item = item
+					
+					if closest_item:
+						var build_item = classes.Item.new(
+							closest_item.get_node("MAIN").type,
+							{}
+						)
+						this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_PICKUP, build_item, this_node))
+						return {"exit": true, "removeRelative": 1}
+					else:
+						this_node.navigator.walkTo(this_node.global_position + Vector3(this_node.random.randf_range(-1,1),0,this_node.random.randf_range(-1,1) * 10))
 				return {"exit": true, "removeRelative": 0}
 			enums.Toughts.ITEM_TALK:
 				if this_node.global_position.distance_squared_to(object_of_intrest.global_position) < 16:
@@ -311,13 +347,29 @@ class Idea:
 				var item_index = this_node.memFindItem(object_of_intrest)
 				if item_index != -1:
 					this_node.navigator.runTo(this_node.seen_objects[item_index].position)
+					this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_VERIFY, item_index, this_node))
 					return {"removeRelative": 0, "exit": true}
 				this_node.priority_list.push_front(Idea.new(enums.Toughts.ITEM_FIND, object_of_intrest, this_node))
 				return {"removeRelative": 0, "indexSet": -1}
 			enums.Toughts.FINDROOM:
 				pass
 			enums.Toughts.ATTACK:
-				pass
+				var player = getVisablePlayer()
+				if player:
+					#TODO add detect if you have wepon
+					var loc_equiped_item = this_node.item_manager.equiped_item
+					this_node.look_at(player.global_position)
+					if loc_equiped_item and loc_equiped_item.type == enums.ItemType.MELE or loc_equiped_item.type == enums.ItemType.GUN:
+						if this_node.random_attack.randi_range(0,1) == 0:
+							this_node.navigator.runTo(player.global_position)
+						else:
+							this_node.item_manager.nbUse()
+						return {"removeRelative": 0, "exit": 1}
+					else:
+						this_node.navigator.runTo(this_node.global_position + Vector3(this_node.random.randf_range(-1,1),0,this_node.random.randf_range(-1,1) * 10))
+						return {}
+				else:
+					return {}
 			enums.Toughts.DEFEND:
 				pass
 			enums.Toughts.SURVIVE:
@@ -386,7 +438,13 @@ class Idea:
 						closest_npc = singular_npc
 						closest_npc_distance = singular_npc.global_position.distance_squared_to(this_node.global_position)
 		return closest_npc
-					
+
+	func getVisablePlayer() -> Node3D:
+		var visible_bodies = this_node.vision_hitbox.get_overlapping_bodies()
+		for visible_bodie: Node3D in visible_bodies:
+			if visible_bodie.is_in_group("player"):
+				return visible_bodie
+		return null
 
 	#Helper functions
 	func checkForMatchingItem(p_nodes) -> Node3D:

@@ -30,6 +30,10 @@ func repeatString(p_string, p_times) -> String:
 	for x in range(p_times): result += p_string
 	return result
 
+#main
+func gameReset() -> void:
+	statueReset()
+
 # time
 var time_now := 0
 func resetStartTimer():
@@ -77,12 +81,13 @@ func getRadnom(p_id):
 	return random_table[p_id]
 
 #time till reset
-var reset_timer_max = 2 * 60
+var reset_timer_max = 3 * 60
 var reset_timer_mod = reset_timer_max
 var reset_timer = reset_timer_max
 var reset_timer_triggered = false
 func resetTimer():
-	reset_timer_mod -= 5
+	#TODO set to bigger number when gameplay gets refined ;-;
+	reset_timer_mod -= 0
 	reset_timer = reset_timer_mod
 func StartTimer():
 	reset_timer_mod = reset_timer_max
@@ -105,24 +110,43 @@ func getLoopTimeProc() -> float:
 #loading game aka scene managment
 var main_game = preload("res://Scenes/test.tscn")
 var seed_name := "mut4rr"
-func play(p_seed_name: String) -> void:
+func play(p_game_scene: PackedScene, p_seed_name: String) -> void:
 	if p_seed_name:
 		seed_name = p_seed_name
 	else:
 		seed_name = "mut4rr"
+	main_game = p_game_scene
 	get_tree().change_scene_to_packed(main_game)
 	random_table = []
 	genRandom()
 	resetTimer()
 	resetStartTimer()
 func replay() -> void:
-	get_tree().change_scene_to_packed(main_game)
+	gameReset()
+	get_tree().change_scene_to_packed.call_deferred(main_game)
 	random_table = []
 	genRandom()
 	resetTimer()
 	resetStartTimer()
 func lost() -> void:
 	reset_timer_mod = reset_timer_max
+	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+func win() -> void:
+	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 
 #music
 var music_last_time = 0
+
+#statues
+var statuesAlive = 0
+signal statuesDown()
+func statueAdd() -> void:
+	statuesAlive += 1
+func statueRemove() -> void:
+	statuesAlive -= 1
+	if statuesAlive <= 0:
+		statuesDown.emit()
+func statusGet() -> int:
+	return statuesAlive
+func statueReset() -> void:
+	statuesAlive = 0

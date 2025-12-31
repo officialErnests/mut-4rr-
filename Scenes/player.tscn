@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://bpgaix3cftid6"]
+[gd_scene load_steps=48 format=3 uid="uid://bpgaix3cftid6"]
 
 [ext_resource type="Script" uid="uid://b4qgmftclp70i" path="res://Scripts/player/oneTime/id_getter.gd" id="1_7dp3o"]
 [ext_resource type="Script" uid="uid://o4n6xug4i5p5" path="res://Scripts/player/main/player_proceser.gd" id="1_ukyrk"]
@@ -48,7 +48,7 @@ billboard_keep_scale = true
 size = Vector2(0.5, 0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dp3o"]
-blend_mode = 3
+blend_mode = 1
 no_depth_test = true
 shading_mode = 0
 albedo_color = Color(1, 0, 0, 1)
@@ -62,11 +62,11 @@ radial_segments = 4
 rings = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fd4e3"]
-blend_mode = 3
+blend_mode = 1
 cull_mode = 2
 no_depth_test = true
 shading_mode = 0
-albedo_color = Color(0, 0, 2, 1)
+albedo_color = Color(0, 0, 1, 1)
 heightmap_scale = 8.468
 grow_amount = -0.315
 point_size = 36.9
@@ -79,10 +79,10 @@ rings = 4
 ring_segments = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_igrcy"]
-blend_mode = 3
+blend_mode = 1
 cull_mode = 2
 shading_mode = 0
-albedo_color = Color(0, 2, 0, 1)
+albedo_color = Color(0, 1.0262072, 0, 1)
 heightmap_scale = 8.468
 grow_amount = -0.315
 point_size = 36.9
@@ -95,10 +95,10 @@ rings = 4
 ring_segments = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l6n3p"]
-blend_mode = 3
+blend_mode = 1
 cull_mode = 2
 shading_mode = 0
-albedo_color = Color(2, 0, 0, 1)
+albedo_color = Color(1.0262072, 0, 0, 1)
 heightmap_scale = 8.468
 grow_amount = -0.315
 point_size = 36.9
@@ -176,6 +176,9 @@ blend_point_1/node = SubResource("AnimationNodeAnimation_wpjfl")
 blend_point_1/pos = 1.0
 max_space = 1.1
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6n3p"]
+bg_color = Color(1, 0, 0, 1)
+
 [sub_resource type="Shader" id="Shader_igrcy"]
 code = "shader_type canvas_item;
 uniform float size = 0.0;
@@ -219,7 +222,7 @@ border_blend = true
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("blinker") groups=["Player"]]
 collision_mask = 56
 script = ExtResource("1_7dp3o")
-blinker = NodePath("CanvasLayer2/AnimationTree")
+blinker = NodePath("introblink/AnimationTree")
 
 [node name="PickUp_pos" type="Marker3D" parent="."]
 
@@ -303,7 +306,7 @@ offset = Vector3(0, 180, 0)
 [node name="PickupArea" type="Area3D" parent="SkelBody"]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, -0.020662546, 0)
 collision_layer = 0
-collision_mask = 39
+collision_mask = 47
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SkelBody/PickupArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
@@ -382,7 +385,7 @@ alpha_cut = 1
 alpha_scissor_threshold = 0.7
 texture_filter = 0
 modulate = Color(0.01, 0, 0, 1)
-outline_modulate = Color(0, 0.01, 0.01, 1)
+outline_modulate = Color(0, 1, 1, 1)
 text = "A"
 font_size = 40
 outline_size = 20
@@ -397,7 +400,7 @@ alpha_cut = 1
 alpha_scissor_threshold = 0.7
 texture_filter = 0
 modulate = Color(0.01, 0, 0, 1)
-outline_modulate = Color(0, 0.01, 0.01, 1)
+outline_modulate = Color(0, 1, 1, 1)
 text = "A
 "
 font_size = 40
@@ -445,10 +448,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 [node name="Eye_center" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+[node name="introblink" type="CanvasLayer" parent="."]
 layer = 2
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
+[node name="ColorRect" type="ColorRect" parent="introblink"]
 material = SubResource("ShaderMaterial_igrcy")
 anchors_preset = 15
 anchor_right = 1.0
@@ -457,26 +460,51 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.06133331, 0, 0.16, 1)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer2"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="introblink"]
 libraries = {
 &"": SubResource("AnimationLibrary_l6n3p")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="CanvasLayer2"]
+[node name="AnimationTree" type="AnimationTree" parent="introblink"]
 tree_root = SubResource("AnimationNodeBlendSpace1D_bi64h")
 anim_player = NodePath("../AnimationPlayer")
 parameters/blend_position = -0.0022708178
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="health" type="CanvasLayer" parent="."]
 
-[node name="Panel" type="Panel" parent="CanvasLayer"]
+[node name="Panel" type="Panel" parent="health"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -100.0
+offset_right = 141.40036
+offset_bottom = -76.33368
+grow_vertical = 0
+rotation = 0.7853982
+theme_override_styles/panel = SubResource("StyleBoxFlat_l6n3p")
+
+[node name="Panel2" type="Panel" parent="health/Panel"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_l6n3p")
+
+[node name="TimeLeft" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="TimeLeft"]
 material = SubResource("ShaderMaterial_fs7ks")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource("15_h4iuc")
 
-[node name="Control" type="Control" parent="CanvasLayer/Panel"]
+[node name="Control" type="Control" parent="TimeLeft/Panel"]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
@@ -486,7 +514,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("16_fd4e3")
 
-[node name="Panel2" type="Panel" parent="CanvasLayer/Panel/Control"]
+[node name="Panel2" type="Panel" parent="TimeLeft/Panel/Control"]
 material = SubResource("ShaderMaterial_olqyp")
 layout_mode = 0
 offset_right = 640.0
@@ -494,10 +522,11 @@ offset_bottom = 360.0
 pivot_offset = Vector2(0, 20)
 theme_override_styles/panel = SubResource("StyleBoxFlat_h4iuc")
 
-[node name="Blinkers" type="Node" parent="CanvasLayer" node_paths=PackedStringArray("blinkers")]
+[node name="Blinkers" type="Node" parent="TimeLeft" node_paths=PackedStringArray("blinkers")]
 script = ExtResource("18_igrcy")
 blinkers = [NodePath("../Panel"), NodePath("../Panel/Control/Panel2")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_fs7ks")
+volume_db = -20.0
 script = ExtResource("20_l6n3p")

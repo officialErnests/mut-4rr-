@@ -38,6 +38,8 @@ Interactable=""
 Player=""
 npc=""
 door=""
+statue=""
+time_machine=""
 
 [input]
 
