@@ -23,12 +23,14 @@ func _ready() -> void:
 
 func roomEntered(body) -> void:
 	if body.is_in_group("Player"):
+		print("ROOM ENTERED")
 		player_closenes = 0
 		updateRoof()
 		expandZero(0, update_step + 1)
 
 func roomExited(body) -> void:
 	if body.is_in_group("Player"):
+		print("ROOM EXITED")
 		player_closenes = 1
 		# player_closenes = -1
 		updateRoof()

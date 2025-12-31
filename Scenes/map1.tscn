@@ -1,11 +1,19 @@
-[gd_scene load_steps=19 format=4 uid="uid://3m80nsty0llh"]
+[gd_scene load_steps=91 format=4 uid="uid://3m80nsty0llh"]
 
+[ext_resource type="Texture2D" uid="uid://cpwaa4s2klaho" path="res://Temp_assets/n0o0bPumkin.png" id="1_4pqaf"]
 [ext_resource type="Environment" uid="uid://c2synjn8oyfw1" path="res://Assets/game_world_env.tres" id="2_0650q"]
 [ext_resource type="Texture2D" uid="uid://cdlvxehhjnh8k" path="res://Assets/Lol.png" id="2_xgpx1"]
 [ext_resource type="CameraAttributesPractical" uid="uid://3kkkrxy42ck3" path="res://Scenes/game_world_cam.tres" id="3_rxi31"]
 [ext_resource type="Script" uid="uid://cwietp32u5ei5" path="res://Scripts/setup/setup_world.gd" id="4_73eik"]
 [ext_resource type="PackedScene" uid="uid://bpgaix3cftid6" path="res://Scenes/player.tscn" id="5_wouuh"]
 [ext_resource type="PackedScene" uid="uid://dgl4duluwfeeq" path="res://Scenes/interactables/door.tscn" id="6_rxi31"]
+[ext_resource type="Script" uid="uid://8lnxrs0kj4e2" path="res://Scripts/npc/main/npc_master.gd" id="7_wouuh"]
+[ext_resource type="PackedScene" uid="uid://bvyc5gq1qi2qw" path="res://Scenes/npc.tscn" id="8_jemul"]
+[ext_resource type="PackedScene" uid="uid://bfdu64o0jubuk" path="res://Scenes/map_roof.tscn" id="9_si05j"]
+[ext_resource type="PackedScene" uid="uid://msoik8yh21b0" path="res://Scenes/buildings/timemachine.tscn" id="11_tnejx"]
+[ext_resource type="PackedScene" uid="uid://njasiktbkswh" path="res://Scenes/statue.tscn" id="12_vcux0"]
+[ext_resource type="PackedScene" uid="uid://hkpge45m4ptt" path="res://Scenes/items/wepons/knife.tscn" id="13_gg3vl"]
+[ext_resource type="Script" uid="uid://cktt5pl0bvboc" path="res://Scripts/utils/global_node.gd" id="13_kif58"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_4pqaf"]
 vertices = PackedVector3Array(-32.420807, 0.5, -35.77458, -30.670807, 0.5, -35.77458, -30.420807, 0.5, -36.77458, -32.670807, 0.5, -36.77458, -27.920807, 0.5, -44.02458, -35.170807, 0.5, -44.02458, -27.920807, 0.5, -36.77458, -35.170807, 0.5, -36.77458, -23.420807, 0.5, -35.77458, -21.670807, 0.5, -35.77458, -21.420807, 0.5, -36.77458, -23.670807, 0.5, -36.77458, -18.920807, 0.5, -44.02458, -26.170807, 0.5, -44.02458, -18.920807, 0.5, -36.77458, -26.170807, 0.5, -36.77458, -14.420807, 0.5, -35.77458, -12.670807, 0.5, -35.77458, -12.420807, 0.5, -36.77458, -14.670807, 0.5, -36.77458, -9.920807, 0.5, -44.02458, -17.170807, 0.5, -44.02458, -9.920807, 0.5, -36.77458, -17.170807, 0.5, -36.77458, -5.420807, 0.5, -36.02458, -3.670807, 0.5, -35.77458, -3.420807, 0.5, -36.77458, -0.9208069, 0.5, -39.27458, 0.079193115, 0.5, -39.52458, 0.079193115, 0.5, -41.27458, -0.9208069, 0.5, -41.52458, -5.670807, 0.5, -36.77458, -0.9208069, 0.5, -44.02458, -8.170807, 0.5, -44.02458, -8.170807, 0.5, -36.77458, -0.9208069, 0.5, -36.77458, 0.8291931, 0.5, -39.27458, 3.329193, 0.5, -36.77458, 3.579193, 0.5, -35.77458, 5.329193, 0.5, -36.02458, 5.579193, 0.5, -36.77458, 0.8291931, 0.5, -41.52458, 8.079193, 0.5, -36.77458, 8.079193, 0.5, -44.02458, 0.8291931, 0.5, -44.02458, 0.8291931, 0.5, -36.77458, 18.079193, 0.5, -39.52458, 18.079193, 0.5, -41.27458, 17.079193, 0.5, -41.52458, 17.079193, 0.5, -39.27458, 9.829193, 0.5, -44.02458, 9.829193, 0.5, -36.77458, 17.079193, 0.5, -44.02458, 17.079193, 0.5, -36.77458, 18.829193, 0.5, -39.27458, 18.829193, 0.5, -41.52458, 26.079193, 0.5, -36.77458, 26.079193, 0.5, -44.02458, 18.829193, 0.5, -36.77458, 18.829193, 0.5, -44.02458, -8.920807, 0.5, -32.27458, -8.920807, 0.5, -30.524578, -8.170807, 0.5, -30.274578, -8.170807, 0.5, -32.52458, -5.670807, 0.5, -27.774578, -5.420807, 0.5, -27.024578, -3.670807, 0.5, -27.024578, -5.670807, 0.5, -35.02458, -3.420807, 0.5, -27.774578, -3.420807, 0.5, -35.02458, -0.9208069, 0.5, -27.774578, -0.6708069, 0.5, -32.52458, -8.170807, 0.5, -27.774578, -8.170807, 0.5, -35.27458, -0.9208069, 0.5, -35.27458, 8.829193, 0.5, -30.524578, 9.079193, 0.5, -32.27458, 8.079193, 0.5, -32.52458, 5.579193, 0.5, -35.02458, 3.329193, 0.5, -35.02458, 8.079193, 0.5, -30.274578, 0.8291931, 0.5, -35.27458, 0.8291931, 0.5, -27.774578, 8.079193, 0.5, -27.774578, 8.079193, 0.5, -35.27458, -32.420807, 0.5, -27.024578, -30.670807, 0.5, -27.024578, -30.420807, 0.5, -27.774578, -30.420807, 0.5, -35.02458, -27.920807, 0.5, -30.274578, -26.920807, 0.5, -30.524578, -26.920807, 0.5, -32.27458, -27.920807, 0.5, -32.52458, -32.670807, 0.5, -27.774578, -32.670807, 0.5, -35.02458, -35.170807, 0.5, -35.27458, -35.170807, 0.5, -27.774578, -27.920807, 0.5, -27.774578, -27.920807, 0.5, -35.27458, -26.170807, 0.5, -30.274578, -26.170807, 0.5, -32.52458, -23.670807, 0.5, -27.774578, -23.420807, 0.5, -27.024578, -21.670807, 0.5, -27.024578, -21.420807, 0.5, -35.02458, -23.670807, 0.5, -35.02458, -21.420807, 0.5, -27.774578, -18.920807, 0.5, -27.774578, -18.670807, 0.5, -32.52458, -26.170807, 0.5, -27.774578, -26.170807, 0.5, -35.27458, -18.920807, 0.5, -35.27458, -12.420807, 0.5, -35.02458, -9.920807, 0.5, -32.52458, -14.670807, 0.5, -35.02458, -9.920807, 0.5, -30.274578, -17.170807, 0.5, -35.27458, -17.170807, 0.5, -27.774578, -9.920807, 0.5, -27.774578, -9.920807, 0.5, -35.27458, 9.829193, 0.5, -30.274578, 12.329193, 0.5, -27.774578, 12.579193, 0.5, -27.024578, 14.329193, 0.5, -27.024578, 14.579193, 0.5, -27.774578, 9.829193, 0.5, -32.52458, 17.079193, 0.5, -27.774578, 17.079193, 0.5, -35.02458, 9.829193, 0.5, -35.02458, 9.829193, 0.5, -27.774578, -32.420807, 0.5, -18.024578, -30.670807, 0.5, -18.024578, -30.420807, 0.5, -18.774578, -30.420807, 0.5, -26.024578, -32.670807, 0.5, -26.024578, -27.670807, 0.5, -23.524578, -32.670807, 0.5, -18.774578, -27.920807, 0.5, -26.274578, -27.920807, 0.5, -18.774578, -35.170807, 0.5, -26.274578, -35.170807, 0.5, -18.774578, -23.420807, 0.5, -18.024578, -21.670807, 0.5, -18.024578, -21.420807, 0.5, -18.774578, -21.420807, 0.5, -26.024578, -23.670807, 0.5, -26.024578, -18.670807, 0.5, -23.524578, -23.670807, 0.5, -18.774578, -18.920807, 0.5, -26.274578, -18.920807, 0.5, -18.774578, -26.170807, 0.5, -26.274578, -26.170807, 0.5, -18.774578, -5.420807, 0.5, -18.024578, -3.670807, 0.5, -18.024578, -3.420807, 0.5, -18.774578, -0.9208069, 0.5, -21.274578, -0.17080688, 0.5, -21.524578, -0.17080688, 0.5, -23.274578, -3.420807, 0.5, -26.024578, -0.9208069, 0.5, -23.524578, -5.670807, 0.5, -18.774578, -5.670807, 0.5, -26.024578, -8.170807, 0.5, -26.274578, -8.170807, 0.5, -18.774578, -0.9208069, 0.5, -18.774578, -0.9208069, 0.5, -26.274578, 12.579193, 0.5, -18.024578, 14.329193, 0.5, -18.024578, 14.579193, 0.5, -18.774578, 14.579193, 0.5, -26.024578, 12.329193, 0.5, -26.024578, 17.329193, 0.5, -23.524578, 12.329193, 0.5, -18.774578, 17.079193, 0.5, -26.274578, 17.079193, 0.5, -18.774578, 9.829193, 0.5, -26.274578, 9.829193, 0.5, -18.774578, 0.8291931, 0.5, -21.274578, 0.8291931, 0.5, -23.524578, 8.079193, 0.5, -18.774578, 8.079193, 0.5, -26.024578, 0.8291931, 0.5, -18.774578, 0.8291931, 0.5, -26.024578, 39.579193, 0.5, -17.774578, 41.329193, 0.5, -17.774578, 41.579193, 0.5, -18.774578, 39.329193, 0.5, -18.774578, 44.079193, 0.5, -26.024578, 36.829193, 0.5, -26.024578, 44.079193, 0.5, -18.774578, 36.829193, 0.5, -18.774578, -32.420807, 0.5, -8.774578, -30.670807, 0.5, -8.774578, -30.420807, 0.5, -9.774578, -30.420807, 0.5, -17.024578, -32.670807, 0.5, -17.024578, -27.670807, 0.5, -14.524578, -32.670807, 0.5, -9.774578, -27.920807, 0.5, -17.274578, -27.920807, 0.5, -9.774578, -35.170807, 0.5, -17.274578, -35.170807, 0.5, -9.774578, -23.670807, 0.5, -17.024578, -21.420807, 0.5, -17.024578, -26.170807, 0.5, -9.774578, -18.920807, 0.5, -9.774578, -26.170807, 0.5, -17.274578, -18.920807, 0.5, -17.274578, -5.420807, 0.5, -8.774578, -3.670807, 0.5, -8.774578, -3.420807, 0.5, -9.774578, -3.420807, 0.5, -17.024578, -5.670807, 0.5, -17.024578, -0.6708069, 0.5, -14.524578, -5.670807, 0.5, -9.774578, -0.9208069, 0.5, -17.274578, -0.9208069, 0.5, -9.774578, -8.170807, 0.5, -17.274578, -8.170807, 0.5, -9.774578, 12.579193, 0.5, -8.774578, 14.329193, 0.5, -8.774578, 14.579193, 0.5, -9.774578, 14.579193, 0.5, -17.024578, 12.329193, 0.5, -17.024578, 17.329193, 0.5, -14.524578, 12.329193, 0.5, -9.774578, 17.079193, 0.5, -17.274578, 17.079193, 0.5, -9.774578, 9.829193, 0.5, -17.274578, 9.829193, 0.5, -9.774578, 36.079193, 0.5, -14.274578, 36.079193, 0.5, -12.524578, 36.829193, 0.5, -12.274578, 36.829193, 0.5, -14.524578, 39.329193, 0.5, -9.774578, 39.579193, 0.5, -9.024578, 41.329193, 0.5, -9.024578, 41.579193, 0.5, -17.024578, 39.329193, 0.5, -17.024578, 41.579193, 0.5, -9.774578, 44.079193, 0.5, -9.774578, 44.329193, 0.5, -14.524578, 36.829193, 0.5, -9.774578, 36.829193, 0.5, -17.274578, 44.079193, 0.5, -17.274578, -14.420807, 0.5, -8.774578, -12.670807, 0.5, -8.774578, -12.420807, 0.5, -9.774578, -14.670807, 0.5, -9.774578, -9.920807, 0.5, -17.024578, -17.170807, 0.5, -17.024578, -9.920807, 0.5, -9.774578, -17.170807, 0.5, -9.774578, 8.079193, 0.5, -9.774578, 8.329193, 0.5, -12.524578, 8.079193, 0.5, -17.024578, 0.8291931, 0.5, -17.024578, 0.8291931, 0.5, -9.774578, 21.579193, 0.5, -8.774578, 23.329193, 0.5, -8.774578, 23.579193, 0.5, -9.774578, 21.329193, 0.5, -9.774578, 26.079193, 0.5, -17.024578, 18.829193, 0.5, -17.024578, 26.079193, 0.5, -9.774578, 18.829193, 0.5, -9.774578, 35.079193, 0.5, -14.524578, 35.079193, 0.5, -12.274578, 27.829193, 0.5, -17.024578, 27.829193, 0.5, -9.774578, 35.079193, 0.5, -17.024578, 35.079193, 0.5, -9.774578, 39.329193, 0.5, -0.7745781, 39.579193, 0.5, -0.024578094, 41.329193, 0.5, -0.024578094, 36.829193, 0.5, -5.524578, 35.829193, 0.5, -5.274578, 36.079193, 0.5, -3.524578, 36.829193, 0.5, -3.274578, 41.579193, 0.5, -8.024578, 39.329193, 0.5, -8.024578, 41.579193, 0.5, -0.7745781, 44.079193, 0.5, -0.7745781, 44.329193, 0.5, -5.524578, 36.829193, 0.5, -0.7745781, 36.829193, 0.5, -8.274578, 44.079193, 0.5, -8.274578, -32.420807, 0.5, -0.024578094, -30.670807, 0.5, -0.024578094, -30.420807, 0.5, -0.7745781, -30.420807, 0.5, -8.024578, -27.920807, 0.5, -3.274578, -26.920807, 0.5, -3.524578, -26.920807, 0.5, -5.274578, -27.920807, 0.5, -5.524578, -32.670807, 0.5, -0.7745781, -32.670807, 0.5, -8.024578, -35.170807, 0.5, -8.274578, -35.170807, 0.5, -0.7745781, -27.920807, 0.5, -0.7745781, -27.920807, 0.5, -8.274578, -14.670807, 0.5, -0.7745781, -14.420807, 0.5, -0.024578094, -12.670807, 0.5, -0.024578094, -12.420807, 0.5, -8.024578, -14.670807, 0.5, -8.024578, -17.170807, 0.5, -5.524578, -18.170807, 0.5, -5.274578, -17.920807, 0.5, -3.524578, -17.170807, 0.5, -3.274578, -12.420807, 0.5, -0.7745781, -9.920807, 0.5, -0.7745781, -9.670807, 0.5, -5.524578, -17.170807, 0.5, -0.7745781, -17.170807, 0.5, -8.274578, -9.920807, 0.5, -8.274578, -5.420807, 0.5, -0.024578094, -3.670807, 0.5, -0.024578094, -3.420807, 0.5, -0.7745781, -3.420807, 0.5, -8.024578, -0.9208069, 0.5, -3.274578, 0.079193115, 0.5, -3.524578, 0.079193115, 0.5, -5.274578, -0.9208069, 0.5, -5.524578, -5.670807, 0.5, -0.7745781, -5.670807, 0.5, -8.024578, -8.170807, 0.5, -8.274578, -8.170807, 0.5, -0.7745781, -0.9208069, 0.5, -0.7745781, -0.9208069, 0.5, -8.274578, 12.579193, 0.5, -0.024578094, 14.329193, 0.5, -0.024578094, 14.579193, 0.5, -0.7745781, 14.579193, 0.5, -8.024578, 17.079193, 0.5, -3.274578, 18.079193, 0.5, -3.524578, 18.079193, 0.5, -5.274578, 17.079193, 0.5, -5.524578, 12.329193, 0.5, -0.7745781, 12.329193, 0.5, -8.024578, 9.829193, 0.5, -8.274578, 9.829193, 0.5, -0.7745781, 17.079193, 0.5, -0.7745781, 17.079193, 0.5, -8.274578, 18.829193, 0.5, -3.274578, 18.829193, 0.5, -5.524578, 23.579193, 0.5, -8.024578, 21.329193, 0.5, -8.024578, 26.079193, 0.5, -3.274578, 27.079193, 0.5, -3.524578, 27.079193, 0.5, -5.274578, 26.079193, 0.5, -5.524578, 18.829193, 0.5, -0.7745781, 26.079193, 0.5, -0.7745781, 26.079193, 0.5, -8.274578, 18.829193, 0.5, -8.274578, -26.170807, 0.5, -3.274578, -26.170807, 0.5, -5.524578, -23.670807, 0.5, -0.7745781, -23.420807, 0.5, -0.024578094, -21.670807, 0.5, -0.024578094, -21.420807, 0.5, -0.7745781, -18.920807, 0.5, -3.274578, -25.170807, 0.5, -8.274578, -18.920807, 0.5, -5.524578, -18.920807, 0.5, -8.024578, -26.170807, 0.5, -8.024578, -26.170807, 0.5, -0.7745781, -18.920807, 0.5, -0.7745781, 0.8291931, 0.5, -3.274578, 3.329193, 0.5, -0.7745781, 3.579193, 0.5, -0.024578094, 5.329193, 0.5, -0.024578094, 5.579193, 0.5, -0.7745781, 0.8291931, 0.5, -5.524578, 8.079193, 0.5, -0.7745781, 8.079193, 0.5, -8.024578, 0.8291931, 0.5, -8.024578, 0.8291931, 0.5, -0.7745781, 27.829193, 0.5, -3.274578, 27.829193, 0.5, -5.524578, 30.329193, 0.5, -0.7745781, 30.579193, 0.5, -0.024578094, 32.329193, 0.5, -0.024578094, 32.579193, 0.5, -0.7745781, 35.079193, 0.5, -3.274578, 28.829193, 0.5, -8.274578, 35.079193, 0.5, -5.524578, 35.079193, 0.5, -8.024578, 27.829193, 0.5, -8.024578, 27.829193, 0.5, -0.7745781, 35.079193, 0.5, -0.7745781, -32.670807, 0.5, 0.9754219, -30.420807, 0.5, 0.9754219, -35.170807, 0.5, 8.225422, -27.920807, 0.5, 8.225422, -35.170807, 0.5, 0.7254219, -27.920807, 0.5, 0.7254219, -23.670807, 0.5, 0.9754219, -21.420807, 0.5, 0.9754219, -26.170807, 0.5, 8.225422, -18.920807, 0.5, 8.225422, -26.170807, 0.5, 0.7254219, -18.920807, 0.5, 0.7254219, -14.420807, 0.5, 8.975422, -12.670807, 0.5, 8.975422, -12.420807, 0.5, 8.225422, -9.920807, 0.5, 5.725422, -8.920807, 0.5, 5.475422, -8.920807, 0.5, 3.725422, -12.420807, 0.5, 0.9754219, -9.920807, 0.5, 3.475422, -14.670807, 0.5, 8.225422, -14.670807, 0.5, 0.9754219, -17.170807, 0.5, 0.7254219, -17.170807, 0.5, 8.225422, -9.920807, 0.5, 8.225422, -9.920807, 0.5, 0.7254219, -8.170807, 0.5, 5.725422, -8.170807, 0.5, 3.475422, -3.420807, 0.5, 0.9754219, -5.670807, 0.5, 0.9754219, -8.170807, 0.5, 8.225422, -0.9208069, 0.5, 8.225422, -0.9208069, 0.5, 0.7254219, -8.170807, 0.5, 0.7254219, 3.579193, 0.5, 8.975422, 5.329193, 0.5, 8.975422, 5.579193, 0.5, 8.225422, 5.579193, 0.5, 0.9754219, 3.329193, 0.5, 0.9754219, 8.329193, 0.5, 3.475422, 3.329193, 0.5, 8.225422, 8.079193, 0.5, 0.7254219, 8.079193, 0.5, 8.225422, 0.8291931, 0.5, 0.7254219, 0.8291931, 0.5, 8.225422, 12.329193, 0.5, 0.9754219, 14.579193, 0.5, 0.9754219, 9.829193, 0.5, 8.225422, 17.079193, 0.5, 8.225422, 9.829193, 0.5, 0.7254219, 17.079193, 0.5, 0.7254219, 27.079193, 0.5, 3.725422, 27.079193, 0.5, 5.475422, 27.829193, 0.5, 5.725422, 27.829193, 0.5, 3.475422, 32.579193, 0.5, 0.9754219, 30.329193, 0.5, 0.9754219, 27.829193, 0.5, 8.225422, 35.079193, 0.5, 8.225422, 35.079193, 0.5, 0.7254219, 27.829193, 0.5, 0.7254219, 39.329193, 0.5, 0.9754219, 41.579193, 0.5, 0.9754219, 36.829193, 0.5, 8.225422, 44.079193, 0.5, 8.225422, 36.829193, 0.5, 0.7254219, 44.079193, 0.5, 0.7254219, 21.579193, 0.5, 8.975422, 23.329193, 0.5, 8.975422, 23.579193, 0.5, 8.225422, 26.079193, 0.5, 5.725422, 26.079193, 0.5, 3.475422, 21.329193, 0.5, 8.225422, 26.079193, 0.5, 0.9754219, 18.829193, 0.5, 0.9754219, 18.829193, 0.5, 8.225422, 26.079193, 0.5, 8.225422, -14.420807, 0.5, 17.975422, -12.670807, 0.5, 17.975422, -12.420807, 0.5, 17.225422, -12.420807, 0.5, 9.975422, -14.670807, 0.5, 9.975422, -9.670807, 0.5, 12.475422, -14.670807, 0.5, 17.225422, -9.920807, 0.5, 9.725422, -9.920807, 0.5, 17.225422, -17.170807, 0.5, 9.725422, -17.170807, 0.5, 17.225422, 3.579193, 0.5, 17.975422, 5.329193, 0.5, 17.975422, 5.579193, 0.5, 17.225422, 5.579193, 0.5, 9.975422, 3.329193, 0.5, 9.975422, 8.329193, 0.5, 12.475422, 3.329193, 0.5, 17.225422, 8.079193, 0.5, 9.725422, 8.079193, 0.5, 17.225422, 0.8291931, 0.5, 9.725422, 0.8291931, 0.5, 17.225422, 21.579193, 0.5, 17.975422, 23.329193, 0.5, 17.975422, 23.579193, 0.5, 17.225422, 23.579193, 0.5, 9.975422, 21.329193, 0.5, 9.975422, 26.329193, 0.5, 12.475422, 21.329193, 0.5, 17.225422, 26.079193, 0.5, 9.725422, 26.079193, 0.5, 17.225422, 18.829193, 0.5, 9.725422, 18.829193, 0.5, 17.225422, -14.420807, 0.5, 26.975422, -12.670807, 0.5, 26.975422, -12.420807, 0.5, 26.225422, -12.420807, 0.5, 18.975422, -14.670807, 0.5, 18.975422, -9.670807, 0.5, 21.475422, -14.670807, 0.5, 26.225422, -9.920807, 0.5, 18.725422, -9.920807, 0.5, 26.225422, -17.170807, 0.5, 18.725422, -17.170807, 0.5, 26.225422, 3.579193, 0.5, 26.975422, 5.329193, 0.5, 26.975422, 5.579193, 0.5, 26.225422, 5.579193, 0.5, 18.975422, 3.329193, 0.5, 18.975422, 8.329193, 0.5, 21.475422, 3.329193, 0.5, 26.225422, 8.079193, 0.5, 18.725422, 8.079193, 0.5, 26.225422, 0.8291931, 0.5, 18.725422, 0.8291931, 0.5, 26.225422, 21.579193, 0.5, 26.975422, 23.329193, 0.5, 26.975422, 23.579193, 0.5, 26.225422, 23.579193, 0.5, 18.975422, 21.329193, 0.5, 18.975422, 26.329193, 0.5, 21.475422, 21.329193, 0.5, 26.225422, 26.079193, 0.5, 18.725422, 26.079193, 0.5, 26.225422, 18.829193, 0.5, 18.725422, 18.829193, 0.5, 26.225422, -14.670807, 0.5, 27.975422, -12.420807, 0.5, 27.975422, -17.170807, 0.5, 35.22542, -9.920807, 0.5, 35.22542, -17.170807, 0.5, 27.725422, -9.920807, 0.5, 27.725422, 3.579193, 0.5, 36.22542, 5.329193, 0.5, 36.22542, 5.579193, 0.5, 35.22542, 5.579193, 0.5, 27.975422, 3.329193, 0.5, 27.975422, 8.329193, 0.5, 30.475422, 3.329193, 0.5, 35.22542, 8.079193, 0.5, 27.725422, 8.079193, 0.5, 35.22542, 0.8291931, 0.5, 27.725422, 0.8291931, 0.5, 35.22542, 21.579193, 0.5, 36.22542, 23.329193, 0.5, 36.22542, 23.579193, 0.5, 35.22542, 23.579193, 0.5, 27.975422, 21.329193, 0.5, 27.975422, 26.329193, 0.5, 30.475422, 21.329193, 0.5, 35.22542, 26.079193, 0.5, 27.725422, 26.079193, 0.5, 35.22542, 18.829193, 0.5, 27.725422, 18.829193, 0.5, 35.22542, 0.079193115, 0.5, 39.72542, 0.079193115, 0.5, 41.47542, 0.8291931, 0.5, 41.72542, 0.8291931, 0.5, 39.47542, 8.079193, 0.5, 41.72542, 8.829193, 0.5, 41.47542, 8.829193, 0.5, 39.72542, 8.079193, 0.5, 39.47542, 5.579193, 0.5, 36.97542, 3.329193, 0.5, 36.97542, 0.8291931, 0.5, 44.22542, 8.079193, 0.5, 44.22542, 8.079193, 0.5, 36.72542, 0.8291931, 0.5, 36.72542, 18.079193, 0.5, 39.72542, 18.079193, 0.5, 41.47542, 18.829193, 0.5, 41.72542, 18.829193, 0.5, 39.47542, 23.579193, 0.5, 36.97542, 21.329193, 0.5, 36.97542, 18.829193, 0.5, 44.22542, 26.079193, 0.5, 44.22542, 26.079193, 0.5, 36.72542, 18.829193, 0.5, 36.72542, -0.9208069, 0.5, 39.47542, -0.9208069, 0.5, 41.72542, -8.170807, 0.5, 36.97542, -8.170807, 0.5, 44.22542, -0.9208069, 0.5, 36.97542, -0.9208069, 0.5, 44.22542, 9.829193, 0.5, 41.72542, 9.829193, 0.5, 39.47542, 17.079193, 0.5, 41.72542, 17.079193, 0.5, 39.47542, 10.829193, 0.5, 36.72542, 9.829193, 0.5, 44.22542, 17.079193, 0.5, 44.22542, 9.829193, 0.5, 36.97542, 17.079193, 0.5, 36.97542)
@@ -133,10 +141,350 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_uxjh5")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ngqs7"]
+size = Vector3(0.2, 3, 42)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qakiw"]
+size = Vector3(0.2, 3, 3.1000001)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o5k6n"]
+size = Vector3(0.2, 3, 39.100002)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_si05j"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_si05j"]
+resource_local_to_scene = true
+size = Vector3(9, 0.2, 9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gg3vl"]
+resource_local_to_scene = true
+size = Vector3(9, 3, 9)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tnejx"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vcux0"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gg3vl"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_55xmv"]
+resource_local_to_scene = true
+size = Vector3(9, 0.2, 27)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ypv6j"]
+resource_local_to_scene = true
+size = Vector3(27, 3, 9)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kif58"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ypv6j"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cjqyo"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_tnejx"]
+resource_local_to_scene = true
+size = Vector3(36, 0.2, 9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cjqyo"]
+resource_local_to_scene = true
+size = Vector3(9, 3, 36)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_55xmv"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ngqs7"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qakiw"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_vcux0"]
+resource_local_to_scene = true
+size = Vector3(9, 0.2, 18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5k6n"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8hrow"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wijmg"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5lhh4"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kiv7j"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1h3pv"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fqqgn"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m1f1e"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_155gl"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_ngqs7"]
+resource_local_to_scene = true
+size = Vector3(18, 0.2, 9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_55xmv"]
+resource_local_to_scene = true
+size = Vector3(9, 3, 18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fbj82"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4c8c7"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k4m8h"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gs3a6"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5x6xl"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vnct7"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pxtmk"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xtfoa"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mfxuu"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2shli"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_payto"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_wqejd"]
+resource_local_to_scene = true
+size = Vector3(9, 0.2, 9)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bgi7f"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_gg3vl"]
+resource_local_to_scene = true
+size = Vector3(36, 0.2, 9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_si05j"]
+resource_local_to_scene = true
+size = Vector3(9, 3, 36)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w6gs8"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkorj"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lcsvx"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_kif58"]
+resource_local_to_scene = true
+size = Vector3(9, 0.2, 18)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tnejx"]
+resource_local_to_scene = true
+size = Vector3(18, 3, 9)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6b81a"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vnl5t"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7hnr6"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_ypv6j"]
+resource_local_to_scene = true
+size = Vector3(18, 0.2, 9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vcux0"]
+resource_local_to_scene = true
+size = Vector3(9, 3, 18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hupf5"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_end2f"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3i7co"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajomm"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ey6si"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_cjqyo"]
+resource_local_to_scene = true
+size = Vector3(36, 0.2, 9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kif58"]
+resource_local_to_scene = true
+size = Vector3(9, 3, 36)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0lx46"]
+resource_local_to_scene = true
+albedo_texture = ExtResource("1_4pqaf")
+texture_filter = 0
+distance_fade_min_distance = 5.0
+
 [node name="coolerMap" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+visible = false
 shadow_enabled = true
 
 [node name="Node3D" type="NavigationRegion3D" parent="."]
@@ -332,12 +680,6 @@ skeleton = NodePath("../../..")
 
 [node name="MeshInstance3D16" type="MeshInstance3D" parent="Node3D/Floor_visual"]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -13.5, 0, -4.5)
-material_override = SubResource("StandardMaterial3D_jemul")
-mesh = SubResource("ArrayMesh_1y255")
-skeleton = NodePath("../../..")
-
-[node name="MeshInstance3D17" type="MeshInstance3D" parent="Node3D/Floor_visual"]
-transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -13.5, 0, -13.5)
 material_override = SubResource("StandardMaterial3D_jemul")
 mesh = SubResource("ArrayMesh_1y255")
 skeleton = NodePath("../../..")
@@ -2094,7 +2436,119 @@ material_override = SubResource("StandardMaterial3D_73eik")
 mesh = SubResource("ArrayMesh_tyl2l")
 skeleton = NodePath("")
 
-[node name="Node3D5" type="Node3D" parent="Node3D"]
+[node name="WallCollX" type="StaticBody3D" parent="Node3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 18)
+shape = SubResource("BoxShape3D_ngqs7")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 43.567993)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1.5, 43.55)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 1.5, 25.600002)
+shape = SubResource("BoxShape3D_o5k6n")
+
+[node name="CollisionShape3D10" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 1.5, 1.4000001)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 1.5, 4.4999976)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 1.5, -9.000004)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 1.5, -21.100004)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 1.5, -10.450004)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D11" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1.5, -10.450004)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D12" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1.5, -44.450005)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D13" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 1.5, -44.450005)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D14" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1.5, -44.450005)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D15" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1.5, -23.450005)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 1.5, -13.500004)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D16" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1.5, 10.549995)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D17" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -7.4500046)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D18" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -28.450005)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D19" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -44.450005)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D20" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1.5, -44.450005)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D21" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1.5, -20.450005)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D22" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1.5, 12.549995)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D23" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 1.5, 12.549995)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D24" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 1.5, -14.450005)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D25" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 1.5, -14.450005)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D26" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 1.5, 1.5499954)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D27" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 1.5, -37.450005)
+shape = SubResource("BoxShape3D_qakiw")
+
+[node name="CollisionShape3D28" type="CollisionShape3D" parent="Node3D/WallCollX"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 1.5, -37.450005)
+shape = SubResource("BoxShape3D_qakiw")
 
 [node name="Node3D6" type="Node3D" parent="Node3D"]
 
@@ -2102,13 +2556,13 @@ skeleton = NodePath("")
 
 [node name="Others" type="Node3D" parent="."]
 
+[node name="Player" parent="Others" instance=ExtResource("5_wouuh")]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 4.9999995, 0.3, -3.9999998)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Others"]
 environment = ExtResource("2_0650q")
 camera_attributes = ExtResource("3_rxi31")
 script = ExtResource("4_73eik")
-
-[node name="Player" parent="Others" instance=ExtResource("5_wouuh")]
-transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 4.9999995, 0.3, -3.9999998)
 
 [node name="Doors" type="Node3D" parent="."]
 
@@ -2287,3 +2741,1158 @@ size = Vector3(0.1, 3, 3)
 [node name="Door49" parent="Doors/DoorY" instance=ExtResource("6_rxi31")]
 transform = Transform3D(-4.37114e-08, 0, -0.9999999, 0, 1, 0, 0.9999999, 0, -4.37114e-08, -31.487572, 1.5, -36)
 size = Vector3(0.1, 3, 3)
+
+[node name="NPCS" type="Node3D" parent="."]
+script = ExtResource("7_wouuh")
+
+[node name="NPCS" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -23, 0.21355267, 2.8884354)
+
+[node name="NPCS2" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -21, 0.21355267, 3.8884354)
+
+[node name="NPCS3" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -23, 0.21355267, 4.8884354)
+
+[node name="NPCS4" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -33, 0.21355267, 2.8884354)
+
+[node name="NPCS5" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -31, 0.21355267, 3.8884354)
+
+[node name="NPCS6" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -33, 0.21355267, 4.8884354)
+
+[node name="NPCS7" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -13, 0.21355267, 31.888435)
+
+[node name="NPCS8" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -11, 0.21355267, 32.888435)
+
+[node name="NPCS9" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -13, 0.21355267, 33.888435)
+
+[node name="NPCS10" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -24, 0.21355267, -15.111565)
+
+[node name="NPCS11" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -22, 0.21355267, -14.111565)
+
+[node name="NPCS12" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -24, 0.21355267, -13.111565)
+
+[node name="NPCS13" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -15, 0.21355267, -33.111565)
+
+[node name="NPCS14" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -13, 0.21355267, -32.111565)
+
+[node name="NPCS15" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -15, 0.21355267, -31.111565)
+
+[node name="NPCS16" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 22, 0.21355267, -42.111565)
+
+[node name="NPCS17" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 24, 0.21355267, -41.111565)
+
+[node name="NPCS18" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 22, 0.21355267, -40.111565)
+
+[node name="NPCS19" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 40, 0.21355267, -24.111565)
+
+[node name="NPCS20" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 42, 0.21355267, -23.111565)
+
+[node name="NPCS21" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 40, 0.21355267, -22.111565)
+
+[node name="NPCS22" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 30, 0.21355267, -14.111565)
+
+[node name="NPCS23" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 32, 0.21355267, -13.111565)
+
+[node name="NPCS24" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 30, 0.21355267, -12.111565)
+
+[node name="NPCS34" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 21, 0.21355267, -14.111565)
+
+[node name="NPCS35" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 23, 0.21355267, -13.111565)
+
+[node name="NPCS36" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 21, 0.21355267, -12.111565)
+
+[node name="NPCS25" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 39, 0.21355267, 3.8884354)
+
+[node name="NPCS26" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 41, 0.21355267, 4.8884354)
+
+[node name="NPCS27" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 39, 0.21355267, 5.8884354)
+
+[node name="NPCS28" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7, 0.21355267, 38.888435)
+
+[node name="NPCS29" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5, 0.21355267, 39.888435)
+
+[node name="NPCS30" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7, 0.21355267, 40.888435)
+
+[node name="NPCS31" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 21, 0.21355267, 38.888435)
+
+[node name="NPCS32" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 23, 0.21355267, 39.888435)
+
+[node name="NPCS33" parent="NPCS" instance=ExtResource("8_jemul")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 21, 0.21355267, 40.888435)
+
+[node name="Roof" type="Node3D" parent="."]
+visible = false
+
+[node name="Roof_0" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.5, 3, -22.5)
+neibour_roofs = [NodePath("../Roof_1")]
+
+[node name="Visual" parent="Roof/Roof_0" index="0"]
+material_override = SubResource("StandardMaterial3D_si05j")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_0/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_0/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_1" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.5, 3, -13.5)
+neibour_roofs = [NodePath("../Roof_0"), NodePath("../Roof_2"), NodePath("../Roof_3")]
+
+[node name="Visual" parent="Roof/Roof_1" index="0"]
+material_override = SubResource("StandardMaterial3D_tnejx")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_1/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_1/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_2" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 3, -13.5)
+neibour_roofs = [NodePath("../Roof_1")]
+
+[node name="Visual" parent="Roof/Roof_2" index="0"]
+material_override = SubResource("StandardMaterial3D_vcux0")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_2/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_2/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_3" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 3, -4.5)
+neibour_roofs = [NodePath("../Roof_1"), NodePath("../Roof_4"), NodePath("../Roof_5"), NodePath("../Roof_7"), NodePath("../Roof_16")]
+
+[node name="Visual" parent="Roof/Roof_3" index="0"]
+material_override = SubResource("StandardMaterial3D_gg3vl")
+mesh = SubResource("BoxMesh_55xmv")
+
+[node name="SpotLight3D" parent="Roof/Roof_3/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Roof/Roof_3/Visual/Lights" index="1"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711406e-08, 1, 0, -1, -4.3711395e-08, -4.7683716e-07, -4.7683716e-07, -8)
+shadow_enabled = true
+shadow_bias = 0.05
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle = 80.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Roof/Roof_3/Visual/Lights" index="2"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.371141e-08, 1, 0, -1, -4.37114e-08, 0, 9.536743e-07, 8)
+shadow_enabled = true
+shadow_bias = 0.05
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle = 80.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_3/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_ypv6j")
+
+[node name="Roof_4" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.5, 3, 4.5)
+neibour_roofs = [NodePath("../Roof_3")]
+
+[node name="Visual" parent="Roof/Roof_4" index="0"]
+material_override = SubResource("StandardMaterial3D_kif58")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_4/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_4/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_5" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 3, 4.5)
+neibour_roofs = [NodePath("../Roof_3"), NodePath("../Roof_6")]
+
+[node name="Visual" parent="Roof/Roof_5" index="0"]
+material_override = SubResource("StandardMaterial3D_ypv6j")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_5/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_5/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_6" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 3, 13.5)
+neibour_roofs = [NodePath("../Roof_5"), NodePath("../Roof_8")]
+
+[node name="Visual" parent="Roof/Roof_6" index="0"]
+transform = Transform3D(-4.371138e-08, -8.7422784e-08, -1, -8.742278e-08, 1, -8.7422784e-08, 1, 8.742278e-08, -4.371139e-08, 0, 0, 4.5)
+material_override = SubResource("StandardMaterial3D_cjqyo")
+mesh = SubResource("BoxMesh_tnejx")
+
+[node name="SpotLight3D" parent="Roof/Roof_6/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_6/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 4.5)
+shape = SubResource("BoxShape3D_cjqyo")
+
+[node name="Roof_7" parent="Roof" instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 3, -13.5)
+
+[node name="Visual" parent="Roof/Roof_7" index="0"]
+material_override = SubResource("StandardMaterial3D_55xmv")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_7/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_7/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_8" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 3, 40.5)
+neibour_roofs = [NodePath("../Roof_6"), NodePath("../Roof_9")]
+
+[node name="Visual" parent="Roof/Roof_8" index="0"]
+material_override = SubResource("StandardMaterial3D_ngqs7")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_8/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_8/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_9" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 3, 40.5)
+neibour_roofs = [NodePath("../Roof_8"), NodePath("../Roof_10"), NodePath("../Roof_11")]
+
+[node name="Visual" parent="Roof/Roof_9" index="0"]
+transform = Transform3D(-4.371138e-08, -8.7422784e-08, -1, -8.742278e-08, 1, -8.7422784e-08, 1, 8.742278e-08, -4.371139e-08, -4.5, 0, 0)
+material_override = SubResource("StandardMaterial3D_qakiw")
+mesh = SubResource("BoxMesh_vcux0")
+
+[node name="SpotLight3D" parent="Roof/Roof_9/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711406e-08, 1, 0, -1, -4.3711395e-08, 0, 2.3841858e-07, 3.9999995)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Roof/Roof_9/Visual/Lights" index="1"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.371141e-08, 1, 0, -1, -4.37114e-08, 0, -2.3841858e-07, -3)
+shadow_enabled = true
+shadow_bias = 0.05
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle = 80.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_9/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_10" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 3, 40.5)
+neibour_roofs = [NodePath("../Roof_9")]
+
+[node name="Visual" parent="Roof/Roof_10" index="0"]
+material_override = SubResource("StandardMaterial3D_o5k6n")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_10/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_10/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_11" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, 31.5)
+neibour_roofs = [NodePath("../Roof_9"), NodePath("../Roof_12")]
+
+[node name="Visual" parent="Roof/Roof_11" index="0"]
+material_override = SubResource("StandardMaterial3D_8hrow")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_11/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_11/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_12" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, 22.5)
+neibour_roofs = [NodePath("../Roof_11"), NodePath("../Roof_13")]
+
+[node name="Visual" parent="Roof/Roof_12" index="0"]
+material_override = SubResource("StandardMaterial3D_wijmg")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_12/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_12/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_13" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, 13.5)
+neibour_roofs = [NodePath("../Roof_12"), NodePath("../Roof_14")]
+
+[node name="Visual" parent="Roof/Roof_13" index="0"]
+material_override = SubResource("StandardMaterial3D_5lhh4")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_13/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_13/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_14" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, 4.5)
+neibour_roofs = [NodePath("../Roof_13"), NodePath("../Roof_15"), NodePath("../Roof_38")]
+
+[node name="Visual" parent="Roof/Roof_14" index="0"]
+material_override = SubResource("StandardMaterial3D_kiv7j")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_14/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_14/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_15" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 3, 4.5)
+neibour_roofs = [NodePath("../Roof_14"), NodePath("../Roof_16")]
+
+[node name="Visual" parent="Roof/Roof_15" index="0"]
+material_override = SubResource("StandardMaterial3D_1h3pv")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_15/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_15/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_16" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 3, -4.5)
+neibour_roofs = [NodePath("../Roof_15"), NodePath("../Roof_17"), NodePath("../Roof_3")]
+
+[node name="Visual" parent="Roof/Roof_16" index="0"]
+material_override = SubResource("StandardMaterial3D_fqqgn")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_16/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_16/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_17" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 3, -13.5)
+neibour_roofs = [NodePath("../Roof_16"), NodePath("../Roof_18"), NodePath("../Roof_19")]
+
+[node name="Visual" parent="Roof/Roof_17" index="0"]
+material_override = SubResource("StandardMaterial3D_m1f1e")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_17/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_17/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_18" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 3, -22.5)
+neibour_roofs = [NodePath("../Roof_17"), NodePath("../Roof_22")]
+
+[node name="Visual" parent="Roof/Roof_18" index="0"]
+transform = Transform3D(-4.371138e-08, -8.7422784e-08, -1, -8.742278e-08, 1, -8.7422784e-08, 1, 8.742278e-08, -4.371139e-08, 0, 0, -4.5)
+material_override = SubResource("StandardMaterial3D_155gl")
+mesh = SubResource("BoxMesh_ngqs7")
+
+[node name="SpotLight3D" parent="Roof/Roof_18/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711406e-08, 1, 0, -1, -4.3711395e-08, 4, 4.7683716e-07, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Roof/Roof_18/Visual/Lights" index="1"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.371141e-08, 1, 0, -1, -4.37114e-08, -5, -2.3841858e-07, 0)
+shadow_enabled = true
+shadow_bias = 0.05
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle = 80.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_18/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -4.5)
+shape = SubResource("BoxShape3D_55xmv")
+
+[node name="Roof_19" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, -31.5)
+neibour_roofs = [NodePath("../Roof_17"), NodePath("../Roof_22")]
+
+[node name="Visual" parent="Roof/Roof_19" index="0"]
+material_override = SubResource("StandardMaterial3D_fbj82")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_19/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_19/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_20" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 3, -40.5)
+neibour_roofs = [NodePath("../Roof_21"), NodePath("../Roof_22"), NodePath("../Roof_22")]
+
+[node name="Visual" parent="Roof/Roof_20" index="0"]
+material_override = SubResource("StandardMaterial3D_4c8c7")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_20/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_20/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_21" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 3, -40.5)
+neibour_roofs = [NodePath("../Roof_20")]
+
+[node name="Visual" parent="Roof/Roof_21" index="0"]
+material_override = SubResource("StandardMaterial3D_k4m8h")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_21/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_21/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_22" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, -40.5)
+neibour_roofs = [NodePath("../Roof_18"), NodePath("../Roof_19"), NodePath("../Roof_23")]
+
+[node name="Visual" parent="Roof/Roof_22" index="0"]
+material_override = SubResource("StandardMaterial3D_gs3a6")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_22/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_22/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_23" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 3, -40.5)
+neibour_roofs = [NodePath("../Roof_22"), NodePath("../Roof_40")]
+
+[node name="Visual" parent="Roof/Roof_23" index="0"]
+material_override = SubResource("StandardMaterial3D_5x6xl")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_23/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_23/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_24" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 3, -40.5)
+neibour_roofs = [NodePath("../Roof_25")]
+
+[node name="Visual" parent="Roof/Roof_24" index="0"]
+material_override = SubResource("StandardMaterial3D_vnct7")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_24/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_24/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_25" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 3, -31.5)
+neibour_roofs = [NodePath("../Roof_24")]
+
+[node name="Visual" parent="Roof/Roof_25" index="0"]
+material_override = SubResource("StandardMaterial3D_pxtmk")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_25/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_25/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_26" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5, 3, -31.5)
+neibour_roofs = [NodePath("../Roof_27"), NodePath("../Roof_29"), NodePath("../Roof_42")]
+
+[node name="Visual" parent="Roof/Roof_26" index="0"]
+material_override = SubResource("StandardMaterial3D_xtfoa")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_26/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_26/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_42" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5, 3, -22.5)
+neibour_roofs = [NodePath("../Roof_26"), NodePath("../Roof_43")]
+
+[node name="Visual" parent="Roof/Roof_42" index="0"]
+material_override = SubResource("StandardMaterial3D_mfxuu")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_42/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_42/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_43" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5, 3, -13.5)
+neibour_roofs = [NodePath("../Roof_42")]
+
+[node name="Visual" parent="Roof/Roof_43" index="0"]
+material_override = SubResource("StandardMaterial3D_mfxuu")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_43/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_43/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_27" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5, 3, -40.5)
+neibour_roofs = [NodePath("../Roof_26")]
+
+[node name="Visual" parent="Roof/Roof_27" index="0"]
+material_override = SubResource("StandardMaterial3D_2shli")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_27/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_27/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_28" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.5, 3, -40.5)
+neibour_roofs = [NodePath("../Roof_29")]
+
+[node name="Visual" parent="Roof/Roof_28" index="0"]
+material_override = SubResource("StandardMaterial3D_payto")
+mesh = SubResource("BoxMesh_wqejd")
+
+[node name="SpotLight3D" parent="Roof/Roof_28/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_28/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_29" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.5, 3, -22.5)
+neibour_roofs = [NodePath("../Roof_28"), NodePath("../Roof_26"), NodePath("../Roof_30"), NodePath("../Roof_32")]
+
+[node name="Visual" parent="Roof/Roof_29" index="0"]
+transform = Transform3D(-4.371138e-08, -8.7422784e-08, -1, -8.742278e-08, 1, -8.7422784e-08, 1, 8.742278e-08, -4.371139e-08, 0, 0, 4.5)
+material_override = SubResource("StandardMaterial3D_bgi7f")
+mesh = SubResource("BoxMesh_gg3vl")
+
+[node name="SpotLight3D" parent="Roof/Roof_29/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711413e-08, 1, 0, -1, -4.3711402e-08, 13.999997, 1.66893e-06, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Roof/Roof_29/Visual/Lights" index="1"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711417e-08, 1, 0, -1, -4.3711406e-08, 3.9999962, 9.536743e-07, 0)
+shadow_enabled = true
+shadow_bias = 0.05
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle = 80.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Roof/Roof_29/Visual/Lights" index="2"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.371142e-08, 1, 0, -1, -4.371141e-08, -5.000004, 4.7683716e-07, 1.9073486e-06)
+shadow_enabled = true
+shadow_bias = 0.05
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle = 80.0
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Roof/Roof_29/Visual/Lights" index="3"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711424e-08, 1, 0, -1, -4.3711413e-08, -14.000006, -2.3841858e-07, 3.8146973e-06)
+shadow_enabled = true
+shadow_bias = 0.05
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle = 80.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_29/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 4.5)
+shape = SubResource("BoxShape3D_si05j")
+
+[node name="Roof_30" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.5, 3, 4.5)
+neibour_roofs = [NodePath("../Roof_29")]
+
+[node name="Visual" parent="Roof/Roof_30" index="0"]
+material_override = SubResource("StandardMaterial3D_w6gs8")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_30/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_30/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_31" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5, 3, 4.5)
+neibour_roofs = [NodePath("../Roof_32")]
+
+[node name="Visual" parent="Roof/Roof_31" index="0"]
+material_override = SubResource("StandardMaterial3D_qkorj")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_31/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_31/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_32" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.5, 3, -4.5)
+neibour_roofs = [NodePath("../Roof_31"), NodePath("../Roof_29"), NodePath("../Roof_33"), NodePath("../Roof_34")]
+
+[node name="Visual" parent="Roof/Roof_32" index="0"]
+transform = Transform3D(-4.371138e-08, -8.7422784e-08, -1, -8.742278e-08, 1, -8.7422784e-08, 1, 8.742278e-08, -4.371139e-08, 4.5, 0, 0)
+material_override = SubResource("StandardMaterial3D_lcsvx")
+mesh = SubResource("BoxMesh_kif58")
+
+[node name="SpotLight3D" parent="Roof/Roof_32/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711406e-08, 1, 0, -1, -4.3711395e-08, 0, 2.3841858e-07, 4)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Roof/Roof_32/Visual/Lights" index="1"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.371141e-08, 1, 0, -1, -4.37114e-08, 0, -4.7683716e-07, -4)
+shadow_enabled = true
+shadow_bias = 0.05
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle = 80.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_32/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, -1.5, 0)
+shape = SubResource("BoxShape3D_tnejx")
+
+[node name="Roof_33" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 3, -13.5)
+neibour_roofs = [NodePath("../Roof_32")]
+
+[node name="Visual" parent="Roof/Roof_33" index="0"]
+material_override = SubResource("StandardMaterial3D_6b81a")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_33/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_33/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_34" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 3, 4.5)
+neibour_roofs = [NodePath("../Roof_32"), NodePath("../Roof_35"), NodePath("../Roof_37")]
+
+[node name="Visual" parent="Roof/Roof_34" index="0"]
+material_override = SubResource("StandardMaterial3D_vnl5t")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_34/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_34/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_35" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 3, 22.5)
+neibour_roofs = [NodePath("../Roof_34"), NodePath("../Roof_36")]
+
+[node name="Visual" parent="Roof/Roof_35" index="0"]
+transform = Transform3D(-4.371138e-08, -8.7422784e-08, -1, -8.742278e-08, 1, -8.7422784e-08, 1, 8.742278e-08, -4.371139e-08, 0, 0, -4.5)
+material_override = SubResource("StandardMaterial3D_7hnr6")
+mesh = SubResource("BoxMesh_ypv6j")
+
+[node name="SpotLight3D" parent="Roof/Roof_35/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711406e-08, 1, 0, -1, -4.3711395e-08, 4, 2.3841858e-07, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Roof/Roof_35/Visual/Lights" index="1"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711413e-08, 1, 0, -1, -4.3711402e-08, -4, -4.7683716e-07, 0)
+shadow_enabled = true
+shadow_bias = 0.05
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle = 80.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_35/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -4.5)
+shape = SubResource("BoxShape3D_vcux0")
+
+[node name="Roof_36" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 3, 31.5)
+neibour_roofs = [NodePath("../Roof_35")]
+
+[node name="Visual" parent="Roof/Roof_36" index="0"]
+material_override = SubResource("StandardMaterial3D_hupf5")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_36/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_36/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_37" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 3, 4.5)
+neibour_roofs = [NodePath("../Roof_34")]
+
+[node name="Visual" parent="Roof/Roof_37" index="0"]
+material_override = SubResource("StandardMaterial3D_end2f")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_37/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_37/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_38" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, -4.5)
+start_room = true
+neibour_roofs = [NodePath("../Roof_40"), NodePath("../Roof_14")]
+
+[node name="Visual" parent="Roof/Roof_38" index="0"]
+material_override = SubResource("StandardMaterial3D_3i7co")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_38/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_38/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_39" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, -13.5)
+neibour_roofs = [NodePath("../Roof_41")]
+
+[node name="Visual" parent="Roof/Roof_39" index="0"]
+material_override = SubResource("StandardMaterial3D_ajomm")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_39/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_39/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Roof_40" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 3, -13.5)
+neibour_roofs = [NodePath("../Roof_38"), NodePath("../Roof_41"), NodePath("../Roof_23")]
+
+[node name="Visual" parent="Roof/Roof_40" index="0"]
+transform = Transform3D(-4.371138e-08, -8.7422784e-08, -1, -8.742278e-08, 1, -8.7422784e-08, 1, 8.742278e-08, -4.371139e-08, 0, 0, -4.5)
+material_override = SubResource("StandardMaterial3D_ey6si")
+mesh = SubResource("BoxMesh_cjqyo")
+
+[node name="SpotLight3D" parent="Roof/Roof_40/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711406e-08, 1, 0, -1, -4.3711395e-08, 14, 1.4305115e-06, -9.536743e-07)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Roof/Roof_40/Visual/Lights" index="1"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.371141e-08, 1, 0, -1, -4.37114e-08, 5, 7.1525574e-07, -9.536743e-07)
+shadow_enabled = true
+shadow_bias = 0.05
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle = 80.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Roof/Roof_40/Visual/Lights" index="2"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711413e-08, 1, 0, -1, -4.3711402e-08, -5, 0, -9.536743e-07)
+shadow_enabled = true
+shadow_bias = 0.05
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle = 80.0
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Roof/Roof_40/Visual/Lights" index="3"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711417e-08, 1, 0, -1, -4.3711406e-08, -13, -4.7683716e-07, -4.7683716e-07)
+shadow_enabled = true
+shadow_bias = 0.05
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle = 80.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_40/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -4.5)
+shape = SubResource("BoxShape3D_kif58")
+
+[node name="Roof_41" parent="Roof" node_paths=PackedStringArray("neibour_roofs") instance=ExtResource("9_si05j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, -22.5)
+neibour_roofs = [NodePath("../Roof_40"), NodePath("../Roof_39")]
+
+[node name="Visual" parent="Roof/Roof_41" index="0"]
+material_override = SubResource("StandardMaterial3D_0lx46")
+mesh = SubResource("BoxMesh_si05j")
+
+[node name="SpotLight3D" parent="Roof/Roof_41/Visual/Lights" index="0"]
+transform = Transform3D(1, 0, -7.1054274e-15, 0, -4.3711402e-08, 1, 0, -1, -4.3711392e-08, 0, 0, 0)
+light_energy = 1.0
+spot_range = 20.0
+spot_attenuation = -0.5
+spot_angle_attenuation = 1.0
+
+[node name="CollisionShape3D" parent="Roof/Roof_41/Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("BoxShape3D_gg3vl")
+
+[node name="Gameplay" type="Node3D" parent="."]
+
+[node name="Time mahine" parent="Gameplay" instance=ExtResource("11_tnejx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, -16.5)
+
+[node name="Statues" type="Node3D" parent="Gameplay"]
+
+[node name="statue" parent="Gameplay/Statues" instance=ExtResource("12_vcux0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -32, 0, 7)
+
+[node name="statue8" parent="Gameplay/Statues" instance=ExtResource("12_vcux0")]
+transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.7071068, -30, 0, 6)
+
+[node name="statue9" parent="Gameplay/Statues" instance=ExtResource("12_vcux0")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -34, 0, 6)
+
+[node name="statue2" parent="Gameplay/Statues" instance=ExtResource("12_vcux0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 40)
+
+[node name="statue3" parent="Gameplay/Statues" instance=ExtResource("12_vcux0")]
+transform = Transform3D(-0.50000006, 0, 0.8660254, 0, 1, 0, -0.8660254, 0, -0.50000006, 43, 0, 7)
+
+[node name="statue10" parent="Gameplay/Statues" instance=ExtResource("12_vcux0")]
+transform = Transform3D(0.7071067, 0, 0.7071068, 0, 1, 0, -0.7071068, 0, 0.7071067, 38, 0, 7)
+
+[node name="statue4" parent="Gameplay/Statues" instance=ExtResource("12_vcux0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 0, -22)
+
+[node name="statue11" parent="Gameplay/Statues" instance=ExtResource("12_vcux0")]
+transform = Transform3D(-1, 0, 8.940697e-08, 0, 1, 0, -8.940697e-08, 0, -1, 44, 0, -22)
+
+[node name="statue5" parent="Gameplay/Statues" instance=ExtResource("12_vcux0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -22)
+
+[node name="statue12" parent="Gameplay/Statues" instance=ExtResource("12_vcux0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5, 0, -28)
+
+[node name="statue6" parent="Gameplay/Statues" instance=ExtResource("12_vcux0")]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -34, 0, -43)
+
+[node name="statue13" parent="Gameplay/Statues" instance=ExtResource("12_vcux0")]
+transform = Transform3D(-0.49999994, 0, -0.8660254, 0, 1, 0, 0.8660254, 0, -0.49999994, -29, 0, -43)
+
+[node name="statue7" parent="Gameplay/Statues" instance=ExtResource("12_vcux0")]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -16, 0, -29)
+
+[node name="Items" type="Node3D" parent="Gameplay"]
+
+[node name="GlobalNode" type="Node" parent="Gameplay/Items" node_paths=PackedStringArray("node_to_globalize")]
+script = ExtResource("13_kif58")
+global_name = "Items"
+node_to_globalize = NodePath("..")
+enabled = true
+
+[node name="Item_preset" parent="Gameplay/Items" instance=ExtResource("13_gg3vl")]
+transform = Transform3D(-0.25881904, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, -0.25881904, 4, 0, -13)
+
+[editable path="Roof/Roof_0"]
+[editable path="Roof/Roof_1"]
+[editable path="Roof/Roof_2"]
+[editable path="Roof/Roof_3"]
+[editable path="Roof/Roof_4"]
+[editable path="Roof/Roof_5"]
+[editable path="Roof/Roof_6"]
+[editable path="Roof/Roof_7"]
+[editable path="Roof/Roof_8"]
+[editable path="Roof/Roof_9"]
+[editable path="Roof/Roof_10"]
+[editable path="Roof/Roof_11"]
+[editable path="Roof/Roof_12"]
+[editable path="Roof/Roof_13"]
+[editable path="Roof/Roof_14"]
+[editable path="Roof/Roof_15"]
+[editable path="Roof/Roof_16"]
+[editable path="Roof/Roof_17"]
+[editable path="Roof/Roof_18"]
+[editable path="Roof/Roof_19"]
+[editable path="Roof/Roof_20"]
+[editable path="Roof/Roof_21"]
+[editable path="Roof/Roof_22"]
+[editable path="Roof/Roof_23"]
+[editable path="Roof/Roof_24"]
+[editable path="Roof/Roof_25"]
+[editable path="Roof/Roof_26"]
+[editable path="Roof/Roof_42"]
+[editable path="Roof/Roof_43"]
+[editable path="Roof/Roof_27"]
+[editable path="Roof/Roof_28"]
+[editable path="Roof/Roof_29"]
+[editable path="Roof/Roof_30"]
+[editable path="Roof/Roof_31"]
+[editable path="Roof/Roof_32"]
+[editable path="Roof/Roof_33"]
+[editable path="Roof/Roof_34"]
+[editable path="Roof/Roof_35"]
+[editable path="Roof/Roof_36"]
+[editable path="Roof/Roof_37"]
+[editable path="Roof/Roof_38"]
+[editable path="Roof/Roof_39"]
+[editable path="Roof/Roof_40"]
+[editable path="Roof/Roof_41"]
